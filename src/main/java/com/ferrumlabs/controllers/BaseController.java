@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 
 public abstract class BaseController  {
 
-	public final static String VERSION = "platformadminapi.v1";
+	public final static String VERSION = "sacretextapi.v1";
 	public static final String V1_MEDIA_STRING = "application/vnd."+VERSION+"+json";
 	public static final MediaType V1_MEDIA_TYPE = new MediaType("application","vnd."+VERSION+"+json");
 		

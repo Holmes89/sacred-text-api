@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferrumlabs.enums.BibleVersionEnum;
 import com.ferrumlabs.exceptions.FactoryException;
 import com.ferrumlabs.factories.BibleFactory;
@@ -52,7 +53,8 @@ public class GetBibleVerseCommand extends BaseCommand<String> {
 	@Override
 	protected String run() throws Exception {
 		try{
-			return bibleFactory.getVerse(this.version, this.book, this.chapter, this.verse);
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString(bibleFactory.getVerse(this.version, this.book, this.chapter, this.verse));
 		}
 		catch(FactoryException e){
 			log.error("error creating getting verse "+e);

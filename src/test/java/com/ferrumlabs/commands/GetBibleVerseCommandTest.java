@@ -40,7 +40,7 @@ public class GetBibleVerseCommandTest {
 		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
 		
 		String response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
-		Assert.assertEquals(MOCKED_RESPONSE, response);
+		Assert.assertEquals("\""+MOCKED_RESPONSE+"\"", response);
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
