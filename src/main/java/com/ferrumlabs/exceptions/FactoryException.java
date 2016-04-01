@@ -2,6 +2,7 @@ package com.ferrumlabs.exceptions;
 
 public class FactoryException extends Exception {
 
+	private static final long serialVersionUID = 1L;
 	private String errorCode;
 	
 	public FactoryException(String errorCode, String message, Throwable t) {
