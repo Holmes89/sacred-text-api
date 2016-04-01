@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import com.ferrumlabs.exceptions.FactoryException;
 import com.ferrumlabs.utils.ErrorCodes;
 
 @Component
+@Scope("singleton")
 public class BibleFactory {
 	
 	private final String ENG_BASE_PATH = "/json/sacredTexts/bible/eng/";	
@@ -45,9 +47,13 @@ public class BibleFactory {
 	}
 	
 	public String getVerse(BibleVersionEnum version, String book, int chapter, int verse) throws FactoryException{
+		if(version == null){
+			throw new FactoryException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
 		if(book == null){
 			throw new FactoryException(ErrorCodes.NULL_INPUT, "Book cannot be null");
 		}
+		book = book.toLowerCase();
 		Map<Integer, Map<Integer, String>> chapters = engBibleMap.get(version).get(book);
 		if(chapters == null){
 			throw new FactoryException(ErrorCodes.INVALID_INPUT, "Invalid book name");

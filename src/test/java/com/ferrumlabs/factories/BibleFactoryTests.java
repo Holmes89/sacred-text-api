@@ -23,5 +23,45 @@ public class BibleFactoryTests {
 		String verse = bibleResource.getVerse(BibleVersionEnum.NIV, "John", 11, 35);
 		Assert.assertNotNull(verse);
 		Assert.assertEquals(verse, "Jesus wept.");
+		verse = bibleResource.getVerse(BibleVersionEnum.NIV, "JOHN", 11, 35);
+		Assert.assertNotNull(verse);
+		Assert.assertEquals(verse, "Jesus wept.");
+		verse = bibleResource.getVerse(BibleVersionEnum.NIV, "john", 11, 35);
+		Assert.assertNotNull(verse);
+		Assert.assertEquals(verse, "Jesus wept.");
+		verse = bibleResource.getVerse(BibleVersionEnum.NIV, "jOHn", 11, 35);
+		Assert.assertNotNull(verse);
+		Assert.assertEquals(verse, "Jesus wept.");
 	}
+	
+	@Test(expected=FactoryException.class)
+	public void testNullEnum() throws FactoryException{
+		bibleResource.getVerse(null, "John", 11, 35);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testNullBook() throws FactoryException{
+		bibleResource.getVerse(BibleVersionEnum.NIV, null, 11, 35);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testEmptyBook() throws FactoryException{
+		bibleResource.getVerse(BibleVersionEnum.NIV, "", 11, 35);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testInvalidBook() throws FactoryException{
+		bibleResource.getVerse(BibleVersionEnum.NIV, "asdfasd", 11, 35);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testInvalidChapter() throws FactoryException{
+		bibleResource.getVerse(BibleVersionEnum.NIV, "John", 99, 35);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testInvalidVerse() throws FactoryException{
+		bibleResource.getVerse(BibleVersionEnum.NIV, "asdfasd", 11, 21321);
+	}
+	
 }
