@@ -1,5 +1,8 @@
 package com.ferrumlabs.factories;
 
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -64,4 +67,58 @@ public class BibleFactoryTests {
 		bibleResource.getVerse(BibleVersionEnum.NIV, "asdfasd", 11, 21321);
 	}
 	
+	@Test
+	public void testGetVerses() throws FactoryException{
+		Map<Integer, String> versus = bibleResource.getVerses(BibleVersionEnum.NIV, "John", 1);
+		Assert.assertEquals(51, versus.size());
+	}
+	@Test(expected=FactoryException.class)
+	public void testGetVersesNullEnum() throws FactoryException{
+		bibleResource.getVerses(null, "John", 11);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetVersesNullBook() throws FactoryException{
+		bibleResource.getVerses(BibleVersionEnum.NIV, null, 11);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetVersesEmptyBook() throws FactoryException{
+		bibleResource.getVerses(BibleVersionEnum.NIV, "", 11);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetVersesInvalidBook() throws FactoryException{
+		bibleResource.getVerses(BibleVersionEnum.NIV, "asdfasd", 11);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetVersesInvalidChapter() throws FactoryException{
+		bibleResource.getVerses(BibleVersionEnum.NIV, "John", 99);
+	}
+	
+	public void testGetChapterList() throws FactoryException{
+		List<Integer> chapters = bibleResource.getChapterList(BibleVersionEnum.NIV, "John");
+		Assert.assertEquals(21, chapters.size());
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetChapterListNullEnum() throws FactoryException{
+		bibleResource.getChapterList(null, "John");
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetChapterListNullBook() throws FactoryException{
+		bibleResource.getChapterList(BibleVersionEnum.NIV, null);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetChapterListEmptyBook() throws FactoryException{
+		bibleResource.getChapterList(BibleVersionEnum.NIV, "");
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetChapterListInvalidBook() throws FactoryException{
+		bibleResource.getChapterList(BibleVersionEnum.NIV, "asdfasd");
+	}
 }

@@ -1,14 +1,15 @@
 package com.ferrumlabs.controllers;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Provider;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.ferrumlabs.SacredTextApiApplication;
 import com.ferrumlabs.commands.GetBibleVerseCommand;
+import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 
 @RunWith(PowerMockRunner.class)
@@ -63,13 +65,21 @@ public class BibleControllerTests {
 	
 	@Test
 	public void testGetVerse() throws Exception{
+		BibleVerseDTO dto = new BibleVerseDTO();
+		dto.setBook("blah");
+		dto.setChapter(1);
+		dto.setVerse(1);
+		dto.setContent("asdfsad");
+		
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		dtos.add(dto);
 		
 		when(getBibleVerseCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getBibleVerseCommand);
 		when(getBibleVerseCommand.setBook(Mockito.anyString())).thenReturn(getBibleVerseCommand);
 		when(getBibleVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getBibleVerseCommand);
 		when(getBibleVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getBibleVerseCommand);
 		
-		when(getBibleVerseCommand.execute()).thenReturn(MOCKED_RESPONSE);
+		when(getBibleVerseCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1")
 				.accept(BibleController.V1_MEDIA_TYPE)
@@ -77,7 +87,6 @@ public class BibleControllerTests {
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
 				.andReturn();
-		String response = mvcResult.getResponse().getContentAsString();
-		Assert.assertEquals(response, MOCKED_RESPONSE);
+
 	}
 }

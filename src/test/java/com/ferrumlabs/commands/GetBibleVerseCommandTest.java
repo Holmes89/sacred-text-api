@@ -1,5 +1,8 @@
 package com.ferrumlabs.commands;
 
+import java.util.List;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,21 +12,24 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 import com.ferrumlabs.exceptions.FactoryException;
-import com.ferrumlabs.factories.BibleFactory;
+import com.ferrumlabs.exceptions.ServiceException;
+import com.ferrumlabs.services.impl.BibleService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
-
-import org.junit.Assert;
 
 @RunWith(PowerMockRunner.class)
 public class GetBibleVerseCommandTest {
 
 	@Mock
-	BibleFactory bibleFactory;
+	BibleService bibleService;
 	
 	@InjectMocks
 	private GetBibleVerseCommand cmd = new GetBibleVerseCommand();
+	
+	@Mock
+	List<BibleVerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -35,18 +41,18 @@ public class GetBibleVerseCommandTest {
 	
 
 	@Test
-	public void testCommand() throws FactoryException{
+	public void testCommand() throws ServiceException{
+
+		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
 		
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
-		
-		String response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
-		Assert.assertEquals("\""+MOCKED_RESPONSE+"\"", response);
+		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
-	public void testException() throws FactoryException{
+	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
+		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
 		
 		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		

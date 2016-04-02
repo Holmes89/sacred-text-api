@@ -2,7 +2,9 @@ package com.ferrumlabs.factories;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -67,6 +69,41 @@ public class BibleFactory {
 			throw new FactoryException(ErrorCodes.INVALID_INPUT, "Verse not in chapter");
 		}
 		return verseContent;
+	}
+	
+	public Map<Integer, String> getVerses(BibleVersionEnum version, String book, int chapter) throws FactoryException{
+		if(version == null){
+			throw new FactoryException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(book == null){
+			throw new FactoryException(ErrorCodes.NULL_INPUT, "Book cannot be null");
+		}
+		book = book.toLowerCase();
+		Map<Integer, Map<Integer, String>> chapters = engBibleMap.get(version).get(book);
+		if(chapters == null){
+			throw new FactoryException(ErrorCodes.INVALID_INPUT, "Invalid book name");
+		}
+		Map<Integer, String> verses = chapters.get(chapter);
+		if(verses == null){
+			throw new FactoryException(ErrorCodes.INVALID_INPUT, "Chapter not in book");
+		}
+		
+		return verses;
+	}
+	
+	public List<Integer> getChapterList(BibleVersionEnum version, String book) throws FactoryException{
+		if(version == null){
+			throw new FactoryException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(book == null){
+			throw new FactoryException(ErrorCodes.NULL_INPUT, "Book cannot be null");
+		}
+		book = book.toLowerCase();
+		Map<Integer, Map<Integer, String>> chapters = engBibleMap.get(version).get(book);
+		if(chapters == null){
+			throw new FactoryException(ErrorCodes.INVALID_INPUT, "Invalid book name");
+		}
+		return new ArrayList<Integer>(chapters.keySet());
 	}
 	
 }
