@@ -22,6 +22,33 @@ public class BibleService implements IBibleService{
 	BibleFactory bibleFactory;
 	
 	@Override
+	public List<BibleVerseDTO> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
+		if(version == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(book == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
+		}
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		try{	
+			List<Integer> chapterList = bibleFactory.getChapterList(version, book);
+			if(!chapterList.contains(chapter)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
+			}
+			Map<Integer, String> versesInChapter = bibleFactory.getVerses(version, book, chapter);
+			
+			for(int verse: versesInChapter.keySet()){
+				String content = versesInChapter.get(verse);
+				dtos.add(new BibleVerseDTO(book, chapter, verse, content));
+			}
+			
+		}catch(FactoryException e){
+			throw new ServiceException("Factory error", e);
+		}
+		return dtos;
+	}
+	
+	@Override
 	public List<BibleVerseDTO> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");

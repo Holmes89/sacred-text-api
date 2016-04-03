@@ -16,7 +16,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @Component
 @Scope("prototype")
-public class GetBibleVerseCommand extends BaseCommand<List<BibleVerseDTO>> {
+public class GetBibleChapterCommand extends BaseCommand<List<BibleVerseDTO>> {
 	
 	@Autowired
 	IBibleService bibleService;
@@ -24,49 +24,31 @@ public class GetBibleVerseCommand extends BaseCommand<List<BibleVerseDTO>> {
 	private BibleVersionEnum version;
 	private String book;
 	private Integer chapter;
-	private Integer verse;
-	private Integer throughChapter;
-	private Integer throughVerse;
 	
+	protected GetBibleChapterCommand() {
+		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("SacredTextAPI"))
+				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleChapter")));
+	}
 	
-	public GetBibleVerseCommand setVersion(BibleVersionEnum version){
+	public GetBibleChapterCommand setVersion(BibleVersionEnum version){
 		this.version=version;
 		return this;
 	}
 	
-	public GetBibleVerseCommand setBook(String book){
+	public GetBibleChapterCommand setBook(String book){
 		this.book=book;
 		return this;
 	}
 	
-	public GetBibleVerseCommand setChapter(Integer chapter){
+	public GetBibleChapterCommand setChapter(Integer chapter){
 		this.chapter=chapter;
 		return this;
 	}
-	
-	public GetBibleVerseCommand setThroughVerse(Integer throughVerse){
-		this.throughVerse=throughVerse;
-		return this;
-	}
-	public GetBibleVerseCommand setThroughChapter(Integer throughChapter){
-		this.throughChapter=throughChapter;
-		return this;
-	}
-	
-	public GetBibleVerseCommand setVerse(Integer verse){
-		this.verse=verse;
-		return this;
-	}
-	
-	protected GetBibleVerseCommand() {
-		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("SacredTextAPI"))
-				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleVerse")));
-	}
-
-	@Override
+		
+		@Override
 	protected List<BibleVerseDTO> run() throws Exception {
 		try{
-			return bibleService.getVersesInRange(this.version, this.book, this.chapter, this.verse, this.throughChapter, this.throughVerse);
+			return bibleService.getVersesInChapter(this.version, this.book, this.chapter);
 		}
 		catch(ServiceException e){
 			log.error("error creating getting verse "+e);
@@ -77,3 +59,4 @@ public class GetBibleVerseCommand extends BaseCommand<List<BibleVerseDTO>> {
 	
 
 }
+

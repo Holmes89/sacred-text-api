@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.inject.Provider;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,8 +29,12 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferrumlabs.SacredTextApiApplication;
-import com.ferrumlabs.commands.GetBibleVerseCommand;
+import com.ferrumlabs.commands.GetBibleChapterCommand;
+import com.ferrumlabs.commands.GetBibleSingleVerseCommand;
+import com.ferrumlabs.commands.GetBibleVerseRangeCommand;
 import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 
@@ -45,12 +50,26 @@ public class BibleControllerTests {
 	private MockMvc mockMvc;
 	
 	private final String MOCKED_RESPONSE = "blah";
+	
+	private ObjectMapper mapper = new ObjectMapper();
 		
 	@Mock
-	Provider<GetBibleVerseCommand> getVerseProvider;
+	Provider<GetBibleSingleVerseCommand> getSingleVerseProvider;
 	
 	@Mock
-	GetBibleVerseCommand getBibleVerseCommand;
+	Provider<GetBibleVerseRangeCommand> getRangeVerseProvider;
+	
+	@Mock
+	Provider<GetBibleChapterCommand> getChapterProvider;
+	
+	@Mock
+	GetBibleSingleVerseCommand getSingleVerseCommand;
+	
+	@Mock
+	GetBibleVerseRangeCommand getRangeVerseCommand;
+	
+	@Mock
+	GetBibleChapterCommand getChapterCommand;
 	
 	@InjectMocks
 	@Autowired
@@ -60,11 +79,13 @@ public class BibleControllerTests {
 	public void setup() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		this.mockMvc = webAppContextSetup(this.wac).build();
-		when(getVerseProvider.get()).thenReturn(getBibleVerseCommand);
+		when(getSingleVerseProvider.get()).thenReturn(getSingleVerseCommand);
+		when(getRangeVerseProvider.get()).thenReturn(getRangeVerseCommand);
+		when(getChapterProvider.get()).thenReturn(getChapterCommand);
 	}
 	
 	@Test
-	public void testGetVerse() throws Exception{
+	public void testGetSingleVerse() throws Exception{
 		BibleVerseDTO dto = new BibleVerseDTO();
 		dto.setBook("blah");
 		dto.setChapter(1);
@@ -74,12 +95,12 @@ public class BibleControllerTests {
 		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
 		dtos.add(dto);
 		
-		when(getBibleVerseCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getBibleVerseCommand);
-		when(getBibleVerseCommand.setBook(Mockito.anyString())).thenReturn(getBibleVerseCommand);
-		when(getBibleVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getBibleVerseCommand);
-		when(getBibleVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getBibleVerseCommand);
+		when(getSingleVerseCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getSingleVerseCommand);
+		when(getSingleVerseCommand.setBook(Mockito.anyString())).thenReturn(getSingleVerseCommand);
+		when(getSingleVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getSingleVerseCommand);
+		when(getSingleVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getSingleVerseCommand);
 		
-		when(getBibleVerseCommand.execute()).thenReturn(dtos);
+		when(getSingleVerseCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1")
 				.accept(BibleController.V1_MEDIA_TYPE)
@@ -87,6 +108,106 @@ public class BibleControllerTests {
 				.andExpect(status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
 				.andReturn();
-
+		
+		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		
+		Assert.assertEquals(1, response.size());
+		BibleVerseDTO verse = response.iterator().next();
+		Assert.assertEquals("blah", verse.getBook());
+	}
+	
+	@Test
+	public void testGetRangeVerses() throws Exception{
+		BibleVerseDTO dto = new BibleVerseDTO();
+		dto.setBook("blah");
+		dto.setChapter(1);
+		dto.setVerse(1);
+		dto.setContent("asdfsad");
+		
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		dtos.add(dto);
+		dtos.add(dto);
+		
+		when(getRangeVerseCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setBook(Mockito.anyString())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setThroughVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setThroughChapter(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		
+		when(getRangeVerseCommand.execute()).thenReturn(dtos);
+		
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1&throughChapter=3&throughVerse=2")
+				.accept(BibleController.V1_MEDIA_TYPE)
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andReturn();
+		
+		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		
+		Assert.assertEquals(2, response.size());
+	}
+	@Test
+	public void testGetRangeVerses_verseOnly() throws Exception{
+		BibleVerseDTO dto = new BibleVerseDTO();
+		dto.setBook("blah");
+		dto.setChapter(1);
+		dto.setVerse(1);
+		dto.setContent("asdfsad");
+		
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		dtos.add(dto);
+		dtos.add(dto);
+		
+		when(getRangeVerseCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setBook(Mockito.anyString())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setThroughVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		when(getRangeVerseCommand.setThroughChapter(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
+		
+		when(getRangeVerseCommand.execute()).thenReturn(dtos);
+		
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1&throughVerse=2")
+				.accept(BibleController.V1_MEDIA_TYPE)
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andReturn();
+		
+		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		
+		Assert.assertEquals(2, response.size());
+	}
+	
+	@Test
+	public void testGetChapterVerse() throws Exception{
+		BibleVerseDTO dto = new BibleVerseDTO();
+		dto.setBook("blah");
+		dto.setChapter(1);
+		dto.setVerse(1);
+		dto.setContent("asdfsad");
+		
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		dtos.add(dto);
+		dtos.add(dto);
+		
+		when(getChapterCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getChapterCommand);
+		when(getChapterCommand.setBook(Mockito.anyString())).thenReturn(getChapterCommand);
+		when(getChapterCommand.setChapter(Mockito.anyInt())).thenReturn(getChapterCommand);
+		
+		when(getChapterCommand.execute()).thenReturn(dtos);
+		
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1")
+				.accept(BibleController.V1_MEDIA_TYPE)
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andReturn();
+		
+		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		
+		Assert.assertEquals(2, response.size());
 	}
 }

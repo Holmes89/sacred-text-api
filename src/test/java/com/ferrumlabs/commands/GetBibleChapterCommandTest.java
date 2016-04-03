@@ -20,13 +20,13 @@ import com.ferrumlabs.services.impl.BibleService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-public class GetBibleVerseCommandTest {
+public class GetBibleChapterCommandTest {
 
 	@Mock
 	BibleService bibleService;
 	
 	@InjectMocks
-	private GetBibleVerseCommand cmd = new GetBibleVerseCommand();
+	private GetBibleChapterCommand cmd = new GetBibleChapterCommand();
 	
 	@Mock
 	List<BibleVerseDTO> dtos;
@@ -43,18 +43,18 @@ public class GetBibleVerseCommandTest {
 	@Test
 	public void testCommand() throws ServiceException{
 
-		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
+		Mockito.when(bibleService.getVersesInChapter(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt())).thenReturn(dtos);
 		
-		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
+		Mockito.when(bibleService.getVersesInChapter(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt())).thenThrow(ServiceException.class);
 		
-		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).execute();
 		
 	}
 	

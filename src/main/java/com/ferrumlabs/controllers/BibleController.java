@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ferrumlabs.commands.GetBibleVerseCommand;
+import com.ferrumlabs.commands.GetBibleChapterCommand;
+import com.ferrumlabs.commands.GetBibleSingleVerseCommand;
+import com.ferrumlabs.commands.GetBibleVerseRangeCommand;
 import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
+import com.ferrumlabs.exceptions.APIException;
 import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
 
@@ -25,7 +28,13 @@ import com.ferrumlabs.utils.StatisticTimer;
 public class BibleController extends BaseController {
 
 	@Autowired
-	Provider<GetBibleVerseCommand> getVerseProvider;
+	Provider<GetBibleSingleVerseCommand> getSingleVerseProvider;
+	
+	@Autowired
+	Provider<GetBibleVerseRangeCommand> getRangeVerseProvider;
+	
+	@Autowired
+	Provider<GetBibleChapterCommand> getChapterProvider;
 	
 	public BibleController(){
 		super();
@@ -35,17 +44,28 @@ public class BibleController extends BaseController {
 	@ResponseBody
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, final @PathVariable BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=true, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
+	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, final @PathVariable BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
 	{
-		log.info("Request to get {} version of {} {}:{}", versionAbbr, book, chapter, verse);
 		
-		if(throughChapter!=null){
-			getVerseProvider.get().setThroughChapter(throughChapter);
+		//Get Chapter Verses
+		if((verse==null)&&(throughChapter==null)&&(throughVerse==null)){
+			log.info("Request to get {} version of {} chapter {}", versionAbbr, book, chapter);
+			return new HttpEntity<List<BibleVerseDTO>>(getChapterProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).execute(), createEntityHeaders());
 		}
-		if(throughVerse!=null){
-			getVerseProvider.get().setThroughVerse(throughVerse);
+		else if((verse!=null)&&(throughChapter==null)&&(throughVerse==null)){
+			log.info("Request to get {} version of {} {}:{}", versionAbbr, book, chapter, verse);
+			return new HttpEntity<List<BibleVerseDTO>>(getSingleVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).execute(), createEntityHeaders());
 		}
-		return new HttpEntity<List<BibleVerseDTO>>(getVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).execute(), createEntityHeaders());
-		
+		else if((verse!=null)&&(throughChapter!=null)&&(throughVerse!=null)){
+			log.info("Request to get {} version of {} {}:{} through {}:{}", versionAbbr, book, chapter, verse, throughChapter, throughVerse);
+			return new HttpEntity<List<BibleVerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughChapter(throughChapter).setThroughVerse(throughVerse).execute(), createEntityHeaders());
+		}
+		else if((verse!=null)&&(throughChapter==null)&&(throughVerse!=null)){
+			log.info("Request to get {} version of {} {}:{} - {}", versionAbbr, book, chapter, verse, throughVerse);
+			return new HttpEntity<List<BibleVerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughVerse(throughVerse).execute(), createEntityHeaders());
+		}
+		else{
+			throw new APIException("Invalid Parameters");
+		}
 	}
 }
