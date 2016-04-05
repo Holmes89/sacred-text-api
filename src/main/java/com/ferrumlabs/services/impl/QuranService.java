@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.ferrumlabs.dto.BibleVerseDTO;
-import com.ferrumlabs.dto.QuranVerseDTO;
 import com.ferrumlabs.dto.QuranVerseDTO;
 import com.ferrumlabs.enums.QuranVersionEnum;
 import com.ferrumlabs.exceptions.FactoryException;
@@ -16,6 +15,7 @@ import com.ferrumlabs.factories.QuranFactory;
 import com.ferrumlabs.services.interfaces.IQuranService;
 import com.ferrumlabs.utils.ErrorCodes;
 
+@Service("QuranService")
 public class QuranService implements IQuranService {
 
 	@Autowired
