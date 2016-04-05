@@ -1,5 +1,6 @@
 package com.ferrumlabs.factories;
 
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -44,5 +45,11 @@ public class TaoFactoryTests {
 	@Test(expected=FactoryException.class)
 	public void testGetChapter_invalidChapter() throws FactoryException{
 		taoResource.getChapter(-1);
+	}
+	
+	@Test
+	public void testGetChapterList(){
+		List<Integer> chapterList = taoResource.getChapterList();
+		Assert.assertEquals(81, chapterList.size());
 	}
 }

@@ -72,4 +72,16 @@ public class QuranFactoryTests {
 	public void testGetChapterName_invalidChapter() throws FactoryException{
 		quranResource.getChapterName(QuranVersionEnum.PICKTHALL, -1);
 	}
+	
+	@Test
+	public void testGetChapterList() throws FactoryException{
+		int size = quranResource.getChapters(QuranVersionEnum.PICKTHALL).size();
+		Assert.assertEquals(114, size);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void testGetChapterList_nullVersion() throws FactoryException{
+		quranResource.getChapters(null);
+	}
+	
 }

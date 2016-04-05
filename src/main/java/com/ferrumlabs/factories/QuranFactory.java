@@ -2,7 +2,9 @@ package com.ferrumlabs.factories;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -96,5 +98,12 @@ public class QuranFactory {
 			throw new FactoryException(ErrorCodes.INVALID_INPUT, "Invalid Chapter");
 		}
 		return chapterNames.get(chapter);
+	}
+	
+	public List<Integer> getChapters(QuranVersionEnum version) throws FactoryException{
+		if(version == null){
+			throw new FactoryException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		return new ArrayList<Integer>(engQuranMap.get(version).keySet());
 	}	
 }
