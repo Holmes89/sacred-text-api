@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,28 +39,30 @@ public class BibleController extends BaseController {
 		super();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/{versionAbbr}", produces=V1_MEDIA_STRING)
+	@RequestMapping(method = RequestMethod.GET, value="/", produces=V1_MEDIA_STRING)
 	@ResponseBody
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, final @PathVariable BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
+	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
 	{
-		
+		if(versionAbbr==null){
+			versionAbbr = BibleVersionEnum.NKJV;
+		}
 		//Get Chapter Verses
 		if((verse==null)&&(throughChapter==null)&&(throughVerse==null)){
-			log.info("Request to get {} version of {} chapter {}", versionAbbr, book, chapter);
+			log.info("Request Bible to get {} version of {} chapter {}", versionAbbr, book, chapter);
 			return new HttpEntity<List<BibleVerseDTO>>(getChapterProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).execute(), createEntityHeaders());
 		}
 		else if((verse!=null)&&(throughChapter==null)&&(throughVerse==null)){
-			log.info("Request to get {} version of {} {}:{}", versionAbbr, book, chapter, verse);
+			log.info("Request Bible to get {} version of {} {}:{}", versionAbbr, book, chapter, verse);
 			return new HttpEntity<List<BibleVerseDTO>>(getSingleVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).execute(), createEntityHeaders());
 		}
 		else if((verse!=null)&&(throughChapter!=null)&&(throughVerse!=null)){
-			log.info("Request to get {} version of {} {}:{} through {}:{}", versionAbbr, book, chapter, verse, throughChapter, throughVerse);
+			log.info("Request Bible to get {} version of {} {}:{} through {}:{}", versionAbbr, book, chapter, verse, throughChapter, throughVerse);
 			return new HttpEntity<List<BibleVerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughChapter(throughChapter).setThroughVerse(throughVerse).execute(), createEntityHeaders());
 		}
 		else if((verse!=null)&&(throughChapter==null)&&(throughVerse!=null)){
-			log.info("Request to get {} version of {} {}:{} - {}", versionAbbr, book, chapter, verse, throughVerse);
+			log.info("Request Bible to get {} version of {} {}:{} - {}", versionAbbr, book, chapter, verse, throughVerse);
 			return new HttpEntity<List<BibleVerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughVerse(throughVerse).execute(), createEntityHeaders());
 		}
 		else{
