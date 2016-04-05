@@ -102,7 +102,7 @@ public class BibleControllerTests {
 		
 		when(getSingleVerseCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1")
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/?book=John&chapter=1&verse=1")
 				.accept(BibleController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
@@ -137,7 +137,7 @@ public class BibleControllerTests {
 		
 		when(getRangeVerseCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1&throughChapter=3&throughVerse=2")
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/?book=John&chapter=1&verse=1&throughChapter=3&throughVerse=2")
 				.accept(BibleController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
@@ -169,7 +169,7 @@ public class BibleControllerTests {
 		
 		when(getRangeVerseCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1&verse=1&throughVerse=2")
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/?book=John&chapter=1&verse=1&throughVerse=2")
 				.accept(BibleController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
@@ -199,7 +199,7 @@ public class BibleControllerTests {
 		
 		when(getChapterCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/bible/NIV?book=John&chapter=1")
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/?book=John&chapter=1")
 				.accept(BibleController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())

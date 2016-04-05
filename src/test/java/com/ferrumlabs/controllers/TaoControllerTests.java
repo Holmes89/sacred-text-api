@@ -32,17 +32,16 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferrumlabs.SacredTextApiApplication;
-import com.ferrumlabs.commands.GetQuranChapterCommand;
-import com.ferrumlabs.commands.GetQuranSingleVerseCommand;
-import com.ferrumlabs.commands.GetQuranVerseRangeCommand;
-import com.ferrumlabs.dto.QuranVerseDTO;
-import com.ferrumlabs.enums.QuranVersionEnum;
+import com.ferrumlabs.commands.GetTaoChapterCommand;
+import com.ferrumlabs.commands.GetTaoSingleVerseCommand;
+import com.ferrumlabs.commands.GetTaoVerseRangeCommand;
+import com.ferrumlabs.dto.TaoVerseDTO;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 @WebAppConfiguration
-public class QuranControllerTests {
+public class TaoControllerTests {
 
 	@Autowired
 	private WebApplicationContext wac;
@@ -54,26 +53,26 @@ public class QuranControllerTests {
 	private ObjectMapper mapper = new ObjectMapper();
 		
 	@Mock
-	Provider<GetQuranSingleVerseCommand> getSingleVerseProvider;
+	Provider<GetTaoSingleVerseCommand> getSingleVerseProvider;
 	
 	@Mock
-	Provider<GetQuranVerseRangeCommand> getRangeVerseProvider;
+	Provider<GetTaoVerseRangeCommand> getRangeVerseProvider;
 	
 	@Mock
-	Provider<GetQuranChapterCommand> getChapterProvider;
+	Provider<GetTaoChapterCommand> getChapterProvider;
 	
 	@Mock
-	GetQuranSingleVerseCommand getSingleVerseCommand;
+	GetTaoSingleVerseCommand getSingleVerseCommand;
 	
 	@Mock
-	GetQuranVerseRangeCommand getRangeVerseCommand;
+	GetTaoVerseRangeCommand getRangeVerseCommand;
 	
 	@Mock
-	GetQuranChapterCommand getChapterCommand;
+	GetTaoChapterCommand getChapterCommand;
 	
 	@InjectMocks
 	@Autowired
-	QuranController underTest = new QuranController();
+	TaoController underTest = new TaoController();
 	
 	@Before
 	public void setup() throws Exception {
@@ -86,49 +85,43 @@ public class QuranControllerTests {
 	
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		TaoVerseDTO dto = new TaoVerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
 		dtos.add(dto);
 		
-		when(getSingleVerseCommand.setVersion(Mockito.any(QuranVersionEnum.class))).thenReturn(getSingleVerseCommand);
 		when(getSingleVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getSingleVerseCommand);
 		when(getSingleVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getSingleVerseCommand);
 		
 		when(getSingleVerseCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1&verse=1")
-				.accept(QuranController.V1_MEDIA_TYPE)
+		MvcResult mvcResult = this.mockMvc.perform(get("/tao/?chapter=1&verse=1")
+				.accept(TaoController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(QuranController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(TaoController.V1_MEDIA_TYPE))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
 		
 		Assert.assertEquals(1, response.size());
-		QuranVerseDTO verse = response.iterator().next();
-		Assert.assertEquals("blah", verse.getChapterName());
+		TaoVerseDTO verse = response.iterator().next();
 	}
 	
 	@Test
 	public void testGetRangeVerses() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		TaoVerseDTO dto = new TaoVerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
-		when(getRangeVerseCommand.setVersion(Mockito.any(QuranVersionEnum.class))).thenReturn(getRangeVerseCommand);
 		when(getRangeVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
 		when(getRangeVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
 		when(getRangeVerseCommand.setThroughVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
@@ -136,31 +129,28 @@ public class QuranControllerTests {
 		
 		when(getRangeVerseCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1&verse=1&throughChapter=3&throughVerse=2")
-				.accept(QuranController.V1_MEDIA_TYPE)
+		MvcResult mvcResult = this.mockMvc.perform(get("/tao/?&chapter=1&verse=1&throughChapter=3&throughVerse=2")
+				.accept(TaoController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(QuranController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(TaoController.V1_MEDIA_TYPE))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	@Test
 	public void testGetRangeVerses_verseOnly() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		TaoVerseDTO dto = new TaoVerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
-		when(getRangeVerseCommand.setVersion(Mockito.any(QuranVersionEnum.class))).thenReturn(getRangeVerseCommand);
 		when(getRangeVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
 		when(getRangeVerseCommand.setVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
 		when(getRangeVerseCommand.setThroughVerse(Mockito.anyInt())).thenReturn(getRangeVerseCommand);
@@ -168,44 +158,41 @@ public class QuranControllerTests {
 		
 		when(getRangeVerseCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1&verse=1&throughVerse=2")
-				.accept(BibleController.V1_MEDIA_TYPE)
+		MvcResult mvcResult = this.mockMvc.perform(get("/tao/?chapter=1&verse=1&throughVerse=2")
+				.accept(TaoController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(TaoController.V1_MEDIA_TYPE))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	
 	@Test
 	public void testGetChapterVerse() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		TaoVerseDTO dto = new TaoVerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
-		when(getChapterCommand.setVersion(Mockito.any(QuranVersionEnum.class))).thenReturn(getChapterCommand);
 		when(getChapterCommand.setChapter(Mockito.anyInt())).thenReturn(getChapterCommand);
 		
 		when(getChapterCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1")
-				.accept(BibleController.V1_MEDIA_TYPE)
+		MvcResult mvcResult = this.mockMvc.perform(get("/tao/?chapter=1")
+				.accept(TaoController.V1_MEDIA_TYPE)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(TaoController.V1_MEDIA_TYPE))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
