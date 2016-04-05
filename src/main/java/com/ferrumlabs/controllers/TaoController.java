@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ferrumlabs.commands.GetTaoChapterCommand;
 import com.ferrumlabs.commands.GetTaoSingleVerseCommand;
@@ -22,7 +21,7 @@ import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
 
 @RequestMapping("/tao")
-@Controller
+@RestController
 public class TaoController extends BaseController {
 
 	@Autowired
@@ -39,7 +38,6 @@ public class TaoController extends BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/", produces=V1_MEDIA_STRING)
-	@ResponseBody
 	@StatisticTimer(name="getTaoVerseTimer")
 	@StatisticCounter(name="getTaoVerseCounter")
 	public HttpEntity<List<TaoVerseDTO>> getVerse(HttpServletRequest request,  @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable

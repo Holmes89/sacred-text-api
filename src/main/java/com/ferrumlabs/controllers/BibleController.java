@@ -7,11 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.ferrumlabs.commands.GetBibleChapterCommand;
 import com.ferrumlabs.commands.GetBibleSingleVerseCommand;
@@ -23,7 +22,7 @@ import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
 
 @RequestMapping("/bible")
-@Controller
+@RestController
 public class BibleController extends BaseController {
 
 	@Autowired
@@ -40,7 +39,6 @@ public class BibleController extends BaseController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/", produces=V1_MEDIA_STRING)
-	@ResponseBody
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
 	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
