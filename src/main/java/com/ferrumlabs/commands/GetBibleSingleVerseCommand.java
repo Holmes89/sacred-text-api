@@ -29,7 +29,7 @@ public class GetBibleSingleVerseCommand extends BaseCommand<List<BibleVerseDTO>>
 	
 	protected GetBibleSingleVerseCommand() {
 		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("SacredTextAPI"))
-				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleVerse")));
+				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleSingleVerse")));
 	}
 	
 	public GetBibleSingleVerseCommand setVersion(BibleVersionEnum version){
@@ -65,8 +65,5 @@ public class GetBibleSingleVerseCommand extends BaseCommand<List<BibleVerseDTO>>
 			throw new HystrixBadRequestException("unable to process request", e);
 		}
 	}
-	
-	
-
 }
 

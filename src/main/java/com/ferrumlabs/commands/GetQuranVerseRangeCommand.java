@@ -6,67 +6,61 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.ferrumlabs.dto.BibleVerseDTO;
-import com.ferrumlabs.enums.BibleVersionEnum;
+import com.ferrumlabs.dto.QuranVerseDTO;
+import com.ferrumlabs.enums.QuranVersionEnum;
 import com.ferrumlabs.exceptions.ServiceException;
-import com.ferrumlabs.services.interfaces.IBibleService;
+import com.ferrumlabs.services.interfaces.IQuranService;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @Component
 @Scope("prototype")
-public class GetBibleVerseRangeCommand extends BaseCommand<List<BibleVerseDTO>> {
+public class GetQuranVerseRangeCommand extends BaseCommand<List<QuranVerseDTO>> {
 	
 	@Autowired
-	IBibleService bibleService;
+	IQuranService quranService;
 	
-	private BibleVersionEnum version;
-	private String book;
+	private QuranVersionEnum version;
 	private Integer chapter;
 	private Integer verse;
 	private Integer throughChapter;
 	private Integer throughVerse;
 	
-	protected GetBibleVerseRangeCommand() {
+	protected GetQuranVerseRangeCommand() {
 		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("SacredTextAPI"))
-				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleVerseRange")));
+				.andCommandKey(HystrixCommandKey.Factory.asKey("GetQuranVerseRange")));
 	}
 	
-	public GetBibleVerseRangeCommand setVersion(BibleVersionEnum version){
+	public GetQuranVerseRangeCommand setVersion(QuranVersionEnum version){
 		this.version=version;
 		return this;
 	}
-	
-	public GetBibleVerseRangeCommand setBook(String book){
-		this.book=book;
-		return this;
-	}
-	
-	public GetBibleVerseRangeCommand setChapter(Integer chapter){
+		
+	public GetQuranVerseRangeCommand setChapter(Integer chapter){
 		this.chapter=chapter;
 		return this;
 	}
 	
-	public GetBibleVerseRangeCommand setThroughVerse(Integer throughVerse){
+	public GetQuranVerseRangeCommand setThroughVerse(Integer throughVerse){
 		this.throughVerse=throughVerse;
 		return this;
 	}
-	public GetBibleVerseRangeCommand setThroughChapter(Integer throughChapter){
+	public GetQuranVerseRangeCommand setThroughChapter(Integer throughChapter){
 		this.throughChapter=throughChapter;
 		return this;
 	}
 	
-	public GetBibleVerseRangeCommand setVerse(Integer verse){
+	public GetQuranVerseRangeCommand setVerse(Integer verse){
 		this.verse=verse;
 		return this;
 	}
 	
 
 	@Override
-	protected List<BibleVerseDTO> run() throws Exception {
+	protected List<QuranVerseDTO> run() throws Exception {
 		try{
-			return bibleService.getVersesInRange(this.version, this.book, this.chapter, this.verse, this.throughChapter, this.throughVerse);
+			return quranService.getVersesInRange(this.version, this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}
 		catch(ServiceException e){
 			log.error("error creating getting verse "+e);
