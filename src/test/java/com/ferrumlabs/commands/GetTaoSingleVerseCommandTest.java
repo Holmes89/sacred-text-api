@@ -12,23 +12,22 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.ferrumlabs.dto.BibleVerseDTO;
-import com.ferrumlabs.enums.BibleVersionEnum;
+import com.ferrumlabs.dto.TaoVerseDTO;
 import com.ferrumlabs.exceptions.FactoryException;
-import com.ferrumlabs.factories.BibleFactory;
+import com.ferrumlabs.factories.TaoFactory;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-public class GetBibleSingleVerseCommandTest {
-
+public class GetTaoSingleVerseCommandTest {
+	
 	@Mock
-	BibleFactory bibleFactory;
+	TaoFactory taoFactory;
 	
 	@InjectMocks
-	private GetBibleSingleVerseCommand cmd = new GetBibleSingleVerseCommand();
+	private GetTaoSingleVerseCommand cmd = new GetTaoSingleVerseCommand();
 	
 	@Mock
-	List<BibleVerseDTO> dtos;
+	List<TaoVerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -42,21 +41,18 @@ public class GetBibleSingleVerseCommandTest {
 	@Test
 	public void testCommand() throws FactoryException{
 
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
+		Mockito.when(taoFactory.getVerse(Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
 		
-		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		List<TaoVerseDTO> response = cmd.setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws FactoryException{
 		
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
+		Mockito.when(taoFactory.getVerse(Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
 		
-		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		cmd.setChapter(-1).setVerse(-1).execute();
 		
 	}
-	
-	
 }
-

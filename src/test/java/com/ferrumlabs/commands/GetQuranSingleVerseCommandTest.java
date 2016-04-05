@@ -12,23 +12,23 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.ferrumlabs.dto.BibleVerseDTO;
-import com.ferrumlabs.enums.BibleVersionEnum;
+import com.ferrumlabs.dto.QuranVerseDTO;
+import com.ferrumlabs.enums.QuranVersionEnum;
 import com.ferrumlabs.exceptions.FactoryException;
-import com.ferrumlabs.factories.BibleFactory;
+import com.ferrumlabs.factories.QuranFactory;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-public class GetBibleSingleVerseCommandTest {
+public class GetQuranSingleVerseCommandTest {
 
 	@Mock
-	BibleFactory bibleFactory;
+	QuranFactory quranFactory;
 	
 	@InjectMocks
-	private GetBibleSingleVerseCommand cmd = new GetBibleSingleVerseCommand();
+	private GetQuranSingleVerseCommand cmd = new GetQuranSingleVerseCommand();
 	
 	@Mock
-	List<BibleVerseDTO> dtos;
+	List<QuranVerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -37,26 +37,22 @@ public class GetBibleSingleVerseCommandTest {
 	{
 		MockitoAnnotations.initMocks(this);	
 	}
-	
 
 	@Test
 	public void testCommand() throws FactoryException{
 
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
+		Mockito.when(quranFactory.getVerse(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
 		
-		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		List<QuranVerseDTO> response = cmd.setVersion(QuranVersionEnum.PICKTHALL).setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws FactoryException{
 		
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
+		Mockito.when(quranFactory.getVerse(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
 		
-		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
+		cmd.setVersion(QuranVersionEnum.PICKTHALL).setChapter(-1).setVerse(-1).execute();
 		
 	}
-	
-	
 }
-
