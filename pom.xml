@@ -142,7 +142,12 @@
 		    <artifactId>javax.inject</artifactId>
 		    <version>1</version>
 		</dependency>
-
+		<!-- Swagger -->
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-core</artifactId>
+			<version>1.5.8</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
