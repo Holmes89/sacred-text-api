@@ -29,6 +29,7 @@
 	</properties>
 	<modules>
 	  <module>sacred-text-api</module>
+	  <module>religious-calendar-api</module>
 	</modules>
 	<dependencies>
 		<dependency>
