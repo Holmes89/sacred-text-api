@@ -21,12 +21,6 @@ import com.ferrumlabs.exceptions.APIException;
 import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-
-@Api(value="bible")
 @RequestMapping("/bible")
 @RestController
 public class BibleController extends BaseController {
@@ -44,28 +38,10 @@ public class BibleController extends BaseController {
 		super();
 	}
 	
-	@ApiOperation(value = "Retrieve Bible Verse",
-    notes = "Retrieves list of bible verses, default version is NKJV",
-    response = BibleVerseDTO.class,
-    responseContainer = "List")
-	@ApiImplicitParams({
-		@ApiImplicitParam(name="versionAbbr", value = "Version of Bible, default NKJV", required = false, dataType = "BibleVersionEnum", paramType = "query"),
-		@ApiImplicitParam(name="book", value = "Book of the Bible", required = true, dataType = "string", paramType = "query"),
-		@ApiImplicitParam(name="chapter", value = "Chapter within book", required = true, dataType = "integer", paramType = "query"),
-		@ApiImplicitParam(name="verse", value = "Verse within chapter", required = false, dataType = "integer", paramType = "query"),
-		@ApiImplicitParam(name="throughChapter", value = "End chapter", required = false, dataType = "integer", paramType = "query"),
-		@ApiImplicitParam(name="throughVerse", value = "End verse", required = false, dataType = "integer", paramType = "query")
-	})
 	@RequestMapping(method = RequestMethod.GET, value="/", produces=V1_MEDIA_STRING)
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, 
-			@RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, 
-			@RequestParam(required=true, value="book") String book, 
-			@RequestParam(required=true, value="chapter") Integer chapter, 
-			@RequestParam(required=false, value="verse") Integer verse, 
-			@RequestParam(required=false, value="throughChapter") Integer throughChapter, 
-			@RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
+	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
 	{
 		if(versionAbbr==null){
 			versionAbbr = BibleVersionEnum.NKJV;
