@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ferrumlabs</groupId>
-	<artifactId>sacred-text-api</artifactId>
+	<artifactId>religious-apis</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
-	<name>SacredTextAPI</name>
-	<description>API to get text from religious texts</description>
+	<name>ReligiousAPIs</name>
+	<description>APIs for various religious elements</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -27,7 +27,9 @@
 		<mockito.version>1.10.18</mockito.version>
 		<org.aspectj-version>1.8.8</org.aspectj-version>
 	</properties>
-
+	<modules>
+	  <module>sacred-text-api</module>
+	</modules>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
