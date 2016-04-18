@@ -4,10 +4,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
 
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import com.ferrumlabs.enums.ChristianSpecialDatesEnum;
 import com.ferrumlabs.exceptions.FactoryException;
+import com.ferrumlabs.utils.ErrorCodes;
 
 @Component
 @Scope("singleton")
@@ -33,13 +36,48 @@ public class ChristianCalendarFactory {
 	@PostConstruct
 	private void init() throws FactoryException{
 		DateTime initDate = new DateTime(2010, 12, 25, 0, 0);
-		for(int x=0; x<50; x++){
+		for(int x=0; x<30; x++){
 			createDateMap(initDate.plusYears(x));
 		}
 	}
 	
 	public Map<ChristianSpecialDatesEnum, DateTime> getEventMap(int year){
+		if(!eventDateMap.containsKey(year)){
+			DateTime initDate = new DateTime(year, 12, 25, 0, 0);
+			createDateMap(initDate);
+		}
 		return eventDateMap.get(year);
+	}
+	
+	public Map<ChristianSpecialDatesEnum, DateTime> getEventMap(DateTime date) throws FactoryException{
+		if(date==null){
+			throw new FactoryException("Date cannot be null", ErrorCodes.NULL_INPUT);
+		}
+		int year = getStartOfAdvent(date).getYear();
+		return getEventMap(year);
+	}
+	
+	public Map<DateTime, Set<ChristianSpecialDatesEnum>> getDateMap(int year){
+		if(!dateEventMap.containsKey(year)){
+			DateTime initDate = new DateTime(year, 12, 25, 0, 0);
+			createDateMap(initDate);
+		}
+		return dateEventMap.get(year);
+	}
+
+	public Map<DateTime, Set<ChristianSpecialDatesEnum>> getDateMap(DateTime date) throws FactoryException{
+		if(date==null){
+			throw new FactoryException("Date cannot be null", ErrorCodes.NULL_INPUT);
+		}
+		int year = getStartOfAdvent(date).getYear();
+		return getDateMap(year);
+	}
+
+	public Set<ChristianSpecialDatesEnum> getEventsByDate(DateTime date) throws FactoryException{
+		if(date==null){
+			throw new FactoryException("Date cannot be null", ErrorCodes.NULL_INPUT);
+		}
+		return getDateMap(date.getYear()).get(date);
 	}
 	
 	private void createDateMap(DateTime date){
@@ -188,8 +226,23 @@ public class ChristianCalendarFactory {
 		
 		eventMap.put(ChristianSpecialDatesEnum.CHRIST_IS_KING, tempDate);
 		eventDateMap.put(adventStart.getYear(), eventMap);
+		
+		
+		dateEventMap.put(adventStart.getYear(), generateDateEventMap(eventMap));
 	}
 	
+	private Map<DateTime, Set<ChristianSpecialDatesEnum>> generateDateEventMap(LinkedHashMap<ChristianSpecialDatesEnum, DateTime> eventMap) {
+		TreeMap<DateTime, Set<ChristianSpecialDatesEnum>> dateMap = new TreeMap<DateTime, Set<ChristianSpecialDatesEnum>>();
+		for(ChristianSpecialDatesEnum event : eventMap.keySet()){
+			DateTime eventDate = eventMap.get(event);
+			if(!dateMap.containsKey(event)){
+				dateMap.put(eventDate, new HashSet<ChristianSpecialDatesEnum>());
+			}
+			dateMap.get(eventDate).add(event);
+		}
+		return dateMap;
+	}
+
 	public DateTime getEasterDate(int year) {
 		int a = year % 19;
 		int b = year / 100;
