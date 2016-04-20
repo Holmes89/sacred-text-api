@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import javax.annotation.PostConstruct;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
 import org.joda.time.DateTimeConstants;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -232,10 +233,10 @@ public class ChristianCalendarFactory {
 	}
 	
 	private Map<DateTime, Set<ChristianSpecialDatesEnum>> generateDateEventMap(LinkedHashMap<ChristianSpecialDatesEnum, DateTime> eventMap) {
-		TreeMap<DateTime, Set<ChristianSpecialDatesEnum>> dateMap = new TreeMap<DateTime, Set<ChristianSpecialDatesEnum>>();
+		TreeMap<DateTime, Set<ChristianSpecialDatesEnum>> dateMap = new TreeMap<DateTime, Set<ChristianSpecialDatesEnum>>(DateTimeComparator.getInstance());
 		for(ChristianSpecialDatesEnum event : eventMap.keySet()){
 			DateTime eventDate = eventMap.get(event);
-			if(!dateMap.containsKey(event)){
+			if(!dateMap.containsKey(eventDate)){
 				dateMap.put(eventDate, new HashSet<ChristianSpecialDatesEnum>());
 			}
 			dateMap.get(eventDate).add(event);
