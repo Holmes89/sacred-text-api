@@ -37,7 +37,7 @@ public class TaoController extends BaseController {
 		super();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/", produces=V1_MEDIA_STRING)
+	@RequestMapping(method = RequestMethod.GET, value="/", produces = "application/json")
 	@StatisticTimer(name="getTaoVerseTimer")
 	@StatisticCounter(name="getTaoVerseCounter")
 	public HttpEntity<List<TaoVerseDTO>> getVerse(HttpServletRequest request,  @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable

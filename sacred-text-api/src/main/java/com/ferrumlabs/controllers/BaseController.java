@@ -8,10 +8,7 @@ import org.springframework.http.MediaType;
 
 public abstract class BaseController  {
 
-	public final static String VERSION = "sacretextapi.v1";
-	public static final String V1_MEDIA_STRING = "application/vnd."+VERSION+"+json";
-	public static final MediaType V1_MEDIA_TYPE = new MediaType("application","vnd."+VERSION+"+json");
-		
+	public final static String VERSION = "sacredtextapi.v1";
 	
 	public BaseController()
 	{
@@ -22,8 +19,8 @@ public abstract class BaseController  {
 	protected HttpHeaders createEntityHeaders()
 	{
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("X-PlatformAdminApi-Media-Type", VERSION);
-		headers.setContentType(V1_MEDIA_TYPE);
+		headers.add("X-SacredText-Media-Type", VERSION);
+		headers.setContentType(MediaType.APPLICATION_JSON);
 		return headers;
 	}
 	protected transient Logger log = LoggerFactory.getLogger(this.getClass());

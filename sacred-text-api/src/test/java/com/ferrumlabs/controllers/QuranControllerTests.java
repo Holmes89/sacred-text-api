@@ -22,6 +22,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -102,10 +103,10 @@ public class QuranControllerTests {
 		when(getSingleVerseCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1&verse=1")
-				.accept(QuranController.V1_MEDIA_TYPE)
+				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(QuranController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
 		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
@@ -137,10 +138,10 @@ public class QuranControllerTests {
 		when(getRangeVerseCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1&verse=1&throughChapter=3&throughVerse=2")
-				.accept(QuranController.V1_MEDIA_TYPE)
+				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(QuranController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
 		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
@@ -169,10 +170,10 @@ public class QuranControllerTests {
 		when(getRangeVerseCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1&verse=1&throughVerse=2")
-				.accept(BibleController.V1_MEDIA_TYPE)
+				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
 		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
@@ -199,10 +200,10 @@ public class QuranControllerTests {
 		when(getChapterCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/quran/?chapter=1")
-				.accept(BibleController.V1_MEDIA_TYPE)
+				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(BibleController.V1_MEDIA_TYPE))
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
 		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });

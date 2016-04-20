@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,7 +39,7 @@ public class BibleController extends BaseController {
 		super();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/", produces=V1_MEDIA_STRING)
+	@RequestMapping(method = RequestMethod.GET, value="/", produces = "application/json")
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
 	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
