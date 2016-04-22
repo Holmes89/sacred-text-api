@@ -1,5 +1,6 @@
 package com.ferrumlabs.services.interfaces;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 import org.joda.time.DateTime;
@@ -9,7 +10,7 @@ public interface IChristianCalendarService {
 
 	DateTime getEaster(int year);
 	
-	Map<String, DateTime> getHolidays(DateTime date) throws ServiceException;
+	Map<String, Date> getHolidays(DateTime date) throws ServiceException;
 	
 	/**
 	 * Returns a set of holiday names for specific dates. If nothing happens on this date get specific Sunday.

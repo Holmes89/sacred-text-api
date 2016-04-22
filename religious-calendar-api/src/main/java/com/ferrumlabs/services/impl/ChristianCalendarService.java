@@ -1,5 +1,6 @@
 package com.ferrumlabs.services.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -29,15 +30,15 @@ public class ChristianCalendarService implements IChristianCalendarService {
 	}
 
 	@Override
-	public Map<String, DateTime> getHolidays(DateTime date) throws ServiceException {
+	public Map<String, Date> getHolidays(DateTime date) throws ServiceException {
 		if(date ==null){
 			throw new ServiceException("Date cannot be null", ErrorCodes.NULL_INPUT);
 		}
-		Map<String, DateTime> holidayMap = new HashMap<String, DateTime>();
+		Map<String, Date> holidayMap = new HashMap<String, Date>();
 		try{
 			Map<ChristianSpecialDatesEnum, DateTime> eventMap = calFactory.getEventMap(date);
 			for(ChristianSpecialDatesEnum key: eventMap.keySet()){
-				holidayMap.put(key.getDisplayName(), eventMap.get(key));
+				holidayMap.put(key.getDisplayName(), eventMap.get(key).toDate());
 			}
 		}catch(FactoryException e){
 			throw new ServiceException("Factory Error", e);

@@ -1,5 +1,6 @@
 package com.ferrumlabs.services;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,9 +35,9 @@ public class ChristianCalendarServiceTests {
 	
 	@Test
 	public void testGetHolidays() throws Exception{
-		Map<String, DateTime> holidays = ccService.getHolidays(testDate);
+		Map<String, Date> holidays = ccService.getHolidays(testDate);
 		Assert.assertNotNull(holidays);
-		DateTime easter = holidays.get("Easter");
+		DateTime easter = new DateTime(holidays.get("Easter"));
 		Assert.assertEquals(3, easter.getMonthOfYear());
 		Assert.assertEquals(27, easter.getDayOfMonth());
 	}
