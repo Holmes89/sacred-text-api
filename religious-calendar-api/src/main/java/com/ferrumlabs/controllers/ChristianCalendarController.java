@@ -2,6 +2,7 @@ package com.ferrumlabs.controllers;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Provider;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ferrumlabs.commands.GetChristianDatesCommand;
 import com.ferrumlabs.commands.GetEasterCommand;
+import com.ferrumlabs.commands.GetNearestHolidayCommand;
 import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
 
@@ -30,6 +32,9 @@ public class ChristianCalendarController extends BaseController {
 	
 	@Autowired
 	Provider<GetEasterCommand> getEasterProvider;
+
+	@Autowired
+	Provider<GetNearestHolidayCommand> getNearestHolidayProvider;
 	
 	public ChristianCalendarController(){
 		super();
@@ -48,6 +53,21 @@ public class ChristianCalendarController extends BaseController {
 		
 		log.info("Request Calendar for date: {}", dateTime);
 		return new HttpEntity<Map<String, Date>>(getChristianDatesProvider.get().setDate(dateTime).execute(), createEntityHeaders());
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/nearestHoliday", produces = "application/json")
+	@StatisticTimer(name="getNearestHolidayTimer")
+	@StatisticCounter(name="getNearestHolidayCounter")
+	public HttpEntity<Set<String>> getNearestHoliday(HttpServletRequest request, @RequestParam(required=false, value="date") @DateTimeFormat(pattern="MM-dd-yyyy") Date date) throws Throwable
+	{
+		if(date==null){
+			date = new Date();
+		}
+		
+		DateTime dateTime = new DateTime(date);
+		
+		log.info("Request neareset holiday on date: {}", dateTime);
+		return new HttpEntity<Set<String>>(getNearestHolidayProvider.get().setDate(dateTime).execute(), createEntityHeaders());
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value="/easter/{year}", produces = "application/json")

@@ -5,10 +5,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Provider;
 
@@ -38,6 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ferrumlabs.ReligiousCalendarApiApplication;
 import com.ferrumlabs.commands.GetChristianDatesCommand;
 import com.ferrumlabs.commands.GetEasterCommand;
+import com.ferrumlabs.commands.GetNearestHolidayCommand;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
@@ -59,12 +63,18 @@ public class ChristianCalendarControllerTests {
 	
 	@Mock
 	Provider<GetEasterCommand> getEasterProvider;
+	
+	@Mock
+	Provider<GetNearestHolidayCommand> getNearestHolidayProvider;
 
 	@Mock
 	GetChristianDatesCommand getChristianDatesCommand;
 	
 	@Mock
 	GetEasterCommand getEasterCommand;
+	
+	@Mock
+	GetNearestHolidayCommand getNearestHolidayCommand;
 	
 	@InjectMocks
 	@Autowired
@@ -76,6 +86,7 @@ public class ChristianCalendarControllerTests {
 		this.mockMvc = webAppContextSetup(this.wac).build();
 		when(getChristianDatesProvider.get()).thenReturn(getChristianDatesCommand);
 		when(getEasterProvider.get()).thenReturn(getEasterCommand);
+		when(getNearestHolidayProvider.get()).thenReturn(getNearestHolidayCommand);
 	}
 	
 	@Test
@@ -107,6 +118,38 @@ public class ChristianCalendarControllerTests {
 				.andReturn();
 		
 		response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<Map<String, Date>>() { });
+		
+		Assert.assertEquals(1, response.size());
+	}
+	
+	@Test
+	public void testGetNearestHoliday() throws Exception{
+		
+		Set<String> holidays = new HashSet<String>(Arrays.asList(new String[]{"blah"}));
+		when(getNearestHolidayCommand.setDate(Mockito.any(DateTime.class))).thenReturn(getNearestHolidayCommand);
+		
+		when(getNearestHolidayCommand.execute()).thenReturn(holidays);
+		
+		MvcResult mvcResult = this.mockMvc.perform(get("/calendar/christian/nearestHoliday")
+				.accept(MediaType.APPLICATION_JSON)
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andReturn();
+		
+		Set<String> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<Set<String>>() { });
+		
+		Assert.assertEquals(1, response.size());
+		
+		mvcResult = this.mockMvc.perform(get("/calendar/christian/nearestHoliday")
+				.accept(MediaType.APPLICATION_JSON)
+				.param("date", "04-22-2014")
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andReturn();
+		
+		response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<Set<String>>() { });
 		
 		Assert.assertEquals(1, response.size());
 	}
