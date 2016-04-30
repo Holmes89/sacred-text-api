@@ -265,7 +265,7 @@ public class ChristianCalendarFactory {
 		return new DateTime(calendar.getTime());
 	}
 	
-	private char getLiturgicalYear(int yearStart){
+	public char getLiturgicalYear(int yearStart){
 		switch(yearStart%3){
 			case 0:
 				return 'a';
@@ -276,7 +276,7 @@ public class ChristianCalendarFactory {
 		}
 	}
 	
-	private DateTime getStartOfAdvent(DateTime now){
+	public DateTime getStartOfAdvent(DateTime now){
 		int year = now.getYear();
 		DateTime christmasThisYear = new DateTime(year, 12, 25, 0, 0);
 		DateTime firstSundayInAdvent = christmasThisYear.minusWeeks(4).withDayOfWeek(DateTimeConstants.SUNDAY);

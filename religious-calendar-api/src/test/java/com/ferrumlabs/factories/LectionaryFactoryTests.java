@@ -28,5 +28,31 @@ public class LectionaryFactoryTests {
 		Map<LitanyEventsEnum, Set<String>> litYear = lectFactory.getLitYear("a");
 		Assert.assertEquals(LitanyEventsEnum.values().length, litYear.keySet().size());
 		Assert.assertEquals(6, litYear.get(LitanyEventsEnum.GOOD_FRIDAY).size());
+		litYear = lectFactory.getLitYear("B");
+		Assert.assertEquals(LitanyEventsEnum.values().length, litYear.keySet().size());
+		Assert.assertEquals(6, litYear.get(LitanyEventsEnum.GOOD_FRIDAY).size());
+		litYear = lectFactory.getLitYear("c");
+		Assert.assertEquals(LitanyEventsEnum.values().length, litYear.keySet().size());
+		Assert.assertEquals(6, litYear.get(LitanyEventsEnum.GOOD_FRIDAY).size());
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void test_null_year() throws FactoryException{
+		lectFactory.getLitYear(null);
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void test_empty_year() throws FactoryException{
+		lectFactory.getLitYear("");
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void test_invalid_year_long() throws FactoryException{
+		lectFactory.getLitYear("abc");
+	}
+	
+	@Test(expected=FactoryException.class)
+	public void test_invalid_year_character() throws FactoryException{
+		lectFactory.getLitYear("z");
 	}
 }

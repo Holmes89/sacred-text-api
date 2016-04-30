@@ -47,12 +47,11 @@ public class ChristianCalendarService implements IChristianCalendarService {
 	}
 
 	@Override
-	public Set<String> getHoliday(DateTime date) throws ServiceException {
+	public Set<ChristianSpecialDatesEnum> getHolidayEnums(DateTime date) throws ServiceException {
 		if(date ==null){
 			throw new ServiceException("Date cannot be null", ErrorCodes.NULL_INPUT);
 		}
 		date = cleanDate(date);
-		Set<String> holidays = new HashSet<String>();
 		try{
 			Map<DateTime, Set<ChristianSpecialDatesEnum>> dateMap = calFactory.getDateMap(date);
 			Set<ChristianSpecialDatesEnum> holidayEnums;
@@ -63,11 +62,20 @@ public class ChristianCalendarService implements IChristianCalendarService {
 				date = date.minusWeeks(1).withDayOfWeek(DateTimeConstants.SUNDAY);
 				holidayEnums = dateMap.get(date);
 			}
-			for(ChristianSpecialDatesEnum h: holidayEnums){
-				holidays.add(h.getDisplayName());
-			}
+			return holidayEnums;
 		}catch(FactoryException e){
 			throw new ServiceException("Factory Error", e);
+		}
+	}
+	
+	@Override
+	public Set<String> getHoliday(DateTime date) throws ServiceException {
+		if(date ==null){
+			throw new ServiceException("Date cannot be null", ErrorCodes.NULL_INPUT);
+		}
+		Set<String> holidays = new HashSet<String>();
+		for(ChristianSpecialDatesEnum h: getHolidayEnums(date)){
+			holidays.add(h.getDisplayName());
 		}
 		return holidays;
 	}
