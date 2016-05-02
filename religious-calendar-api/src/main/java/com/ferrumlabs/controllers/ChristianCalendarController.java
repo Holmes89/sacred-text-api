@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ferrumlabs.commands.GetChristianDatesCommand;
 import com.ferrumlabs.commands.GetEasterCommand;
+import com.ferrumlabs.commands.GetLectionaryByDateCommand;
 import com.ferrumlabs.commands.GetNearestHolidayCommand;
 import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
@@ -35,6 +36,9 @@ public class ChristianCalendarController extends BaseController {
 
 	@Autowired
 	Provider<GetNearestHolidayCommand> getNearestHolidayProvider;
+	
+	@Autowired
+	Provider<GetLectionaryByDateCommand> getLectionaryByDateProvider;
 	
 	public ChristianCalendarController(){
 		super();
@@ -78,5 +82,20 @@ public class ChristianCalendarController extends BaseController {
 		
 		log.info("Request Easter for year: {}", year);
 		return new HttpEntity<Date>(getEasterProvider.get().setYear(year).execute(), createEntityHeaders());
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/lectionary", produces = "application/json")
+	@StatisticTimer(name="getLectionaryTimer")
+	@StatisticCounter(name="getLectionaryCounter")
+	public HttpEntity<Set<String>> getLectionaryByDate(HttpServletRequest request, @RequestParam(required=false, value="date") @DateTimeFormat(pattern="MM-dd-yyyy") Date date) throws Throwable
+	{
+		if(date==null){
+			date = new Date();
+		}
+		
+		DateTime dateTime = new DateTime(date);
+		
+		log.info("Request leciontary by date: {}", dateTime);
+		return new HttpEntity<Set<String>>(getLectionaryByDateProvider.get().setDate(dateTime).execute(), createEntityHeaders());
 	}
 }

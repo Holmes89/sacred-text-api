@@ -22,6 +22,7 @@ public class LectionaryServiceTests {
 	ILectionaryService lectService;
 	
 	private DateTime testDate = new DateTime(2016, 7, 20, 0, 0, 0);
+	private DateTime anotherTestDate = new DateTime(2016, 4, 30, 0, 0, 0);
 	
 	@Test
 	public void testGetLectionaryVerse() throws ServiceException{
@@ -34,5 +35,16 @@ public class LectionaryServiceTests {
 		Assert.assertTrue(lectionaryVerses.contains("Psalm 15"));
 		Assert.assertTrue(lectionaryVerses.contains("Colossians 1:15-28"));
 		Assert.assertTrue(lectionaryVerses.contains("Luke 10:38-42"));
+	}
+	
+	@Test
+	public void testGetLectionaryVerse2() throws ServiceException{
+		Set<String> lectionaryVerses = lectService.getLectionaryVerses(anotherTestDate);
+		Assert.assertNotNull(lectionaryVerses);
+		Assert.assertEquals(4, lectionaryVerses.size());
+		Assert.assertTrue(lectionaryVerses.contains("Acts 11:1-18"));
+		Assert.assertTrue(lectionaryVerses.contains("Psalm 148"));
+		Assert.assertTrue(lectionaryVerses.contains("Revelation 21:1-6"));
+		Assert.assertTrue(lectionaryVerses.contains("John 13:31-35"));
 	}
 }

@@ -81,7 +81,7 @@ public class ChristianCalendarService implements IChristianCalendarService {
 	}
 
 	private DateTime cleanDate(DateTime date){
-		return date.withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0);
+		return date.withHourOfDay(0).withMinuteOfHour(0).withSecondOfMinute(0).withMillisOfSecond(0);
 	}
 
 }
