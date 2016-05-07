@@ -1,5 +1,6 @@
 package com.ferrumlabs.commands;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 import com.ferrumlabs.exceptions.ServiceException;
 import com.ferrumlabs.services.interfaces.IBibleService;
+import com.ferrumlabs.utils.ErrorCodes;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
@@ -69,6 +71,9 @@ public class GetBibleVerseRangeCommand extends BaseCommand<List<BibleVerseDTO>> 
 			return bibleService.getVersesInRange(this.version, this.book, this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}
 		catch(ServiceException e){
+			if(e.getErrorCode().equals(ErrorCodes.INVALID_INPUT)){
+				return new ArrayList<BibleVerseDTO>();
+			}
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}

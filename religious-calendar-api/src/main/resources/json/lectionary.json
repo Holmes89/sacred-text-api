@@ -2,22 +2,22 @@
     "a": {
         "All Saints Day": [
             "Revelation 7:9-17", 
-            "Psalm 34:1-10", 
-            "Psalm 34:22", 
+            "Psalms 34:1-10", 
+            "Psalms 34:22", 
             "1 John 3:1-3", 
             "Matthew 5:1-12"
         ], 
         "Annunciation of the Lord": [
             "Isaiah 7:10-14", 
-            "Psalm 45", 
-            "Psalm 40:5-10", 
+            "Psalms 45", 
+            "Psalms 40:5-10", 
             "Hebrews 10:4-10", 
             "Luke 1:26-38"
         ], 
         "Ascension of the Lord": [
             "Acts 1:1-11", 
-            "Psalm 47", 
-            "Psalm 93", 
+            "Psalms 47", 
+            "Psalms 93", 
             "Ephesians 1:15-23", 
             "Luke 24:44-53"
         ], 
@@ -25,14 +25,14 @@
             "Joel 2:1-2", 
             "Joel 2:12-17", 
             "Isaiah 58:1-12", 
-            "Psalm 51:1-17", 
+            "Psalms 51:1-17", 
             "2 Corinthians 5:20-6:10", 
             "Matthew 6:1-6", 
             "Matthew 6:16-21"
         ], 
         "Baptism of the Lord": [
             "Isaiah 42:1-9", 
-            "Psalm 29", 
+            "Psalms 29", 
             "Acts 10:34-43", 
             "Matthew 3:13-17"
         ], 
@@ -45,17 +45,17 @@
         "Christ is King": [
             "Ezekiel 34:11-16", 
             "Ezekiel 34:20-24", 
-            "Psalm 100", 
+            "Psalms 100", 
             "Ezekiel 34:11-16", 
             "Ezekiel 34:20-24", 
-            "Psalm 95:1-7", 
+            "Psalms 95:1-7", 
             "Ephesians 1:15-23", 
             "Matthew 25:31-46"
         ], 
         "Day of Pentecost": [
             "Acts 2:1-21", 
             "Numbers 11:24-30", 
-            "Psalm 104:24-35", 
+            "Psalms 104:24-35", 
             "1 Corinthians 12:3-13", 
             "Acts 2:1-21", 
             "John 20:19-23", 
@@ -63,21 +63,21 @@
         ], 
         "Easter Evening": [
             "Isaiah 25:6-9", 
-            "Psalm 114", 
+            "Psalms 114", 
             "1 Corinthians 5:6-8", 
             "Luke 24:13-49"
         ], 
         "Easter Vigil": [
             "Genesis 1:1-2:4", 
-            "Psalm 136:1-9", 
-            "Psalm 136:23-26", 
+            "Psalms 136:1-9", 
+            "Psalms 136:23-26", 
             "Genesis 7:1-5", 
             "Genesis 7:11-18", 
             "Genesis 8:6-18", 
             "Genesis 9:8-13", 
-            "Psalm 46", 
+            "Psalms 46", 
             "Genesis 22:1-18", 
-            "Psalm 16", 
+            "Psalms 16", 
             "Exodus 14:10-31", 
             "Exodus 15:20-21", 
             "Exodus 15:1-13", 
@@ -89,97 +89,97 @@
             "Proverbs 8:1-8", 
             "Proverbs 8:19-21", 
             "Proverbs 9:4-6", 
-            "Psalm 19", 
+            "Psalms 19", 
             "Ezekiel 36:24-28", 
-            "Psalm 42", 
-            "Psalm 43", 
+            "Psalms 42", 
+            "Psalms 43", 
             "Ezekiel 37:1-14", 
-            "Psalm 143", 
+            "Psalms 143", 
             "Zephaniah 3:14-20", 
-            "Psalm 98", 
+            "Psalms 98", 
             "Romans 6:3-11", 
-            "Psalm 114", 
+            "Psalms 114", 
             "Matthew 28:1-10"
         ], 
         "Eighth Sunday after the Epiphany": [
             "Isaiah 49:8-16", 
-            "Psalm 131", 
+            "Psalms 131", 
             "1 Corinthians 4:1-5", 
             "Matthew 6:24-34"
         ], 
         "Epiphany of the Lord": [
             "Isaiah 60:1-6", 
-            "Psalm 72:1-7", 
-            "Psalm 72:10-14", 
+            "Psalms 72:1-7", 
+            "Psalms 72:10-14", 
             "Ephesians 3:1-12", 
             "Matthew 2:1-12"
         ], 
         "Fifth Sunday after the Epiphany": [
             "Isaiah 58:1-12)", 
-            "Psalm 112:1-10", 
+            "Psalms 112:1-10", 
             "1 Corinthians 2:1-16", 
             "Matthew 5:13-20"
         ], 
         "Fifth Sunday in Lent": [
             "Ezekiel 37:1-14", 
-            "Psalm 130", 
+            "Psalms 130", 
             "Romans 8:6-11", 
             "John 11:1-45"
         ], 
         "Fifth Sunday of Easter": [
             "Acts 7:55-60", 
-            "Psalm 31:1-5", 
-            "Psalm 31:15-16", 
+            "Psalms 31:1-5", 
+            "Psalms 31:15-16", 
             "1 Peter 2:2-10", 
             "John 14:1-14"
         ], 
         "First Sunday after Christmas Day": [
             "Isaiah 63:7-9", 
-            "Psalm 148", 
+            "Psalms 148", 
             "Hebrews 2:10-18", 
             "Matthew 2:13-23"
         ], 
         "First Sunday in Lent": [
             "Genesis 2:15-17", 
             "Genesis 3:1-7", 
-            "Psalm 32", 
+            "Psalms 32", 
             "Romans 5:12-19", 
             "Matthew 4:1-11"
         ], 
         "First Sunday of Advent": [
             "Isaiah 2:1-5", 
-            "Psalm 122", 
+            "Psalms 122", 
             "Romans 13:11-14", 
             "Matthew 24:36-44"
         ], 
         "Fourth Sunday after the Epiphany": [
             "Micah 6:1-8", 
-            "Psalm 15", 
+            "Psalms 15", 
             "1 Corinthians 1:18-31", 
             "Matthew 5:1-12"
         ], 
         "Fourth Sunday in Lent": [
             "1 Samuel 16:1-13", 
-            "Psalm 23", 
+            "Psalms 23", 
             "Ephesians 5:8-14", 
             "John 9:1-41"
         ], 
         "Fourth Sunday of Advent": [
             "Isaiah 7:10-16", 
-            "Psalm 80:1-7", 
-            "Psalm 80:17-19", 
+            "Psalms 80:1-7", 
+            "Psalms 80:17-19", 
             "Romans 1:1-7", 
             "Matthew 1:18-25"
         ], 
         "Fourth Sunday of Easter": [
             "Acts 2:42-47", 
-            "Psalm 23", 
+            "Psalms 23", 
             "1 Peter 2:19-25", 
             "John 10:1-10"
         ], 
         "Good Friday": [
             "Isaiah 52:13-53:12", 
-            "Psalm 22", 
+            "Psalms 22", 
             "Hebrews 10:16-25", 
             "Hebrews 4:14-16", 
             "Hebrews 5:7-9", 
@@ -187,15 +187,15 @@
         ], 
         "Holy Cross": [
             "Numbers 21:4b-9", 
-            "Psalm 98:1-5", 
-            "Psalm 78:1-2", 
-            "Psalm 78:34-38", 
+            "Psalms 98:1-5", 
+            "Psalms 78:1-2", 
+            "Psalms 78:34-38", 
             "1 Corinthians 1:18-24", 
             "John 3:13-17"
         ], 
         "Holy Name of Jesus": [
             "Numbers 6:22-27", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Galatians 4:4-7", 
             "Philippians 2:5-11", 
             "Luke 2:15-21"
@@ -204,193 +204,193 @@
             "Job 14:1-14", 
             "Lamentations 3:1-9", 
             "Lamentations 3:19-24", 
-            "Psalm 31:1-4", 
-            "Psalm 31:15-16", 
+            "Psalms 31:1-4", 
+            "Psalms 31:15-16", 
             "1 Peter 4:1-8", 
             "Matthew 27:57-66", 
             "John 19:38-42"
         ], 
         "Liturgy of the Palms": [
-            "Psalm 118:1-2", 
-            "Psalm 118:19-29", 
+            "Psalms 118:1-2", 
+            "Psalms 118:19-29", 
             "Matthew 21:1-11"
         ], 
         "Liturgy of the Passion": [
             "Isaiah 50:4-9", 
-            "Psalm 31:9-16", 
+            "Psalms 31:9-16", 
             "Philippians 2:5-11", 
             "Matthew 26:14-27:66", 
             "Matthew 27:11-54"
         ], 
         "Maundy Thursday": [
             "Exodus 12:1-14", 
-            "Psalm 116:1-2", 
-            "Psalm 116:12-19", 
+            "Psalms 116:1-2", 
+            "Psalms 116:12-19", 
             "1 Corinthians 11:23-26", 
             "John 13:1-17", 
             "John 13:31-35"
         ], 
         "Monday of Holy Week": [
             "Isaiah 42:1-9", 
-            "Psalm 36:5-11", 
+            "Psalms 36:5-11", 
             "Hebrews 9:11-15", 
             "John 12:1-11"
         ], 
         "Nativity of the Lord - Proper I": [
             "Isaiah 9:2-7", 
-            "Psalm 96", 
+            "Psalms 96", 
             "Titus 2:11-14", 
             "Luke 2:1-20"
         ], 
         "Nativity of the Lord - Proper II": [
             "Isaiah 62:6-12", 
-            "Psalm 97", 
+            "Psalms 97", 
             "Titus 3:4-7", 
             "Luke 2:1-20"
         ], 
         "Nativity of the Lord - Proper III": [
             "Isaiah 52:7-10", 
-            "Psalm 98", 
+            "Psalms 98", 
             "Hebrews 1:1-12", 
             "John 1:1-14"
         ], 
         "New Year's Day": [
             "Ecclesiastes 3:1-13", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Revelation 21:1-6", 
             "Matthew 25:31-46"
         ], 
         "Ninth Sunday after the Epiphany": [
             "Deuteronomy 11:18-21", 
             "Deuteronomy 11:26-28", 
-            "Psalm 31:1-5", 
-            "Psalm 31:19-24", 
+            "Psalms 31:1-5", 
+            "Psalms 31:19-24", 
             "Romans 1:16-17", 
             "Romans 3:22-31", 
             "Matthew 7:21-29"
         ], 
         "Presentation of the Lord": [
             "Malachi 3:1-4", 
-            "Psalm 84", 
-            "Psalm 24:7-10", 
+            "Psalms 84", 
+            "Psalms 24:7-10", 
             "Hebrews 2:14-18", 
             "Luke 2:22-40"
         ], 
         "Proper 10": [
             "Genesis 25:19-34", 
-            "Psalm 119:105-112", 
+            "Psalms 119:105-112", 
             "Isaiah 55:10-13", 
-            "Psalm 65:1-13", 
+            "Psalms 65:1-13", 
             "Romans 8:1-11", 
             "Matthew 13:1-9", 
             "Matthew 13:18-23"
         ], 
         "Proper 11": [
             "Genesis 28:10-19", 
-            "Psalm 139:1-12", 
-            "Psalm 139:23-24", 
+            "Psalms 139:1-12", 
+            "Psalms 139:23-24", 
             "Wisdom of Solomon 12:13", 
             "Wisdom of Solomon 12:16-19", 
             "Isaiah 44:6-8", 
-            "Psalm 86:11-17", 
+            "Psalms 86:11-17", 
             "Romans 8:12-25", 
             "Matthew 13:24-30", 
             "Matthew 13:36-43"
         ], 
         "Proper 12": [
             "Genesis 29:15-28", 
-            "Psalm 105:1-11", 
-            "Psalm 105:45", 
-            "Psalm 128", 
+            "Psalms 105:1-11", 
+            "Psalms 105:45", 
+            "Psalms 128", 
             "1 Kings 3:5-12", 
-            "Psalm 119:129-136", 
+            "Psalms 119:129-136", 
             "Romans 8:26-39", 
             "Matthew 13:31-33", 
             "Matthew 13:44-52"
         ], 
         "Proper 13": [
             "Genesis 32:22-31", 
-            "Psalm 17:1-7", 
-            "Psalm 17:15", 
+            "Psalms 17:1-7", 
+            "Psalms 17:15", 
             "Isaiah 55:1-5", 
-            "Psalm 145:8-9", 
-            "Psalm 145:14-21", 
+            "Psalms 145:8-9", 
+            "Psalms 145:14-21", 
             "Romans 9:1-5", 
             "Matthew 14:13-21"
         ], 
         "Proper 14": [
             "Genesis 37:1-4", 
             "Genesis 37:12-28", 
-            "Psalm 105:1-6", 
-            "Psalm 105:16-22", 
-            "Psalm 105:45", 
+            "Psalms 105:1-6", 
+            "Psalms 105:16-22", 
+            "Psalms 105:45", 
             "1 Kings 19:9-18", 
-            "Psalm 85:8-13", 
+            "Psalms 85:8-13", 
             "Romans 10:5-15", 
             "Matthew 14:22-33"
         ], 
         "Proper 15": [
             "Genesis 45:1-15", 
-            "Psalm 133", 
+            "Psalms 133", 
             "Isaiah 56:1", 
             "Isaiah 56:6-8", 
-            "Psalm 67", 
+            "Psalms 67", 
             "Romans 11:1-2", 
             "Romans 11:29-32", 
             "Matthew 15:10-28"
         ], 
         "Proper 16": [
             "Exodus 1:8-2:10", 
-            "Psalm 124", 
+            "Psalms 124", 
             "Isaiah 51:1-6", 
-            "Psalm 138", 
+            "Psalms 138", 
             "Romans 12:1-8", 
             "Matthew 16:13-20"
         ], 
         "Proper 17": [
             "Exodus 3:1-15", 
-            "Psalm 105:1-6", 
-            "Psalm 105:23-26", 
-            "Psalm 105:45", 
+            "Psalms 105:1-6", 
+            "Psalms 105:23-26", 
+            "Psalms 105:45", 
             "Jeremiah 15:15-21", 
-            "Psalm 26:1-8", 
+            "Psalms 26:1-8", 
             "Romans 12:9-21", 
             "Matthew 16:21-28"
         ], 
         "Proper 18": [
             "Exodus 12:1-14", 
-            "Psalm 149", 
+            "Psalms 149", 
             "Ezekiel 33:7-11", 
-            "Psalm 119:33-40", 
+            "Psalms 119:33-40", 
             "Romans 13:8-14", 
             "Matthew 18:15-20"
         ], 
         "Proper 19": [
             "Exodus 14:19-31", 
-            "Psalm 114", 
+            "Psalms 114", 
             "Exodus 15:1-11", 
             "Exodus 20-21", 
             "Genesis 50:15-21", 
-            "Psalm 103:1-13", 
+            "Psalms 103:1-13", 
             "Romans 14:1-12", 
             "Matthew 18:21-35"
         ], 
         "Proper 20": [
             "Exodus 16:2-15", 
-            "Psalm 105:1-6", 
-            "Psalm 105:37-45", 
+            "Psalms 105:1-6", 
+            "Psalms 105:37-45", 
             "Jonah 3:10-4:11", 
-            "Psalm 145:1-8", 
+            "Psalms 145:1-8", 
             "Philippians 1:21-30", 
             "Matthew 20:1-16"
         ], 
         "Proper 21": [
             "Exodus 17:1-7", 
-            "Psalm 78:1-4", 
-            "Psalm 78:12-16", 
+            "Psalms 78:1-4", 
+            "Psalms 78:12-16", 
             "Ezekiel 18:1-4", 
             "Ezekiel 18:25-32", 
-            "Psalm 25:1-9", 
+            "Psalms 25:1-9", 
             "Philippians 2:1-13", 
             "Matthew 21:23-32"
         ], 
@@ -398,71 +398,71 @@
             "Exodus 20:1-4", 
             "Exodus 20:7-9", 
             "Exodus 20:12-20", 
-            "Psalm 19", 
+            "Psalms 19", 
             "Isaiah 5:1-7", 
-            "Psalm 80:7-15", 
+            "Psalms 80:7-15", 
             "Philippians 3:4-14", 
             "Matthew 21:33-46"
         ], 
         "Proper 23": [
             "Exodus 32:1-14", 
-            "Psalm 106:1-6", 
-            "Psalm 106:19-23", 
+            "Psalms 106:1-6", 
+            "Psalms 106:19-23", 
             "Isaiah 25:1-9", 
-            "Psalm 23", 
+            "Psalms 23", 
             "Philippians 4:1-9", 
             "Matthew 22:1-14"
         ], 
         "Proper 24": [
             "Exodus 33:12-23", 
-            "Psalm 99", 
+            "Psalms 99", 
             "Isaiah 45:1-7", 
-            "Psalm 96:1-13", 
+            "Psalms 96:1-13", 
             "1 Thessalonians 1:1-10", 
             "Matthew 22:15-22"
         ], 
         "Proper 25": [
             "Deuteronomy 34:1-12", 
-            "Psalm 90:1-6", 
-            "Psalm 90:13-17", 
+            "Psalms 90:1-6", 
+            "Psalms 90:13-17", 
             "Leviticus 19:1-2", 
             "Leviticus 19:15-18", 
-            "Psalm 1", 
+            "Psalms 1", 
             "1 Thessalonians 2:1-8", 
             "Matthew 22:34-46"
         ], 
         "Proper 26": [
             "Joshua 3:7-17", 
-            "Psalm 107:1-7", 
-            "Psalm 107:33-37", 
+            "Psalms 107:1-7", 
+            "Psalms 107:33-37", 
             "Micah 3:5-12", 
-            "Psalm 43", 
+            "Psalms 43", 
             "1 Thessalonians 2:9-13", 
             "Matthew 23:1-12"
         ], 
         "Proper 27": [
             "Joshua 24:1-3", 
             "Joshua 24:14-25", 
-            "Psalm 78:1-7", 
+            "Psalms 78:1-7", 
             "Wisdom of Solomon 6:12-16", 
             "Amos 5:18-24", 
             "Wisdom of Solomon 6:17-20", 
-            "Psalm 70", 
+            "Psalms 70", 
             "1 Thessalonians 4:13-18", 
             "Matthew 25:1-13"
         ], 
         "Proper 28": [
             "Judges 4:1-7", 
-            "Psalm 123", 
+            "Psalms 123", 
             "Zephaniah 1:7", 
             "Zephaniah 1:12-18", 
-            "Psalm 90:1-12", 
+            "Psalms 90:1-12", 
             "1 Thessalonians 5:1-11", 
             "Matthew 25:14-30"
         ], 
         "Proper 3": [
             "Isaiah 49:8-16", 
-            "Psalm 131", 
+            "Psalms 131", 
             "1 Corinthians 4:1-5", 
             "Matthew 6:24-34"
         ], 
@@ -470,20 +470,20 @@
             "Genesis 6:9-22", 
             "Genesis 7:24", 
             "Genesis 8:14-19", 
-            "Psalm 46", 
+            "Psalms 46", 
             "Deuteronomy 11:18-21", 
             "Deuteronomy 11:26-28", 
-            "Psalm 31:1-5", 
-            "Psalm 31:19-24", 
+            "Psalms 31:1-5", 
+            "Psalms 31:19-24", 
             "Romans 1:16-17", 
             "Romans 3:22-31", 
             "Matthew 7:21-29"
         ], 
         "Proper 5": [
             "Genesis 12:1-9", 
-            "Psalm 33:1-12", 
+            "Psalms 33:1-12", 
             "Hosea 5:15-6:6", 
-            "Psalm 50:7-15", 
+            "Psalms 50:7-15", 
             "Romans 4:13-25", 
             "Matthew 9:9-13", 
             "Matthew 9:18-26"
@@ -491,29 +491,29 @@
         "Proper 6": [
             "Genesis 18:1-15", 
             "Genesis 21:1-7", 
-            "Psalm 116:1-2", 
-            "Psalm 116:12-19", 
+            "Psalms 116:1-2", 
+            "Psalms 116:12-19", 
             "Exodus 19:2-8", 
-            "Psalm 100", 
+            "Psalms 100", 
             "Romans 5:1-8", 
             "Matthew 9:35-10:23"
         ], 
         "Proper 7": [
             "Genesis 21:8-21", 
-            "Psalm 86:1-10", 
-            "Psalm 86:16-17", 
+            "Psalms 86:1-10", 
+            "Psalms 86:16-17", 
             "Jeremiah 20:7-13", 
-            "Psalm 69:7-15", 
-            "Psalm 69:16-18", 
+            "Psalms 69:7-15", 
+            "Psalms 69:16-18", 
             "Romans 6:1-11", 
             "Matthew 10:24-39"
         ], 
         "Proper 8": [
             "Genesis 22:1-14", 
-            "Psalm 13", 
+            "Psalms 13", 
             "Jeremiah 28:5-9", 
-            "Psalm 89:1-4", 
-            "Psalm 89:15-18", 
+            "Psalms 89:1-4", 
+            "Psalms 89:15-18", 
             "Romans 6:12-23", 
             "Matthew 10:40-42"
         ], 
@@ -521,10 +521,10 @@
             "Genesis 24:34-38", 
             "Genesis 24:42-49", 
             "Genesis 24:58-67", 
-            "Psalm 45:10-17", 
+            "Psalms 45:10-17", 
             "Song of Solomon 2:8-13", 
             "Zechariah 9:9-12", 
-            "Psalm 145:8-14", 
+            "Psalms 145:8-14", 
             "Romans 7:15-25", 
             "Matthew 11:16-19", 
             "Matthew 11:25-30"
@@ -532,8 +532,8 @@
         "Resurrection of the Lord": [
             "Acts 10:34-43", 
             "Jeremiah 31:1-6", 
-            "Psalm 118:1-2", 
-            "Psalm 118:14-24", 
+            "Psalms 118:1-2", 
+            "Psalms 118:14-24", 
             "Colossians 3:1-4", 
             "Acts 10:34-43", 
             "John 20:1-18", 
@@ -542,20 +542,20 @@
         "Second Sunday after Christmas Day": [
             "Jeremiah 31:7-14", 
             "Sirach 24:1-12", 
-            "Psalm 147:12-20", 
+            "Psalms 147:12-20", 
             "Wisdom of Solomon 10:15-21", 
             "Ephesians 1:3-14", 
             "John 1:1-18"
         ], 
         "Second Sunday after the Epiphany": [
             "Isaiah 49:1-7", 
-            "Psalm 40:1-11", 
+            "Psalms 40:1-11", 
             "1 Corinthians 1:1-9", 
             "John 1:29-42"
         ], 
         "Second Sunday in Lent": [
             "Genesis 12:1-4", 
-            "Psalm 121", 
+            "Psalms 121", 
             "Romans 4:1-5", 
             "Romans 4:13-17", 
             "John 3:1-17", 
@@ -563,30 +563,30 @@
         ], 
         "Second Sunday of Advent": [
             "Isaiah 11:1-10", 
-            "Psalm 72:1-7", 
-            "Psalm 72:18-19", 
+            "Psalms 72:1-7", 
+            "Psalms 72:18-19", 
             "Romans 15:4-13", 
             "Matthew 3:1-12"
         ], 
         "Second Sunday of Easter": [
             "Acts 2:14", 
             "Acts 2:22-32", 
-            "Psalm 16", 
+            "Psalms 16", 
             "1 Peter 1:3-9", 
             "John 20:19-31"
         ], 
         "Seventh Sunday after the Epiphany": [
             "Leviticus 19:1-2", 
             "Leviticus 19:9-18", 
-            "Psalm 119:33-40", 
+            "Psalms 119:33-40", 
             "1 Corinthians 3:10-11", 
             "1 Corinthians 3:16-23", 
             "Matthew 5:38-48"
         ], 
         "Seventh Sunday of Easter": [
             "Acts 1:6-14", 
-            "Psalm 68:1-10", 
-            "Psalm 68:32-35", 
+            "Psalms 68:1-10", 
+            "Psalms 68:32-35", 
             "1 Peter 4:12-14", 
             "1 Peter 5:6-11", 
             "John 17:1-11"
@@ -594,38 +594,38 @@
         "Sixth Sunday after the Epiphany": [
             "Deuteronomy 30:15-20", 
             "Sirach 15:15-20", 
-            "Psalm 119:1-8", 
+            "Psalms 119:1-8", 
             "1 Corinthians 3:1-9", 
             "Matthew 5:21-37"
         ], 
         "Sixth Sunday of Easter": [
             "Acts 17:22-31", 
-            "Psalm 66:8-20", 
+            "Psalms 66:8-20", 
             "1 Peter 3:13-22", 
             "John 14:15-21"
         ], 
         "Thanksgiving Day USA": [
             "Daniel 7:1-3", 
-            "Psalm 65", 
+            "Psalms 65", 
             "2 Corinthians 9:6-15", 
             "Luke 17:11-19"
         ], 
         "Third Sunday after the Epiphany": [
             "Isaiah 9:1-4", 
-            "Psalm 27:1", 
-            "Psalm 27:4-9", 
+            "Psalms 27:1", 
+            "Psalms 27:4-9", 
             "1 Corinthians 1:10-18", 
             "Matthew 4:12-23"
         ], 
         "Third Sunday in Lent": [
             "Exodus 17:1-7", 
-            "Psalm 95", 
+            "Psalms 95", 
             "Romans 5:1-11", 
             "John 4:5-42"
         ], 
         "Third Sunday of Advent": [
             "Isaiah 35:1-10", 
-            "Psalm 146:5-10", 
+            "Psalms 146:5-10", 
             "Luke 1:46-55", 
             "James 5:7-10", 
             "Matthew 11:2-11"
@@ -633,39 +633,39 @@
         "Third Sunday of Easter": [
             "Acts 2:14", 
             "Acts 2:36-41", 
-            "Psalm 116:1-4", 
-            "Psalm 116:12-19", 
+            "Psalms 116:1-4", 
+            "Psalms 116:12-19", 
             "1 Peter 1:17-23", 
             "Luke 24:13-35"
         ], 
         "Transfiguration Sunday": [
             "Exodus 24:12-18", 
-            "Psalm 2", 
-            "Psalm 99", 
+            "Psalms 2", 
+            "Psalms 99", 
             "2 Peter 1:16-21", 
             "Matthew 17:1-9"
         ], 
         "Trinity Sunday": [
             "Genesis 1:1-2:4", 
-            "Psalm 8", 
+            "Psalms 8", 
             "2 Corinthians 13:11-13", 
             "Matthew 28:16-20"
         ], 
         "Tuesday of Holy Week": [
             "Isaiah 49:1-7", 
-            "Psalm 71:1-14", 
+            "Psalms 71:1-14", 
             "1 Corinthians 1:18-31", 
             "John 12:20-36"
         ], 
         "Visitation of Mary to Elizabeth": [
             "1 Samuel 2:1-10", 
-            "Psalm 113", 
+            "Psalms 113", 
             "Romans 12:9-16", 
             "Luke 1:39-57"
         ], 
         "Wednesday of Holy Week": [
             "Isaiah 50:4-9", 
-            "Psalm 70", 
+            "Psalms 70", 
             "Hebrews 12:1-3", 
             "John 13:21-32"
         ]
@@ -674,21 +674,21 @@
         "All Saints Day": [
             "Wisdom of Solomon 3:1-9", 
             "Isaiah 25:6-9", 
-            "Psalm 24", 
+            "Psalms 24", 
             "Revelation 21:1-6", 
             "John 11:32-44"
         ], 
         "Annunciation of the Lord": [
             "Isaiah 7:10-14", 
-            "Psalm 45", 
-            "Psalm 40:5-10", 
+            "Psalms 45", 
+            "Psalms 40:5-10", 
             "Hebrews 10:4-10", 
             "Luke 1:26-38"
         ], 
         "Ascension of the Lord": [
             "Acts 1:1-11", 
-            "Psalm 47", 
-            "Psalm 93", 
+            "Psalms 47", 
+            "Psalms 93", 
             "Ephesians 1:15-23", 
             "Luke 24:44-53"
         ], 
@@ -696,37 +696,37 @@
             "Joel 2:1-2", 
             "Joel 2:12-17", 
             "Isaiah 58:1-12", 
-            "Psalm 51:1-17", 
+            "Psalms 51:1-17", 
             "2 Corinthians 5:20-6:10", 
             "Matthew 6:1-6", 
             "Matthew 6:16-21"
         ], 
         "Baptism of the Lord": [
             "Genesis 1:1-5", 
-            "Psalm 29", 
+            "Psalms 29", 
             "Acts 19:1-7", 
             "Mark 1:4-11"
         ], 
         "Canadian Thanksgiving Day": [
             "Joel 2:21-27", 
-            "Psalm 126", 
+            "Psalms 126", 
             "1 Timothy 2:1-7", 
             "Matthew 6:25-33"
         ], 
         "Christ is King": [
             "2 Samuel 23:1-7", 
-            "Psalm 132:1-18", 
+            "Psalms 132:1-18", 
             "Daniel 7:9-10", 
             "Daniel 7:13-14", 
-            "Psalm 93", 
+            "Psalms 93", 
             "Revelation 1:4-8", 
             "John 18:33-37"
         ], 
         "Day of Pentecost": [
             "Acts 2:1-21", 
             "Ezekiel 37:1-14", 
-            "Psalm 104:24-34", 
-            "Psalm 104:35", 
+            "Psalms 104:24-34", 
+            "Psalms 104:35", 
             "Romans 8:22-27", 
             "Acts 2:1-21", 
             "John 15:26-27", 
@@ -734,21 +734,21 @@
         ], 
         "Easter Evening": [
             "Isaiah 25:6-9", 
-            "Psalm 114", 
+            "Psalms 114", 
             "1 Corinthians 5:6-8", 
             "Luke 24:13-49"
         ], 
         "Easter Vigil": [
             "Genesis 1:1-2:4", 
-            "Psalm 136:1-9", 
-            "Psalm 136:23-26", 
+            "Psalms 136:1-9", 
+            "Psalms 136:23-26", 
             "Genesis 7:1-5", 
             "Genesis 7:11-18", 
             "Genesis 8:6-18", 
             "Genesis 9:8-13", 
-            "Psalm 46", 
+            "Psalms 46", 
             "Genesis 22:1-18", 
-            "Psalm 16", 
+            "Psalms 16", 
             "Exodus 14:10-31", 
             "Exodus 15:1-13", 
             "Exodus 15:20-21", 
@@ -760,81 +760,81 @@
             "Proverbs 8:1-8", 
             "Proverbs 8:19-21", 
             "Proverbs 9:4-6", 
-            "Psalm 19", 
+            "Psalms 19", 
             "Ezekiel 36:24-28", 
-            "Psalm 42", 
-            "Psalm 43", 
+            "Psalms 42", 
+            "Psalms 43", 
             "Ezekiel 37:1-14", 
-            "Psalm 143", 
+            "Psalms 143", 
             "Zephaniah 3:14-20", 
-            "Psalm 98", 
+            "Psalms 98", 
             "Romans 6:3-11", 
-            "Psalm 114", 
+            "Psalms 114", 
             "Mark 16:1-8"
         ], 
         "Eighth Sunday after the Epiphany": [
             "Hosea 2:14-20", 
-            "Psalm 103:1-13", 
-            "Psalm 103:22", 
+            "Psalms 103:1-13", 
+            "Psalms 103:22", 
             "2 Corinthians 3:1-6", 
             "Mark 2:13-22"
         ], 
         "Epiphany of the Lord": [
             "Isaiah 60:1-6", 
-            "Psalm 72:1-7", 
-            "Psalm 72:10-14", 
+            "Psalms 72:1-7", 
+            "Psalms 72:10-14", 
             "Ephesians 3:1-12", 
             "Matthew 2:1-12"
         ], 
         "Fifth Sunday after the Epiphany": [
             "Isaiah 40:21-31", 
-            "Psalm 147:1-11", 
-            "Psalm 147:20", 
+            "Psalms 147:1-11", 
+            "Psalms 147:20", 
             "1 Corinthians 9:16-23", 
             "Mark 1:29-39"
         ], 
         "Fifth Sunday in Lent": [
             "Jeremiah 31:31-34", 
-            "Psalm 51:1-12", 
-            "Psalm 119:9-16", 
+            "Psalms 51:1-12", 
+            "Psalms 119:9-16", 
             "Hebrews 5:5-10", 
             "John 12:20-33"
         ], 
         "Fifth Sunday of Easter": [
             "Acts 8:26-40", 
-            "Psalm 22:25-31", 
+            "Psalms 22:25-31", 
             "1 John 4:7-21", 
             "John 15:1-8"
         ], 
         "First Sunday after Christmas Day": [
             "Isaiah 61:10-62:3", 
-            "Psalm 148", 
+            "Psalms 148", 
             "Galatians 4:4-7", 
             "Luke 2:22-40"
         ], 
         "First Sunday in Lent": [
             "Genesis 9:8-17", 
-            "Psalm 25:1-10", 
+            "Psalms 25:1-10", 
             "1 Peter 3:18-22", 
             "Mark 1:9-15"
         ], 
         "First Sunday of Advent": [
             "Isaiah 64:1-9", 
-            "Psalm 80:1-7", 
-            "Psalm 80:17-19", 
+            "Psalms 80:1-7", 
+            "Psalms 80:17-19", 
             "1 Corinthians 1:3-9", 
             "Mark 13:24-37"
         ], 
         "Fourth Sunday after the Epiphany": [
             "Deuteronomy 18:15-20", 
-            "Psalm 111", 
+            "Psalms 111", 
             "1 Corinthians 8:1-13", 
             "Mark 1:21-28"
         ], 
         "Fourth Sunday in Lent": [
             "Numbers 21:4-9", 
-            "Psalm 107:1-3", 
-            "Psalm 107:17-22", 
+            "Psalms 107:1-3", 
+            "Psalms 107:17-22", 
             "Ephesians 2:1-10", 
             "John 3:14-21"
         ], 
@@ -842,20 +842,20 @@
             "2 Samuel 7:1-11", 
             "2 Samuel 7:16", 
             "Luke 1:46-55", 
-            "Psalm 89:1-4", 
-            "Psalm 89:19-26", 
+            "Psalms 89:1-4", 
+            "Psalms 89:19-26", 
             "Romans 16:25-27", 
             "Luke 1:26-38"
         ], 
         "Fourth Sunday of Easter": [
             "Acts 4:5-12", 
-            "Psalm 23", 
+            "Psalms 23", 
             "1 John 3:16-24", 
             "John 10:11-18"
         ], 
         "Good Friday": [
             "Isaiah 52:13-53:12", 
-            "Psalm 22", 
+            "Psalms 22", 
             "Hebrews 10:16-25", 
             "Hebrews 4:14-16", 
             "Hebrews 5:7-9", 
@@ -863,15 +863,15 @@
         ], 
         "Holy Cross": [
             "Numbers 21:4-9", 
-            "Psalm 98:1-5", 
-            "Psalm 78:1-2", 
-            "Psalm 78:34-38", 
+            "Psalms 98:1-5", 
+            "Psalms 78:1-2", 
+            "Psalms 78:34-38", 
             "1 Corinthians 1:18-24", 
             "John 3:13-17"
         ], 
         "Holy Name of Jesus": [
             "Numbers 6:22-27", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Galatians 4:4-7", 
             "Philippians 2:5-11", 
             "Luke 2:15-21"
@@ -880,108 +880,108 @@
             "Job 14:1-14", 
             "Lamentations 3:1-9", 
             "Lamentations 3:19-24", 
-            "Psalm 31:1-4", 
-            "Psalm 31:15-16", 
+            "Psalms 31:1-4", 
+            "Psalms 31:15-16", 
             "1 Peter 4:1-8", 
             "Matthew 27:57-66", 
             "John 19:38-42"
         ], 
         "Liturgy of the Palms": [
-            "Psalm 118:1-2", 
-            "Psalm 118:19-29", 
+            "Psalms 118:1-2", 
+            "Psalms 118:19-29", 
             "Mark 11:1-11", 
             "John 12:12-16"
         ], 
         "Liturgy of the Passion": [
             "Isaiah 50:4-9", 
-            "Psalm 31:9-16", 
+            "Psalms 31:9-16", 
             "Philippians 2:5-11", 
             "Mark 14:1-15:47", 
             "Mark 15:1-47"
         ], 
         "Maundy Thursday": [
             "Exodus 12:1-14", 
-            "Psalm 116:1-2", 
-            "Psalm 116:12-19", 
+            "Psalms 116:1-2", 
+            "Psalms 116:12-19", 
             "1 Corinthians 11:23-26", 
             "John 13:1-17", 
             "John 13:31-35"
         ], 
         "Monday of Holy Week": [
             "Isaiah 42:1-9", 
-            "Psalm 36:5-11", 
+            "Psalms 36:5-11", 
             "Hebrews 9:11-15", 
             "John 12:1-11"
         ], 
         "Nativity of the Lord - Proper I": [
             "Isaiah 9:2-7", 
-            "Psalm 96", 
+            "Psalms 96", 
             "Titus 2:11-14", 
             "Luke 2:1-20"
         ], 
         "Nativity of the Lord - Proper II": [
             "Isaiah 62:6-12", 
-            "Psalm 97", 
+            "Psalms 97", 
             "Titus 3:4-7", 
             "Luke 2:1-20"
         ], 
         "Nativity of the Lord - Proper III": [
             "Isaiah 52:7-10", 
-            "Psalm 98", 
+            "Psalms 98", 
             "Hebrews 1:1-12", 
             "John 1:1-14"
         ], 
         "New Year's Day": [
             "Ecclesiastes 3:1-13", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Revelation 21:1-6", 
             "Matthew 25:31-46"
         ], 
         "Ninth Sunday after the Epiphany": [
             "Deuteronomy 5:12-15", 
-            "Psalm 81:1-10", 
+            "Psalms 81:1-10", 
             "2 Corinthians 4:5-12", 
             "Mark 2:23-3:6"
         ], 
         "Presentation of the Lord": [
             "Malachi 3:1-4", 
-            "Psalm 84", 
-            "Psalm 24:7-10", 
+            "Psalms 84", 
+            "Psalms 24:7-10", 
             "Hebrews 2:14-18", 
             "Luke 2:22-40"
         ], 
         "Proper 10": [
             "2 Samuel 6:1-5", 
             "2 Samuel 6:12-19", 
-            "Psalm 24", 
+            "Psalms 24", 
             "Amos 7:7-15", 
-            "Psalm 85:8-13", 
+            "Psalms 85:8-13", 
             "Ephesians 1:3-14", 
             "Mark 6:14-29"
         ], 
         "Proper 11": [
             "2 Samuel 7:1-14", 
-            "Psalm 89:20-37", 
+            "Psalms 89:20-37", 
             "Jeremiah 23:1-6", 
-            "Psalm 23", 
+            "Psalms 23", 
             "Ephesians 2:11-22", 
             "Mark 6:30-34", 
             "Mark 6:53-56"
         ], 
         "Proper 12": [
             "2 Samuel 11:1-15", 
-            "Psalm 14", 
+            "Psalms 14", 
             "2 Kings 4:42-44", 
-            "Psalm 145:10-18", 
+            "Psalms 145:10-18", 
             "Ephesians 3:14-21", 
             "John 6:1-21"
         ], 
         "Proper 13": [
             "2 Samuel 11:26-12:13", 
-            "Psalm 51:1-12", 
+            "Psalms 51:1-12", 
             "Exodus 16:2-4", 
             "Exodus 16:9-15", 
-            "Psalm 78:23-29", 
+            "Psalms 78:23-29", 
             "Ephesians 4:1-16", 
             "John 6:24-35"
         ], 
@@ -989,9 +989,9 @@
             "2 Samuel 18:5-9", 
             "2 Samuel 18:15", 
             "2 Samuel 18:31-33", 
-            "Psalm 130", 
+            "Psalms 130", 
             "1 Kings 19:4-8", 
-            "Psalm 34:1-8", 
+            "Psalms 34:1-8", 
             "Ephesians 4:25-5:2", 
             "John 6:35", 
             "John 6:41-51"
@@ -999,9 +999,9 @@
         "Proper 15": [
             "1 Kings 2:10-12", 
             "1 Kings 3:3-14", 
-            "Psalm 111", 
+            "Psalms 111", 
             "Proverbs 9:1-6", 
-            "Psalm 34:9-14", 
+            "Psalms 34:9-14", 
             "Ephesians 5:15-20", 
             "John 6:51-58"
         ], 
@@ -1011,20 +1011,20 @@
             "1 Kings 8:10-11", 
             "1 Kings 8:22-30", 
             "1 Kings 8:41-43", 
-            "Psalm 84", 
+            "Psalms 84", 
             "Joshua 24:1-2", 
             "Joshua 24:14-18", 
-            "Psalm 34:15-22", 
+            "Psalms 34:15-22", 
             "Ephesians 6:10-20", 
             "John 6:56-69"
         ], 
         "Proper 17": [
             "Song of Solomon 2:8-13", 
-            "Psalm 45:1-2", 
-            "Psalm 45:6-9", 
+            "Psalms 45:1-2", 
+            "Psalms 45:6-9", 
             "Deuteronomy 4:1-2", 
             "Deuteronomy 4:6-9", 
-            "Psalm 15", 
+            "Psalms 15", 
             "James 1:17-27", 
             "Mark 7:1-8", 
             "Mark 7:14-15", 
@@ -1034,28 +1034,28 @@
             "Proverbs 22:1-2", 
             "Proverbs 22:8-9", 
             "Proverbs 22:22-23", 
-            "Psalm 125", 
+            "Psalms 125", 
             "Isaiah 35:4-7", 
-            "Psalm 146", 
+            "Psalms 146", 
             "James 2:1-17", 
             "Mark 7:24-37"
         ], 
         "Proper 19": [
             "Proverbs 1:20-33", 
-            "Psalm 19", 
+            "Psalms 19", 
             "Isaiah 50:4-9", 
-            "Psalm 116:1-9", 
+            "Psalms 116:1-9", 
             "Wisdom of Solomon 7:26-8:1", 
             "James 3:1-12", 
             "Mark 8:27-38"
         ], 
         "Proper 20": [
             "Proverbs 31:10-31", 
-            "Psalm 1", 
+            "Psalms 1", 
             "Wisdom of Solomon 1:16-2:1", 
             "Wisdom of Solomon 2:12-22", 
             "Jeremiah 11:18-20", 
-            "Psalm 54", 
+            "Psalms 54", 
             "James 3:13-4:3", 
             "James 3:7-8", 
             "Mark 9:30-37"
@@ -1064,20 +1064,20 @@
             "Esther 7:1-6", 
             "Esther 7:9-10", 
             "Esther 7:9:20-22", 
-            "Psalm 124", 
+            "Psalms 124", 
             "Numbers 11:4-6", 
             "Numbers 11:10-16", 
             "Numbers 11:24-29", 
-            "Psalm 19:7-14", 
+            "Psalms 19:7-14", 
             "James 5:13-20", 
             "Mark 9:38-50"
         ], 
         "Proper 22": [
             "Job 1:1", 
             "Job 2:1-10", 
-            "Psalm 26", 
+            "Psalms 26", 
             "Genesis 2:18-24", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Hebrews 1:1-4", 
             "Hebrews 2:5-12", 
             "Mark 10:2-16"
@@ -1085,48 +1085,48 @@
         "Proper 23": [
             "Job 23:1-9", 
             "Job 23:16-17", 
-            "Psalm 22:1-15", 
+            "Psalms 22:1-15", 
             "Amos 5:6-7", 
             "Amos 5:10-15", 
-            "Psalm 90:12-17", 
+            "Psalms 90:12-17", 
             "Hebrews 4:12-16", 
             "Mark 10:17-31"
         ], 
         "Proper 24": [
             "Job 38:1-7", 
             "Job 38:34-41", 
-            "Psalm 104:1-9", 
-            "Psalm 104:24", 
-            "Psalm 104:35", 
+            "Psalms 104:1-9", 
+            "Psalms 104:24", 
+            "Psalms 104:35", 
             "Isaiah 53:4-12", 
-            "Psalm 91:9-16", 
+            "Psalms 91:9-16", 
             "Hebrews 5:1-10", 
             "Mark 10:35-45"
         ], 
         "Proper 25": [
             "Job 42:1-6", 
             "Job 42:10-17", 
-            "Psalm 34:1-8", 
-            "Psalm 34:19-22", 
+            "Psalms 34:1-8", 
+            "Psalms 34:19-22", 
             "Jeremiah 31:7-9", 
-            "Psalm 126", 
+            "Psalms 126", 
             "Hebrews 7:23-28", 
             "Mark 10:46-52"
         ], 
         "Proper 26": [
             "Ruth 1:1-18", 
-            "Psalm 146", 
+            "Psalms 146", 
             "Deuteronomy 6:1-9", 
-            "Psalm 119:1-8", 
+            "Psalms 119:1-8", 
             "Hebrews 9:11-14", 
             "Mark 12:28-34"
         ], 
         "Proper 27": [
             "Ruth 3:1-5", 
             "Ruth 4:13-17", 
-            "Psalm 127", 
+            "Psalms 127", 
             "1 Kings 17:8-16", 
-            "Psalm 146", 
+            "Psalms 146", 
             "Hebrews 9:24-28", 
             "Mark 12:38-44"
         ], 
@@ -1134,23 +1134,23 @@
             "1 Samuel 1:4-20", 
             "1 Samuel 2:1-10", 
             "Daniel 12:1-3", 
-            "Psalm 16", 
+            "Psalms 16", 
             "Hebrews 10:11-25", 
             "Mark 13:1-8"
         ], 
         "Proper 3": [
             "Hosea 2:14-20", 
-            "Psalm 103:1-13", 
-            "Psalm 103:22", 
+            "Psalms 103:1-13", 
+            "Psalms 103:22", 
             "2 Corinthians 3:1-6", 
             "Mark 2:13-22"
         ], 
         "Proper 4": [
             "1 Samuel 3:1-20", 
-            "Psalm 139:1-6", 
-            "Psalm 139:13-18", 
+            "Psalms 139:1-6", 
+            "Psalms 139:13-18", 
             "Deuteronomy 5:12-15", 
-            "Psalm 81:1-10", 
+            "Psalms 81:1-10", 
             "2 Corinthians 4:5-12", 
             "Mark 2:23-3:6"
         ], 
@@ -1158,18 +1158,18 @@
             "1 Samuel 8:4-15", 
             "1 Samuel 8:16-20", 
             "1 Samuel 11:14-15", 
-            "Psalm 138", 
+            "Psalms 138", 
             "Genesis 3:8-15", 
-            "Psalm 130", 
+            "Psalms 130", 
             "2 Corinthians 4:13-5:1", 
             "Mark 3:20-35"
         ], 
         "Proper 6": [
             "1 Samuel 15:34-16:13", 
-            "Psalm 20", 
+            "Psalms 20", 
             "Ezekiel 17:22-24", 
-            "Psalm 92:1-4", 
-            "Psalm 92:12-15", 
+            "Psalms 92:1-4", 
+            "Psalms 92:12-15", 
             "2 Corinthians 5:6-17", 
             "Mark 4:26-34"
         ], 
@@ -1178,41 +1178,41 @@
             "1 Samuel 17:4-11", 
             "1 Samuel 17:19-23", 
             "1 Samuel 17:32-49", 
-            "Psalm 9:9-20", 
+            "Psalms 9:9-20", 
             "1 Samuel 17:57-18:5", 
             "1 Samuel 18:10-16", 
-            "Psalm 133", 
+            "Psalms 133", 
             "Job 38:1-11", 
-            "Psalm 107:1-3", 
-            "Psalm 107:23-32", 
+            "Psalms 107:1-3", 
+            "Psalms 107:23-32", 
             "2 Corinthians 6:1-13", 
             "Mark 4:35-41"
         ], 
         "Proper 8": [
             "2 Samuel 1:1", 
             "2 Samuel 1:17-27", 
-            "Psalm 130", 
+            "Psalms 130", 
             "Wisdom of Solomon 1:13-15", 
             "Wisdom of Solomon 2:23-24", 
             "Lamentations 3:22-33", 
-            "Psalm 30", 
+            "Psalms 30", 
             "2 Corinthians 8:7-15", 
             "Mark 5:21-43"
         ], 
         "Proper 9": [
             "2 Samuel 5:1-5", 
             "2 Samuel 9-10", 
-            "Psalm 48", 
+            "Psalms 48", 
             "Ezekiel 2:1-5", 
-            "Psalm 123", 
+            "Psalms 123", 
             "2 Corinthians 12:2-10", 
             "Mark 6:1-13"
         ], 
         "Resurrection of the Lord": [
             "Acts 10:34-43", 
             "Isaiah 25:6-9", 
-            "Psalm 118:1-2", 
-            "Psalm 118:14-24", 
+            "Psalms 118:1-2", 
+            "Psalms 118:14-24", 
             "1 Corinthians 15:1-11", 
             "Acts 10:34-43", 
             "John 20:1-18", 
@@ -1221,87 +1221,87 @@
         "Second Sunday after Christmas Day": [
             "Jeremiah 31:7-14", 
             "Sirach 24:1-12", 
-            "Psalm 147:12-20", 
+            "Psalms 147:12-20", 
             "Wisdom of Solomon 10:15-21", 
             "Ephesians 1:3-14", 
             "John 1:1-18"
         ], 
         "Second Sunday after the Epiphany": [
             "1 Samuel 3:1-20", 
-            "Psalm 139:1-6", 
-            "Psalm 139:13-18", 
+            "Psalms 139:1-6", 
+            "Psalms 139:13-18", 
             "1 Corinthians 6:12-20", 
             "John 1:43-51"
         ], 
         "Second Sunday in Lent": [
             "Genesis 17:1-7", 
             "Genesis 17:15-16", 
-            "Psalm 22:23-31", 
+            "Psalms 22:23-31", 
             "Romans 4:13-25", 
             "Mark 8:31-38", 
             "Mark 9:2-9"
         ], 
         "Second Sunday of Advent": [
             "Isaiah 40:1-11", 
-            "Psalm 85:1-2", 
-            "Psalm 85:8-13", 
+            "Psalms 85:1-2", 
+            "Psalms 85:8-13", 
             "2 Peter 3:8-15", 
             "Mark 1:1-8"
         ], 
         "Second Sunday of Easter": [
             "Acts 4:32-35", 
-            "Psalm 133", 
+            "Psalms 133", 
             "1 John 1:1-2:2", 
             "John 20:19-31"
         ], 
         "Seventh Sunday after the Epiphany": [
             "Isaiah 43:18-25", 
-            "Psalm 41", 
+            "Psalms 41", 
             "2 Corinthians 1:18-22", 
             "Mark 2:1-12"
         ], 
         "Seventh Sunday of Easter": [
             "Acts 1:15-17", 
             "Acts 1:21-26", 
-            "Psalm 1", 
+            "Psalms 1", 
             "1 John 5:9-13", 
             "John 17:6-19"
         ], 
         "Sixth Sunday after the Epiphany": [
             "2 Kings 5:1-14", 
-            "Psalm 30", 
+            "Psalms 30", 
             "1 Corinthians 9:24-27", 
             "Mark 1:40-45"
         ], 
         "Sixth Sunday of Easter": [
             "Acts 10:44-48", 
-            "Psalm 98", 
+            "Psalms 98", 
             "1 John 5:1-6", 
             "John 15:9-17"
         ], 
         "Thanksgiving Day USA": [
             "Joel 2:21-27", 
-            "Psalm 126", 
+            "Psalms 126", 
             "1 Timothy 2:1-7", 
             "Matthew 6:25-33"
         ], 
         "Third Sunday after the Epiphany": [
             "Jonah 3:1-5", 
             "Jonah 3:10", 
-            "Psalm 62:5-12", 
+            "Psalms 62:5-12", 
             "1 Corinthians 7:29-31", 
             "Mark 1:14-20"
         ], 
         "Third Sunday in Lent": [
             "Exodus 20:1-17", 
-            "Psalm 19", 
+            "Psalms 19", 
             "1 Corinthians 1:18-25", 
             "John 2:13-22"
         ], 
         "Third Sunday of Advent": [
             "Isaiah 61:1-4", 
             "Isaiah 61:8-11", 
-            "Psalm 126", 
+            "Psalms 126", 
             "Luke 1:46-55", 
             "1 Thessalonians 5:16-24", 
             "John 1:6-8", 
@@ -1309,37 +1309,37 @@
         ], 
         "Third Sunday of Easter": [
             "Acts 3:12-19", 
-            "Psalm 4", 
+            "Psalms 4", 
             "1 John 3:1-7", 
             "Luke 24:36-48"
         ], 
         "Transfiguration Sunday": [
             "2 Kings 2:1-12", 
-            "Psalm 50:1-6", 
+            "Psalms 50:1-6", 
             "2 Corinthians 4:3-6", 
             "Mark 9:2-9"
         ], 
         "Trinity Sunday": [
             "Isaiah 6:1-8", 
-            "Psalm 29", 
+            "Psalms 29", 
             "Romans 8:12-17", 
             "John 3:1-17"
         ], 
         "Tuesday of Holy Week": [
             "Isaiah 49:1-7", 
-            "Psalm 71:1-14", 
+            "Psalms 71:1-14", 
             "1 Corinthians 1:18-31", 
             "John 12:20-36"
         ], 
         "Visitation of Mary to Elizabeth": [
             "1 Samuel 2:1-10", 
-            "Psalm 113", 
+            "Psalms 113", 
             "Romans 12:9-16", 
             "Luke 1:39-57"
         ], 
         "Wednesday of Holy Week": [
             "Isaiah 50:4-9", 
-            "Psalm 70", 
+            "Psalms 70", 
             "Hebrews 12:1-3", 
             "John 13:21-32"
         ]
@@ -1348,21 +1348,21 @@
         "All Saints Day": [
             "Daniel 7:1-3", 
             "Daniel 7:15-18", 
-            "Psalm 149", 
+            "Psalms 149", 
             "Ephesians 1:11-23", 
             "Luke 6:20-31"
         ], 
         "Annunciation of the Lord": [
             "Isaiah 7:10-14", 
-            "Psalm 45", 
-            "Psalm 40:5-10", 
+            "Psalms 45", 
+            "Psalms 40:5-10", 
             "Hebrews 10:4-10", 
             "Luke 1:26-38"
         ], 
         "Ascension of the Lord": [
             "Acts 1:1-11", 
-            "Psalm 47", 
-            "Psalm 93", 
+            "Psalms 47", 
+            "Psalms 93", 
             "Ephesians 1:15-23", 
             "Luke 24:44-53"
         ], 
@@ -1370,21 +1370,21 @@
             "Joel 2:1-2", 
             "Joel 2:12-17", 
             "Isaiah 58:1-12", 
-            "Psalm 51:1-17", 
+            "Psalms 51:1-17", 
             "2 Corinthians 5:20-6:10", 
             "Matthew 6:1-6", 
             "Matthew 6:16-21"
         ], 
         "Baptism of the Lord": [
             "Isaiah 43:1-7", 
-            "Psalm 29", 
+            "Psalms 29", 
             "Acts 8:14-17", 
             "Luke 3:15-17", 
             "Luke 3:21-22"
         ], 
         "Canadian Thanksgiving Day": [
             "Deuteronomy 26:1-11", 
-            "Psalm 100", 
+            "Psalms 100", 
             "Philippians 4:4-9", 
             "John 6:25-35"
         ], 
@@ -1392,14 +1392,14 @@
             "Jeremiah 23:1-6", 
             "Luke 1:68-79", 
             "Jeremiah 23:1-6", 
-            "Psalm 46", 
+            "Psalms 46", 
             "Colossians 1:11-20", 
             "Luke 23:33-43"
         ], 
         "Day of Pentecost": [
             "Acts 2:1-21", 
             "Genesis 11:1-9", 
-            "Psalm 104:24-35`", 
+            "Psalms 104:24-35`", 
             "Romans 8:14-17", 
             "Acts 2:1-21", 
             "John 14:8-17", 
@@ -1407,21 +1407,21 @@
         ], 
         "Easter Evening": [
             "Isaiah 25:6-9", 
-            "Psalm 114", 
+            "Psalms 114", 
             "1 Corinthians 5:6-8", 
             "Luke 24:13-49"
         ], 
         "Easter Vigil": [
             "Genesis 1:1-2:4", 
-            "Psalm 136:1-9", 
-            "Psalm 136:23-26", 
+            "Psalms 136:1-9", 
+            "Psalms 136:23-26", 
             "Genesis 7:1-5", 
             "Genesis 7:11-18", 
             "Genesis 8:6-18", 
             "Genesis 9:8-13", 
-            "Psalm 46", 
+            "Psalms 46", 
             "Genesis 22:1-18", 
-            "Psalm 16", 
+            "Psalms 16", 
             "Exodus 14:10-31", 
             "Exodus 15:20-21", 
             "Exodus 15:1-13", 
@@ -1433,80 +1433,80 @@
             "Proverbs 8:1-8", 
             "Proverbs 8:19-21", 
             "Proverbs 9:4-6", 
-            "Psalm 19", 
+            "Psalms 19", 
             "Ezekiel 36:24-28", 
-            "Psalm 42", 
-            "Psalm 43", 
+            "Psalms 42", 
+            "Psalms 43", 
             "Ezekiel 37:1-14", 
-            "Psalm 143", 
+            "Psalms 143", 
             "Zephaniah 3:14-20", 
-            "Psalm 98", 
+            "Psalms 98", 
             "Romans 6:3-11", 
-            "Psalm 114", 
+            "Psalms 114", 
             "Luke 24:1-12"
         ], 
         "Eighth Sunday after the Epiphany": [
             "Sirach 27:4-7", 
             "Isaiah 55:10-13", 
-            "Psalm 92:1-4", 
-            "Psalm 92:12-15", 
+            "Psalms 92:1-4", 
+            "Psalms 92:12-15", 
             "1 Corinthians 15:51-58", 
             "Luke 6:39-49"
         ], 
         "Epiphany of the Lord": [
             "Isaiah 60:1-6", 
-            "Psalm 72:1-7", 
-            "Psalm 72:10-14", 
+            "Psalms 72:1-7", 
+            "Psalms 72:10-14", 
             "Ephesians 3:1-12", 
             "Matthew 2:1-12"
         ], 
         "Fifth Sunday after the Epiphany": [
             "Isaiah 6:1-13", 
-            "Psalm 138", 
+            "Psalms 138", 
             "1 Corinthians 15:1-11", 
             "Luke 5:1-11"
         ], 
         "Fifth Sunday in Lent": [
             "Isaiah 43:16-21", 
-            "Psalm 126", 
+            "Psalms 126", 
             "Philippians 3:4-14", 
             "John 12:1-8"
         ], 
         "Fifth Sunday of Easter": [
             "Acts 11:1-18", 
-            "Psalm 148", 
+            "Psalms 148", 
             "Revelation 21:1-6", 
             "John 13:31-35"
         ], 
         "First Sunday after Christmas Day": [
             "1 Samuel 2:18-20", 
             "1 Samuel 2:26", 
-            "Psalm 148", 
+            "Psalms 148", 
             "Colossians 3:12-17", 
             "Luke 2:41-52"
         ], 
         "First Sunday in Lent": [
             "Deuteronomy 26:1-11", 
-            "Psalm 91:1-2", 
-            "Psalm 91:9-16", 
+            "Psalms 91:1-2", 
+            "Psalms 91:9-16", 
             "Romans 10:8-13", 
             "Luke 4:1-13"
         ], 
         "First Sunday of Advent": [
             "Jeremiah 33:14-16", 
-            "Psalm 25:1-10", 
+            "Psalms 25:1-10", 
             "1 Thessalonians 3:9-13", 
             "Luke 21:25-36"
         ], 
         "Fourth Sunday after the Epiphany": [
             "Jeremiah 1:4-10", 
-            "Psalm 71:1-6", 
+            "Psalms 71:1-6", 
             "1 Corinthians 13:1-13", 
             "Luke 4:21-30"
         ], 
         "Fourth Sunday in Lent": [
             "Joshua 5:9-12", 
-            "Psalm 32", 
+            "Psalms 32", 
             "2 Corinthians 5:16-21", 
             "Luke 15:1-3", 
             "Luke 15:11-32"
@@ -1514,19 +1514,19 @@
         "Fourth Sunday of Advent": [
             "Micah 5:2-5", 
             "Luke 1:46-55", 
-            "Psalm 80:1-7", 
+            "Psalms 80:1-7", 
             "Hebrews 10:5-10", 
             "Luke 1:39-55"
         ], 
         "Fourth Sunday of Easter": [
             "Acts 9:36-43", 
-            "Psalm 23", 
+            "Psalms 23", 
             "Revelation 7:9-17", 
             "John 10:22-30"
         ], 
         "Good Friday": [
             "Isaiah 52:13-53:12", 
-            "Psalm 22", 
+            "Psalms 22", 
             "Hebrews 10:16-25", 
             "Hebrews 4:14-16", 
             "Hebrews 5:7-9", 
@@ -1534,15 +1534,15 @@
         ], 
         "Holy Cross": [
             "Numbers 21:4-9", 
-            "Psalm 98:1-5", 
-            "Psalm 78:1-2", 
-            "Psalm 78:34-38", 
+            "Psalms 98:1-5", 
+            "Psalms 78:1-2", 
+            "Psalms 78:34-38", 
             "1 Corinthians 1:18-24", 
             "John 3:13-17"
         ], 
         "Holy Name of Jesus": [
             "Numbers 6:22-27", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Galatians 4:4-7", 
             "Philippians 2:5-11", 
             "Luke 2:15-21"
@@ -1551,146 +1551,146 @@
             "Job 14:1-14", 
             "Lamentations 3:1-9", 
             "Lamentations 3:19-24", 
-            "Psalm 31:1-4", 
-            "Psalm 31:15-16", 
+            "Psalms 31:1-4", 
+            "Psalms 31:15-16", 
             "1 Peter 4:1-8", 
             "Matthew 27:57-66", 
             "John 19:38-42"
         ], 
         "Liturgy of the Palms": [
-            "Psalm 118:1-2", 
-            "Psalm 118:19-29", 
+            "Psalms 118:1-2", 
+            "Psalms 118:19-29", 
             "Luke 19:28-40"
         ], 
         "Liturgy of the Passion": [
             "Isaiah 50:4-9", 
-            "Psalm 31:9-16", 
+            "Psalms 31:9-16", 
             "Philippians 2:5-11", 
             "Luke 22:14-23:56", 
             "Luke 23:1-49"
         ], 
         "Maundy Thursday": [
             "Exodus 12:1-14", 
-            "Psalm 116:1-2", 
-            "Psalm 116:12-19", 
+            "Psalms 116:1-2", 
+            "Psalms 116:12-19", 
             "1 Corinthians 11:23-26", 
             "John 13:1-17", 
             "John 13:31-35"
         ], 
         "Monday of Holy Week": [
             "Isaiah 42:1-9", 
-            "Psalm 36:5-11", 
+            "Psalms 36:5-11", 
             "Hebrews 9:11-15", 
             "John 12:1-11"
         ], 
         "Nativity of the Lord - Proper I": [
             "Isaiah 9:2-7", 
-            "Psalm 96", 
+            "Psalms 96", 
             "Titus 2:11-14", 
             "Luke 2:1-20"
         ], 
         "Nativity of the Lord - Proper II": [
             "Isaiah 62:6-12", 
-            "Psalm 97", 
+            "Psalms 97", 
             "Titus 3:4-7", 
             "Luke 2:1-20"
         ], 
         "Nativity of the Lord - Proper III": [
             "Isaiah 52:7-10", 
-            "Psalm 98", 
+            "Psalms 98", 
             "Hebrews 1:1-12", 
             "John 1:1-14"
         ], 
         "New Year's Day": [
             "Ecclesiastes 3:1-13", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Revelation 21:1-6", 
             "Matthew 25:31-46"
         ], 
         "Ninth Sunday after the Epiphany": [
             "1 Kings 8:22-23", 
             "1 Kings 8:41-43", 
-            "Psalm 96:1-9", 
+            "Psalms 96:1-9", 
             "Galatians 1:1-12", 
             "Luke 7:1-10"
         ], 
         "Presentation of the Lord": [
             "Malachi 3:1-4", 
-            "Psalm 84", 
-            "Psalm 24:7-10", 
+            "Psalms 84", 
+            "Psalms 24:7-10", 
             "Hebrews 2:14-18", 
             "Luke 2:22-40"
         ], 
         "Proper 10": [
             "Amos 7:7-17", 
-            "Psalm 82", 
+            "Psalms 82", 
             "Deuteronomy 30:9-14", 
-            "Psalm 25:1-10", 
+            "Psalms 25:1-10", 
             "Colossians 1:1-14", 
             "Luke 10:25-37"
         ], 
         "Proper 11": [
             "Amos 8:1-12", 
-            "Psalm 52", 
+            "Psalms 52", 
             "Genesis 18:1-10", 
-            "Psalm 15", 
+            "Psalms 15", 
             "Colossians 1:15-28", 
             "Luke 10:38-42"
         ], 
         "Proper 12": [
             "Hosea 1:2-10", 
-            "Psalm 85", 
+            "Psalms 85", 
             "Genesis 18:20-32", 
-            "Psalm 138", 
+            "Psalms 138", 
             "Colossians 2:6-19", 
             "Luke 11:1-13"
         ], 
         "Proper 13": [
             "Hosea 11:1-11", 
-            "Psalm 107:1-9", 
-            "Psalm 107:43", 
+            "Psalms 107:1-9", 
+            "Psalms 107:43", 
             "Ecclesiastes 1:2", 
             "Ecclesiastes 1:12-14", 
             "Ecclesiastes 1:2:18-23", 
-            "Psalm 49:1-12", 
+            "Psalms 49:1-12", 
             "Colossians 3:1-11", 
             "Luke 12:13-21"
         ], 
         "Proper 14": [
             "Isaiah 1:1", 
             "Isaiah 1:10-20", 
-            "Psalm 50:1-8", 
-            "Psalm 50:22-23", 
+            "Psalms 50:1-8", 
+            "Psalms 50:22-23", 
             "Genesis 15:1-6", 
-            "Psalm 33:12-22", 
+            "Psalms 33:12-22", 
             "Hebrews 11:1-3", 
             "Hebrews 11:8-16", 
             "Luke 12:32-40"
         ], 
         "Proper 15": [
             "Isaiah 5:1-7", 
-            "Psalm 80:1-2", 
-            "Psalm 80:8-19", 
+            "Psalms 80:1-2", 
+            "Psalms 80:8-19", 
             "Jeremiah 23:23-29", 
-            "Psalm 82", 
+            "Psalms 82", 
             "Hebrews 11:29-12:2", 
             "Luke 12:49-56"
         ], 
         "Proper 16": [
             "Jeremiah 1:4-10", 
-            "Psalm 71:1-6", 
+            "Psalms 71:1-6", 
             "Isaiah 58:9-14", 
-            "Psalm 103:1-8", 
+            "Psalms 103:1-8", 
             "Hebrews 12:18-29", 
             "Luke 13:10-17"
         ], 
         "Proper 17": [
             "Jeremiah 2:4-13", 
-            "Psalm 81:1", 
-            "Psalm 81:10-16", 
+            "Psalms 81:1", 
+            "Psalms 81:10-16", 
             "Sirach 10:12-18", 
             "Proverbs 25:6-7", 
-            "Psalm 112", 
+            "Psalms 112", 
             "Hebrews 13:1-8", 
             "Hebrews 13:15-16", 
             "Luke 14:1", 
@@ -1698,76 +1698,76 @@
         ], 
         "Proper 18": [
             "Jeremiah 18:1-11", 
-            "Psalm 139:1-6", 
-            "Psalm 139:13-18", 
+            "Psalms 139:1-6", 
+            "Psalms 139:13-18", 
             "Deuteronomy 30:15-20", 
-            "Psalm 1", 
+            "Psalms 1", 
             "Philemon 1:1-1:21", 
             "Luke 14:25-33"
         ], 
         "Proper 19": [
             "Jeremiah 4:11-12", 
             "Jeremiah 4:22-28", 
-            "Psalm 14", 
+            "Psalms 14", 
             "Exodus 32:7-14", 
-            "Psalm 51:1-10", 
+            "Psalms 51:1-10", 
             "1 Timothy 1:12-17", 
             "Luke 15:1-10"
         ], 
         "Proper 20": [
             "Jeremiah 8:18-9:1", 
-            "Psalm 79:1-9", 
+            "Psalms 79:1-9", 
             "Amos 8:4-7", 
-            "Psalm 113", 
+            "Psalms 113", 
             "1 Timothy 2:1-7", 
             "Luke 16:1-13"
         ], 
         "Proper 21": [
             "Jeremiah 32:1-3", 
             "Jeremiah 32:6-15", 
-            "Psalm 91:1-6", 
-            "Psalm 91:14-16", 
+            "Psalms 91:1-6", 
+            "Psalms 91:14-16", 
             "Amos 6:1", 
             "Amos 6:4-7", 
-            "Psalm 146", 
+            "Psalms 146", 
             "1 Timothy 6:6-19", 
             "Luke 16:19-31"
         ], 
         "Proper 22": [
             "Lamentations 1:1-6", 
             "Lamentations 3:19-26", 
-            "Psalm 137", 
+            "Psalms 137", 
             "Habakkuk 1:1-4", 
             "Habakkuk 2:1-4", 
-            "Psalm 37:1-9", 
+            "Psalms 37:1-9", 
             "2 Timothy 1:1-14", 
             "Luke 17:5-10"
         ], 
         "Proper 23": [
             "Jeremiah 29:1", 
             "Jeremiah 29:4-7", 
-            "Psalm 66:1-12", 
+            "Psalms 66:1-12", 
             "2 Kings 5:1-3", 
             "2 Kings 5:7-15", 
-            "Psalm 111", 
+            "Psalms 111", 
             "2 Timothy 2:8-15", 
             "Luke 17:11-19"
         ], 
         "Proper 24": [
             "Jeremiah 31:27-34", 
-            "Psalm 119:97-104", 
+            "Psalms 119:97-104", 
             "Genesis 32:22-31", 
-            "Psalm 121", 
+            "Psalms 121", 
             "2 Timothy 3:14-4:5", 
             "Luke 18:1-8"
         ], 
         "Proper 25": [
             "Joel 2:23-32", 
-            "Psalm 65", 
+            "Psalms 65", 
             "Sirach 35:12-17", 
             "Jeremiah 14:7-10", 
             "Jeremiah 14:19-22", 
-            "Psalm 84:1-7", 
+            "Psalms 84:1-7", 
             "2 Timothy 4:6-8", 
             "2 Timothy 4:16-18", 
             "Luke 18:9-14"
@@ -1775,20 +1775,20 @@
         "Proper 26": [
             "Habakkuk 1:1-4", 
             "Habakkuk 2:1-4", 
-            "Psalm 119:137-144", 
+            "Psalms 119:137-144", 
             "Isaiah 1:10-18", 
-            "Psalm 32:1-7", 
+            "Psalms 32:1-7", 
             "2 Thessalonians 1:1-4", 
             "2 Thessalonians 1:11-12", 
             "Luke 19:1-10"
         ], 
         "Proper 27": [
             "Haggai 1:15-2:9", 
-            "Psalm 145:1-5", 
-            "Psalm 145:17-21", 
-            "Psalm 98", 
+            "Psalms 145:1-5", 
+            "Psalms 145:17-21", 
+            "Psalms 98", 
             "Job 19:23-27", 
-            "Psalm 17:1-9", 
+            "Psalms 17:1-9", 
             "2 Thessalonians 2:1-5", 
             "2 Thessalonians 2:13-17", 
             "Luke 20:27-38"
@@ -1797,71 +1797,71 @@
             "Isaiah 65:17-25", 
             "Isaiah 12", 
             "Malachi 4:1-2", 
-            "Psalm 98", 
+            "Psalms 98", 
             "2 Thessalonians 3:6-13", 
             "Luke 21:5-19"
         ], 
         "Proper 3": [
             "Sirach 27:4-7", 
             "Isaiah 55:10-13", 
-            "Psalm 92:1-4", 
-            "Psalm 92:12-15", 
+            "Psalms 92:1-4", 
+            "Psalms 92:12-15", 
             "1 Corinthians 15:51-58", 
             "Luke 6:39-49"
         ], 
         "Proper 4": [
             "1 Kings 18:20-29", 
             "1 Kings 18:30-39", 
-            "Psalm 96", 
+            "Psalms 96", 
             "1 Kings 8:22-23", 
             "1 Kings 8:41-43", 
-            "Psalm 96:1-9", 
+            "Psalms 96:1-9", 
             "Galatians 1:1-12", 
             "Luke 7:1-10"
         ], 
         "Proper 5": [
             "1 Kings 17:8-24", 
-            "Psalm 146", 
+            "Psalms 146", 
             "1 Kings 17:17-24", 
-            "Psalm 30", 
+            "Psalms 30", 
             "Galatians 1:11-24", 
             "Luke 7:11-17"
         ], 
         "Proper 6": [
             "1 Kings 21:1-21", 
-            "Psalm 5:1-8", 
+            "Psalms 5:1-8", 
             "2 Samuel 11:26-12:10", 
             "2 Samuel 12:13-15", 
-            "Psalm 32", 
+            "Psalms 32", 
             "Galatians 2:15-21", 
             "Luke 7:36-8:3"
         ], 
         "Proper 7": [
             "1 Kings 19:1-15", 
-            "Psalm 42", 
+            "Psalms 42", 
             "Isaiah 65:1-9", 
-            "Psalm 22:19-28", 
+            "Psalms 22:19-28", 
             "Galatians 3:23-29", 
             "Luke 8:26-39", 
-            "Psalm 43"
+            "Psalms 43"
         ], 
         "Proper 8": [
             "2 Kings 2:1-2", 
             "2 Kings 2:6-14", 
-            "Psalm 77:1-2", 
-            "Psalm 77:11-20", 
+            "Psalms 77:1-2", 
+            "Psalms 77:11-20", 
             "1 Kings 19:15-16", 
             "1 Kings 19:19-21", 
-            "Psalm 16", 
+            "Psalms 16", 
             "Galatians 5:1", 
             "Galatians 5:13-25", 
             "Luke 9:51-62"
         ], 
         "Proper 9": [
             "2 Kings 5:1-14", 
-            "Psalm 30", 
+            "Psalms 30", 
             "Isaiah 66:10-14", 
-            "Psalm 66:1-9", 
+            "Psalms 66:1-9", 
             "Galatians 6:1-16", 
             "Luke 10:1-11", 
             "Luke 10:16-20"
@@ -1869,8 +1869,8 @@
         "Resurrection of the Lord": [
             "Acts 10:34-43", 
             "Isaiah 65:17-25", 
-            "Psalm 118:1-2", 
-            "Psalm 118:14-24", 
+            "Psalms 118:1-2", 
+            "Psalms 118:14-24", 
             "1 Corinthians 15:19-26", 
             "Acts 10:34-43", 
             "John 20:1-18", 
@@ -1879,21 +1879,21 @@
         "Second Sunday after Christmas Day": [
             "Jeremiah 31:7-14", 
             "Sirach 24:1-12", 
-            "Psalm 147:12-20", 
+            "Psalms 147:12-20", 
             "Wisdom of Solomon 10:15-21", 
             "Ephesians 1:3-14", 
             "John 1:1-18"
         ], 
         "Second Sunday after the Epiphany": [
             "Isaiah 62:1-5", 
-            "Psalm 36:5-10", 
+            "Psalms 36:5-10", 
             "1 Corinthians 12:1-11", 
             "John 2:1-11"
         ], 
         "Second Sunday in Lent": [
             "Genesis 15:1-12", 
             "Genesis 15:17-18", 
-            "Psalm 27", 
+            "Psalms 27", 
             "Philippians 3:17-4:1", 
             "Luke 13:31-35", 
             "Luke 9:28-43"
@@ -1907,23 +1907,23 @@
         ], 
         "Second Sunday of Easter": [
             "Acts 5:27-32", 
-            "Psalm 118:14-29", 
-            "Psalm 150", 
+            "Psalms 118:14-29", 
+            "Psalms 150", 
             "Revelation 1:4-8", 
             "John 20:19-31"
         ], 
         "Seventh Sunday after the Epiphany": [
             "Genesis 45:3-11", 
             "Genesis 45:15", 
-            "Psalm 37:1-11", 
-            "Psalm 37:39-40", 
+            "Psalms 37:1-11", 
+            "Psalms 37:39-40", 
             "1 Corinthians 15:35-38", 
             "1 Corinthians 15:42-50", 
             "Luke 6:27-38"
         ], 
         "Seventh Sunday of Easter": [
             "Acts 16:16-34", 
-            "Psalm 97", 
+            "Psalms 97", 
             "Revelation 22:12-14", 
             "Revelation 22:16-17", 
             "Revelation 22:20-21", 
@@ -1931,13 +1931,13 @@
         ], 
         "Sixth Sunday after the Epiphany": [
             "Jeremiah 17:5-10", 
-            "Psalm 1", 
+            "Psalms 1", 
             "1 Corinthians 15:12-20", 
             "Luke 6:17-26"
         ], 
         "Sixth Sunday of Easter": [
             "Acts 16:9-15", 
-            "Psalm 67", 
+            "Psalms 67", 
             "Revelation 21:10", 
             "Revelation 21:22-22:5", 
             "John 14:23-29", 
@@ -1945,7 +1945,7 @@
         ], 
         "Thanksgiving Day USA": [
             "Deuteronomy 26:1-11", 
-            "Psalm 100", 
+            "Psalms 100", 
             "Philippians 4:4-9", 
             "John 6:25-35"
         ], 
@@ -1953,13 +1953,13 @@
             "Nehemiah 8:1-3", 
             "Nehemiah 8:5-6", 
             "Nehemiah 8:8-10", 
-            "Psalm 19", 
+            "Psalms 19", 
             "1 Corinthians 12:12-31", 
             "Luke 4:14-21"
         ], 
         "Third Sunday in Lent": [
             "Isaiah 55:1-9", 
-            "Psalm 63:1-8", 
+            "Psalms 63:1-8", 
             "1 Corinthians 10:1-13", 
             "Luke 13:1-9"
         ], 
@@ -1971,38 +1971,38 @@
         ], 
         "Third Sunday of Easter": [
             "Acts 9:1-20", 
-            "Psalm 30", 
+            "Psalms 30", 
             "Revelation 5:11-14", 
             "John 21:1-19"
         ], 
         "Transfiguration Sunday": [
             "Exodus 34:29-35", 
-            "Psalm 99", 
+            "Psalms 99", 
             "2 Corinthians 3:12-4:2", 
             "Luke 9:28-43"
         ], 
         "Trinity Sunday": [
             "Proverbs 8:1-4", 
             "Proverbs 8:22-31", 
-            "Psalm 8", 
+            "Psalms 8", 
             "Romans 5:1-5", 
             "John 16:12-15"
         ], 
         "Tuesday of Holy Week": [
             "Isaiah 49:1-7", 
-            "Psalm 71:1-14", 
+            "Psalms 71:1-14", 
             "1 Corinthians 1:18-31", 
             "John 12:20-36"
         ], 
         "Visitation of Mary to Elizabeth": [
             "1 Samuel 2:1-10", 
-            "Psalm 113", 
+            "Psalms 113", 
             "Romans 12:9-16", 
             "Luke 1:39-57"
         ], 
         "Wednesday of Holy Week": [
             "Isaiah 50:4-9", 
-            "Psalm 70", 
+            "Psalms 70", 
             "Hebrews 12:1-3", 
             "John 13:21-32"
         ]

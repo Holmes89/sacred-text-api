@@ -11,6 +11,7 @@ import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 import com.ferrumlabs.exceptions.FactoryException;
 import com.ferrumlabs.factories.BibleFactory;
+import com.ferrumlabs.utils.ErrorCodes;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
@@ -61,6 +62,9 @@ public class GetBibleSingleVerseCommand extends BaseCommand<List<BibleVerseDTO>>
 			return dtos;
 		}
 		catch(FactoryException e){
+			if(e.getErrorCode().equals(ErrorCodes.INVALID_INPUT)){
+				return new ArrayList<BibleVerseDTO>();
+			}
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}
