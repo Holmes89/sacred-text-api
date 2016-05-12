@@ -2,8 +2,19 @@ language: java
 
 sudo: true
 
+cache:
+  directories:
+    - $HOME/.m2
+jdk:
+  - oraclejdk8
 os:
-  -linux
+  - linux
+
 branches:
   only:
     - master
+
+after_success:
+  - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build -t holmes89/religious-api .
+  - docker push holmes89/religious-api
