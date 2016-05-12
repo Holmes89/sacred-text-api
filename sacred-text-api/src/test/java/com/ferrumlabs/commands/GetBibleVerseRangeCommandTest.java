@@ -14,9 +14,9 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
-import com.ferrumlabs.exceptions.FactoryException;
 import com.ferrumlabs.exceptions.ServiceException;
 import com.ferrumlabs.services.impl.BibleService;
+import com.ferrumlabs.utils.ErrorCodes;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
@@ -52,7 +52,7 @@ public class GetBibleVerseRangeCommandTest {
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
+		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
 		
 		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		

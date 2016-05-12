@@ -16,6 +16,7 @@ import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 import com.ferrumlabs.exceptions.FactoryException;
 import com.ferrumlabs.factories.BibleFactory;
+import com.ferrumlabs.utils.ErrorCodes;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
@@ -51,7 +52,7 @@ public class GetBibleSingleVerseCommandTest {
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws FactoryException{
 		
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
+		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new FactoryException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
 		
 		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		
