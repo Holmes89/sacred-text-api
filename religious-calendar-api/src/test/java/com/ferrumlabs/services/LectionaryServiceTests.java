@@ -32,7 +32,7 @@ public class LectionaryServiceTests {
 		Assert.assertTrue(lectionaryVerses.contains("Amos 8:1-12"));
 		Assert.assertTrue(lectionaryVerses.contains("Psalms 52"));
 		Assert.assertTrue(lectionaryVerses.contains("Genesis 18:1-10"));
-		Assert.assertTrue(lectionaryVerses.contains("Psalm 15"));
+		Assert.assertTrue(lectionaryVerses.contains("Psalms 15"));
 		Assert.assertTrue(lectionaryVerses.contains("Colossians 1:15-28"));
 		Assert.assertTrue(lectionaryVerses.contains("Luke 10:38-42"));
 	}
