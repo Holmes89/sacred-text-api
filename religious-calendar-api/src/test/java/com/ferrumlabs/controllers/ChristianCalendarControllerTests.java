@@ -215,17 +215,4 @@ public class ChristianCalendarControllerTests {
 		
 		Assert.assertEquals(1, response.size());
 	}
-	
-	@Test
-	public void testGetLectionaryByDate2() throws Exception{
-		
-		MvcResult mvcResult = this.mockMvc.perform(get("/calendar/christian/lectionary")
-				.accept(MediaType.APPLICATION_JSON)
-				)
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-				.andReturn();
-		
-		Set<String> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<Set<String>>() { });
-	}
 }
