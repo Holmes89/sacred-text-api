@@ -11,7 +11,7 @@
 	
 	<groupId>com.ferrumlabs</groupId>
 	<artifactId>religious-calendar-api</artifactId>
-	<version>0.1</version>
+	<version>0.2</version>
 	<packaging>war</packaging>
 	
 	<name>ReligousCalendarAPI</name>
