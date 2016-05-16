@@ -247,10 +247,10 @@ public class BibleService implements IBibleService{
 		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
 		
 		String book = null;
-		int startChapter = 0;
-		int startVerse = 0;
-		int endChapter = 0;
-		int endVerse = 0;
+		Integer startChapter = null;
+		Integer startVerse = null;
+		Integer endChapter = null;
+		Integer endVerse = null;
 		
 		String[] verseArray = verses.trim().split(",");
 		for(String verse: verseArray){
@@ -269,7 +269,11 @@ public class BibleService implements IBibleService{
 				if(m.group(3)!=null){
 					cv = m.group(3).split(":");
 					if(cv.length==1){
-						endVerse = Integer.parseInt(cv[0]);
+						if(startVerse == null)
+							endChapter = Integer.parseInt(cv[0]);
+						else{
+							endVerse = Integer.parseInt(cv[0]);
+						}
 					}
 					else if(cv.length==2){
 						endChapter = Integer.parseInt(cv[0]);
@@ -284,9 +288,12 @@ public class BibleService implements IBibleService{
 				m = chapterVersePattern.matcher(verse);
 				if(m.matches()){
 					String[] nextCv = m.group(1).split(":");
-					if(startVerse==0){
-						startChapter = Integer.parseInt(nextCv[0]);
-						if(nextCv.length==2){
+					if(startVerse!=null){
+						if(nextCv.length==1){
+							startVerse = Integer.parseInt(nextCv[0]);
+						}
+						else if(nextCv.length==2){
+							startChapter = Integer.parseInt(nextCv[0]);
 							startVerse = Integer.parseInt(nextCv[1]);
 						}
 						else{
@@ -307,7 +314,7 @@ public class BibleService implements IBibleService{
 					}
 					if(m.group(2)!=null){
 						nextCv = m.group(2).split(":");
-						if(startChapter!=0 && startVerse!=0){
+						if(startChapter!=null && startVerse!=null){
 							if(nextCv.length==1){
 								endVerse = Integer.parseInt(nextCv[0]);
 							}
@@ -319,7 +326,7 @@ public class BibleService implements IBibleService{
 								throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
 							}
 						}
-						else if(startChapter!=0){
+						else if(startChapter!=null){
 							if(nextCv.length==1){
 								endChapter = Integer.parseInt(nextCv[0]);
 							}
@@ -331,7 +338,7 @@ public class BibleService implements IBibleService{
 								return null;
 							}
 						}
-						else if(startVerse!=0){
+						else if(startVerse!=null){
 							if(nextCv.length==1){
 								endVerse = Integer.parseInt(nextCv[0]);
 							}
@@ -351,6 +358,12 @@ public class BibleService implements IBibleService{
 			}
 			//get verses here.
 			verseList.addAll(getVerses(version, book, startChapter, startVerse, endChapter, endVerse));
+			if(endChapter!=null)
+				startChapter = endChapter;
+			if(endVerse!=null)
+				startVerse = endVerse;
+			endChapter = null;
+			endVerse = null;
 			
 		}
 		
