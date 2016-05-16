@@ -162,16 +162,19 @@ public class BibleService implements IBibleService{
 				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter not in book");
 			}
 			
-			if((throughChapter == null) && (throughVerse == null)){
-				String singleVerseContent = bibleFactory.getVerse(version, book, chapter, verse);
-				BibleVerseDTO singleDTO = new BibleVerseDTO(book, chapter, verse, singleVerseContent);
-				dtos.add(singleDTO);
-				return dtos;
+			if((chapter != null) && (verse == null) && (throughChapter == null) && (throughVerse == null)){
+				return getVersesInChapter(version, book, chapter);
 			}
 			else if((chapter != null) && (verse == null) && (throughChapter != null) && (throughVerse == null)){
 				for(int x = chapter; x<=throughChapter; x++){
 					dtos.addAll(this.getVersesInChapter(version, book, x));
 				}
+				return dtos;
+			}
+			else if((throughChapter == null) && (throughVerse == null)){
+				String singleVerseContent = bibleFactory.getVerse(version, book, chapter, verse);
+				BibleVerseDTO singleDTO = new BibleVerseDTO(book, chapter, verse, singleVerseContent);
+				dtos.add(singleDTO);
 				return dtos;
 			}
 			else if((throughChapter == null) && (throughVerse != null)){
@@ -190,6 +193,9 @@ public class BibleService implements IBibleService{
 				return dtos;
 			}
 			else if((throughChapter != null) && (throughVerse != null)){
+				if(verse==null){
+					verse=1;
+				}
 				if(!chapterList.contains(throughChapter)){
 					throw new ServiceException(ErrorCodes.INVALID_INPUT, "Book does not contain chapter");
 				}
