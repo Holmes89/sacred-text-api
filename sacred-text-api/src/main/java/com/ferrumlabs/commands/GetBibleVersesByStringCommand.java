@@ -18,39 +18,34 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @Component
 @Scope("prototype")
-public class GetBibleChapterCommand extends BaseCommand<List<BibleVerseDTO>> {
+public class GetBibleVersesByStringCommand extends BaseCommand<List<BibleVerseDTO>> {
 	
 	@Autowired
 	IBibleService bibleService;
 	
 	private BibleVersionEnum version;
-	private String book;
-	private Integer chapter;
+	private String verses;
 	
-	protected GetBibleChapterCommand() {
+	protected GetBibleVersesByStringCommand() {
 		super(Setter.withGroupKey(HystrixCommandGroupKey.Factory.asKey("SacredTextAPI"))
-				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleChapter")));
+				.andCommandKey(HystrixCommandKey.Factory.asKey("GetBibleVerseString")));
 	}
 	
-	public GetBibleChapterCommand setVersion(BibleVersionEnum version){
+	public GetBibleVersesByStringCommand setVersion(BibleVersionEnum version){
 		this.version=version;
 		return this;
 	}
 	
-	public GetBibleChapterCommand setBook(String book){
-		this.book=book;
+	public GetBibleVersesByStringCommand setVerses(String verses){
+		this.verses=verses;
 		return this;
 	}
 	
-	public GetBibleChapterCommand setChapter(Integer chapter){
-		this.chapter=chapter;
-		return this;
-	}
 		
-		@Override
+	@Override
 	protected List<BibleVerseDTO> run() throws Exception {
 		try{
-			return bibleService.getVersesInChapter(this.version, this.book, this.chapter);
+			return bibleService.getVersesFromString(version, verses);
 		}
 		catch(ServiceException e){
 			log.error("error creating getting verse "+e);

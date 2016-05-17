@@ -36,6 +36,7 @@ import com.ferrumlabs.SacredTextApiApplication;
 import com.ferrumlabs.commands.GetBibleChapterCommand;
 import com.ferrumlabs.commands.GetBibleSingleVerseCommand;
 import com.ferrumlabs.commands.GetBibleVerseRangeCommand;
+import com.ferrumlabs.commands.GetBibleVersesByStringCommand;
 import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 
@@ -64,6 +65,10 @@ public class BibleControllerTests {
 	Provider<GetBibleChapterCommand> getChapterProvider;
 	
 	@Mock
+	Provider<GetBibleVersesByStringCommand> getBibleVersesByStringProvider;
+
+	
+	@Mock
 	GetBibleSingleVerseCommand getSingleVerseCommand;
 	
 	@Mock
@@ -71,6 +76,9 @@ public class BibleControllerTests {
 	
 	@Mock
 	GetBibleChapterCommand getChapterCommand;
+
+	@Mock
+	GetBibleVersesByStringCommand getBibleVerseByStringCommand;
 	
 	@InjectMocks
 	@Autowired
@@ -83,6 +91,7 @@ public class BibleControllerTests {
 		when(getSingleVerseProvider.get()).thenReturn(getSingleVerseCommand);
 		when(getRangeVerseProvider.get()).thenReturn(getRangeVerseCommand);
 		when(getChapterProvider.get()).thenReturn(getChapterCommand);
+		when(getBibleVersesByStringProvider.get()).thenReturn(getBibleVerseByStringCommand);
 	}
 	
 	@Test
@@ -201,6 +210,35 @@ public class BibleControllerTests {
 		when(getChapterCommand.execute()).thenReturn(dtos);
 		
 		MvcResult mvcResult = this.mockMvc.perform(get("/bible/?book=John&chapter=1")
+				.accept(MediaType.APPLICATION_JSON)
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andReturn();
+		
+		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		
+		Assert.assertEquals(2, response.size());
+	}
+	
+	@Test
+	public void testGetVerse() throws Exception{
+		BibleVerseDTO dto = new BibleVerseDTO();
+		dto.setBook("blah");
+		dto.setChapter(1);
+		dto.setVerse(1);
+		dto.setContent("asdfsad");
+		
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		dtos.add(dto);
+		dtos.add(dto);
+		
+		when(getBibleVerseByStringCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getBibleVerseByStringCommand);
+		when(getBibleVerseByStringCommand.setVerses(Mockito.anyString())).thenReturn(getBibleVerseByStringCommand);
+		
+		when(getChapterCommand.execute()).thenReturn(dtos);
+		
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/search?verses=Joel 2:2, 4")
 				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())

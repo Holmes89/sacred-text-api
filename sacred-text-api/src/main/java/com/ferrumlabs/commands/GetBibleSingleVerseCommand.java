@@ -62,9 +62,6 @@ public class GetBibleSingleVerseCommand extends BaseCommand<List<BibleVerseDTO>>
 			return dtos;
 		}
 		catch(FactoryException e){
-			if(e.getErrorCode().equals(ErrorCodes.INVALID_INPUT)){
-				return new ArrayList<BibleVerseDTO>();
-			}
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}

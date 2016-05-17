@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ferrumlabs.commands.GetBibleChapterCommand;
 import com.ferrumlabs.commands.GetBibleSingleVerseCommand;
 import com.ferrumlabs.commands.GetBibleVerseRangeCommand;
+import com.ferrumlabs.commands.GetBibleVersesByStringCommand;
 import com.ferrumlabs.dto.BibleVerseDTO;
 import com.ferrumlabs.enums.BibleVersionEnum;
 import com.ferrumlabs.exceptions.APIException;
@@ -34,6 +34,9 @@ public class BibleController extends BaseController {
 	
 	@Autowired
 	Provider<GetBibleChapterCommand> getChapterProvider;
+	
+	@Autowired
+	Provider<GetBibleVersesByStringCommand> getBibleVersesByStringProvider;
 	
 	public BibleController(){
 		super();
@@ -67,5 +70,17 @@ public class BibleController extends BaseController {
 		else{
 			throw new APIException("Invalid Parameters");
 		}
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/search", produces = "application/json")
+	@StatisticTimer(name="getBibleVerseTimer")
+	@StatisticCounter(name="getBibleVerseCounter")
+	public HttpEntity<List<BibleVerseDTO>> searchVerses(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="verses") String search) throws Throwable
+	{
+		if(versionAbbr==null){
+			versionAbbr = BibleVersionEnum.NKJV;
+		}
+		log.info("Request Bible to search {} version of {}", versionAbbr, search);
+		return new HttpEntity<List<BibleVerseDTO>>(getBibleVersesByStringProvider.get().setVersion(versionAbbr).setVerses(search).execute(), createEntityHeaders());
 	}
 }

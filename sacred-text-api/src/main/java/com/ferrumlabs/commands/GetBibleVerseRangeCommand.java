@@ -71,9 +71,6 @@ public class GetBibleVerseRangeCommand extends BaseCommand<List<BibleVerseDTO>> 
 			return bibleService.getVersesInRange(this.version, this.book, this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}
 		catch(ServiceException e){
-			if(e.getErrorCode().equals(ErrorCodes.INVALID_INPUT)){
-				return new ArrayList<BibleVerseDTO>();
-			}
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}
