@@ -236,9 +236,9 @@ public class BibleControllerTests {
 		when(getBibleVerseByStringCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getBibleVerseByStringCommand);
 		when(getBibleVerseByStringCommand.setVerses(Mockito.anyString())).thenReturn(getBibleVerseByStringCommand);
 		
-		when(getChapterCommand.execute()).thenReturn(dtos);
+		when(getBibleVerseByStringCommand.execute()).thenReturn(dtos);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/bible/search?verses=Joel 2:2, 4")
+		MvcResult mvcResult = this.mockMvc.perform(get("/bible/search?verses=Joel+2:2,4")
 				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())
