@@ -391,6 +391,22 @@ public class BibleServiceTests {
 	}
 	
 	@Test
+	public void testGetVerseFromString_MultipleVersesSingleChapterPlusVerseRange_book_test() throws Exception{
+		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "1 kings 2:3-6,9-11");
+		Assert.assertEquals(7, dtos.size());
+		BibleVerseDTO result = dtos.iterator().next();
+		Assert.assertEquals("1 kings", result.getBook());
+		Assert.assertEquals(2, result.getChapter());
+		Assert.assertEquals(3, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+		result = dtos.get(dtos.size()-1);
+		Assert.assertEquals("1 kings", result.getBook());
+		Assert.assertEquals(2, result.getChapter());
+		Assert.assertEquals(11, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+	}
+	
+	@Test
 	public void testGetVerseFromString_MultipleVersesSingleChapterPlusChapterVerse() throws Exception{
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, 3:9");
 		Assert.assertEquals(5, dtos.size());
@@ -419,6 +435,53 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(11, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+	}
+	
+	@Test
+	public void testGetVerseFromString_MultipleVersesSingleChapterPlusBookChapterVerseRange() throws Exception{
+		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, Exodus 3:9-11");
+		Assert.assertEquals(7, dtos.size());
+		BibleVerseDTO result = dtos.iterator().next();
+		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals(2, result.getChapter());
+		Assert.assertEquals(3, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+		result = dtos.get(dtos.size()-1);
+		Assert.assertEquals("Exodus", result.getBook());
+		Assert.assertEquals(3, result.getChapter());
+		Assert.assertEquals(11, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+	}
+	
+	@Test
+	public void testGetVerseFromString_MultipleVersesSingleChapterPlusBookChapterVerseRange_2() throws Exception{
+		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, Exodus 3:9-11, 14");
+		Assert.assertEquals(8, dtos.size());
+		BibleVerseDTO result = dtos.iterator().next();
+		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals(2, result.getChapter());
+		Assert.assertEquals(3, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+		result = dtos.get(dtos.size()-1);
+		Assert.assertEquals("Exodus", result.getBook());
+		Assert.assertEquals(3, result.getChapter());
+		Assert.assertEquals(14, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+	}
+	@Test
+	public void testGetVerseFromString_MultipleVersesSingleChapterPlusBookChapterVerseRange_3() throws Exception{
+		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, Exodus 3:9-11, 4:14");
+		Assert.assertEquals(8, dtos.size());
+		BibleVerseDTO result = dtos.iterator().next();
+		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals(2, result.getChapter());
+		Assert.assertEquals(3, result.getVerse());
+		Assert.assertNotNull(result.getContent());
+		result = dtos.get(dtos.size()-1);
+		Assert.assertEquals("Exodus", result.getBook());
+		Assert.assertEquals(4, result.getChapter());
+		Assert.assertEquals(14, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 	}
 	@Test
