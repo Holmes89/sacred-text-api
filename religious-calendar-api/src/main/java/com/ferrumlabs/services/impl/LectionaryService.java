@@ -3,6 +3,7 @@ package com.ferrumlabs.services.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,13 +14,15 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ferrumlabs.dto.LectionaryVerseDTO;
 import com.ferrumlabs.enums.ChristianSpecialDatesEnum;
 import com.ferrumlabs.enums.LitanyEventsEnum;
 import com.ferrumlabs.exceptions.FactoryException;
 import com.ferrumlabs.exceptions.ServiceException;
 import com.ferrumlabs.factories.ChristianCalendarFactory;
 import com.ferrumlabs.factories.LectionaryFactory;
-import com.ferrumlabs.services.interfaces.ILectionaryService;;
+import com.ferrumlabs.services.interfaces.ILectionaryService;
+import com.ferrumlabs.utils.ErrorCodes;;
 
 
 @Service("LectionaryService")
@@ -49,6 +52,33 @@ public class LectionaryService implements ILectionaryService {
 				verses.addAll(lectionary.get(litanyEventsEnum));
 			}
 			return verses;
+		} catch (FactoryException e) {
+			throw new ServiceException("Factory Exception occured", e);
+		}
+	}
+	
+	@Override
+	public Map<String, LectionaryVerseDTO> getLectionary(DateTime now) throws ServiceException{
+		if(now == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "DateTime cannot be null");
+		}
+		try {
+			Map<String, LectionaryVerseDTO> result = new HashMap<String, LectionaryVerseDTO>();
+			DateTime advent = calFactory.getStartOfAdvent(now);
+			int year = advent.getYear();
+			String yearCode = Character.toString(calFactory.getLiturgicalYear(year));
+			Map<ChristianSpecialDatesEnum, DateTime> eventMap = calFactory.getEventMap(year);
+			Map<ChristianSpecialDatesEnum, LitanyEventsEnum> litCalMap = getLitCalMap(eventMap.keySet());
+			Map<LitanyEventsEnum, Set<String>> lectionary = lectFactory.getLitYear(yearCode);
+			for(ChristianSpecialDatesEnum event: calService.getHolidayEnums(now)){
+				LectionaryVerseDTO dto = new LectionaryVerseDTO();
+				dto.setDate(now.toDate());
+				LitanyEventsEnum litanyEventsEnum = litCalMap.get(event);
+				dto.setHoliday(event.getDisplayName());
+				dto.addAllVerses(lectionary.get(litanyEventsEnum));
+				result.put(event.getDisplayName(), dto);
+			}
+			return result;
 		} catch (FactoryException e) {
 			throw new ServiceException("Factory Exception occured", e);
 		}

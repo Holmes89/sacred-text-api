@@ -87,7 +87,7 @@ public enum LitanyEventsEnum {
 	VISITATION_OF_MARY_TO_ELIZABETH("Visitation of Mary to Elizabeth"),
 	WEDNESDAY_OF_HOLY_WEEK("Wednesday of Holy Week");
 	
-	private static final Map<String, LitanyEventsEnum> LOOKUP = new HashMap<String, LitanyEventsEnum>(); 
+	private static final Map<String, LitanyEventsEnum> LOOKUP = new HashMap<String, LitanyEventsEnum>();
 
 	static{
 		for(LitanyEventsEnum e: LitanyEventsEnum.values()){

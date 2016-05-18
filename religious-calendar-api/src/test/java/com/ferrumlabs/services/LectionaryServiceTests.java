@@ -1,5 +1,6 @@
 package com.ferrumlabs.services;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.joda.time.DateTime;
@@ -11,6 +12,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.ferrumlabs.ReligiousCalendarApiApplication;
+import com.ferrumlabs.dto.LectionaryVerseDTO;
+import com.ferrumlabs.enums.ChristianSpecialDatesEnum;
+import com.ferrumlabs.enums.LitanyEventsEnum;
 import com.ferrumlabs.exceptions.ServiceException;
 import com.ferrumlabs.services.interfaces.ILectionaryService;
 
@@ -23,6 +27,7 @@ public class LectionaryServiceTests {
 	
 	private DateTime testDate = new DateTime(2016, 7, 20, 0, 0, 0);
 	private DateTime anotherTestDate = new DateTime(2016, 4, 30, 0, 0, 0);
+	private DateTime newYears = new DateTime(2017, 1, 1, 0, 0, 0);
 	
 	@Test
 	public void testGetLectionaryVerse() throws ServiceException{
@@ -46,5 +51,14 @@ public class LectionaryServiceTests {
 		Assert.assertTrue(lectionaryVerses.contains("Psalms 148"));
 		Assert.assertTrue(lectionaryVerses.contains("Revelation 21:1-6"));
 		Assert.assertTrue(lectionaryVerses.contains("John 13:31-35"));
+	}
+	
+	@Test
+	public void testGetLectionary() throws ServiceException{
+		Map<String, LectionaryVerseDTO> lectionary = lectService.getLectionary(newYears);
+		Assert.assertEquals(3, lectionary.keySet().size());
+		lectionary = lectService.getLectionary(testDate);
+		LectionaryVerseDTO dto = lectionary.get(ChristianSpecialDatesEnum.NINTH_SUNDAY_PENTECOST.getDisplayName());
+		Assert.assertTrue(dto.getFormattedVerses().contains("Psalms 15, 52"));
 	}
 }
