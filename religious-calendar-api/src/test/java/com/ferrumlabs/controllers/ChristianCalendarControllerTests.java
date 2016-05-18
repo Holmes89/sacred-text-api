@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -42,7 +41,9 @@ import com.ferrumlabs.ReligiousCalendarApiApplication;
 import com.ferrumlabs.commands.GetChristianDatesCommand;
 import com.ferrumlabs.commands.GetEasterCommand;
 import com.ferrumlabs.commands.GetLectionaryByDateCommand;
+import com.ferrumlabs.commands.GetLectionaryCommand;
 import com.ferrumlabs.commands.GetNearestHolidayCommand;
+import com.ferrumlabs.dto.LectionaryVerseDTO;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
@@ -71,6 +72,8 @@ public class ChristianCalendarControllerTests {
 	@Mock
 	Provider<GetLectionaryByDateCommand> getLectionaryByDateProvider;
 
+	@Mock
+	Provider<GetLectionaryCommand> getLectionaryProvider;
 
 	@Mock
 	GetChristianDatesCommand getChristianDatesCommand;
@@ -84,6 +87,9 @@ public class ChristianCalendarControllerTests {
 	@Mock
 	GetLectionaryByDateCommand getLectionaryByDateCommand;
 	
+	@Mock
+	GetLectionaryCommand getLectionaryCommand;
+	
 	@InjectMocks
 	@Autowired
 	ChristianCalendarController underTest = new ChristianCalendarController();
@@ -96,6 +102,7 @@ public class ChristianCalendarControllerTests {
 		when(getEasterProvider.get()).thenReturn(getEasterCommand);
 		when(getNearestHolidayProvider.get()).thenReturn(getNearestHolidayCommand);
 		when(getLectionaryByDateProvider.get()).thenReturn(getLectionaryByDateCommand);
+		when(getLectionaryProvider.get()).thenReturn(getLectionaryCommand);
 	}
 	
 	@Test
@@ -192,7 +199,7 @@ public class ChristianCalendarControllerTests {
 		
 		when(getLectionaryByDateCommand.execute()).thenReturn(verses);
 		
-		MvcResult mvcResult = this.mockMvc.perform(get("/calendar/christian/lectionary")
+		MvcResult mvcResult = this.mockMvc.perform(get("/calendar/christian/lectionaryVerses")
 				.accept(MediaType.APPLICATION_JSON)
 				)
 				.andExpect(status().isOk())
@@ -203,7 +210,7 @@ public class ChristianCalendarControllerTests {
 		
 		Assert.assertEquals(1, response.size());
 		
-		mvcResult = this.mockMvc.perform(get("/calendar/christian/lectionary")
+		mvcResult = this.mockMvc.perform(get("/calendar/christian/lectionaryVerses")
 				.accept(MediaType.APPLICATION_JSON)
 				.param("date", "04-22-2014")
 				)
@@ -214,5 +221,25 @@ public class ChristianCalendarControllerTests {
 		response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<Set<String>>() { });
 		
 		Assert.assertEquals(1, response.size());
+	}
+	
+	@Test
+	public void testGetLectionary() throws Exception{
+		
+		Map<String, LectionaryVerseDTO> result = new HashMap<String, LectionaryVerseDTO>();
+		when(getLectionaryCommand.setDate(Mockito.any(DateTime.class))).thenReturn(getLectionaryCommand);
+		
+		when(getLectionaryCommand.execute()).thenReturn(result);
+		
+		MvcResult mvcResult = this.mockMvc.perform(get("/calendar/christian/lectionary")
+				.accept(MediaType.APPLICATION_JSON)
+				)
+				.andExpect(status().isOk())
+				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+				.andReturn();
+		
+		String response = mvcResult.getResponse().getContentAsString();
+		
+		Assert.assertNotNull(response);
 	}
 }

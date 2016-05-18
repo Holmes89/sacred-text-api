@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ferrumlabs.commands.GetChristianDatesCommand;
 import com.ferrumlabs.commands.GetEasterCommand;
 import com.ferrumlabs.commands.GetLectionaryByDateCommand;
+import com.ferrumlabs.commands.GetLectionaryCommand;
 import com.ferrumlabs.commands.GetNearestHolidayCommand;
+import com.ferrumlabs.dto.LectionaryVerseDTO;
 import com.ferrumlabs.utils.StatisticCounter;
 import com.ferrumlabs.utils.StatisticTimer;
 
@@ -39,6 +41,9 @@ public class ChristianCalendarController extends BaseController {
 	
 	@Autowired
 	Provider<GetLectionaryByDateCommand> getLectionaryByDateProvider;
+	
+	@Autowired
+	Provider<GetLectionaryCommand> getLectionaryProvider;
 	
 	public ChristianCalendarController(){
 		super();
@@ -84,7 +89,7 @@ public class ChristianCalendarController extends BaseController {
 		return new HttpEntity<Date>(getEasterProvider.get().setYear(year).execute(), createEntityHeaders());
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/lectionary", produces = "application/json")
+	@RequestMapping(method = RequestMethod.GET, value="/lectionaryVerses", produces = "application/json")
 	@StatisticTimer(name="getLectionaryTimer")
 	@StatisticCounter(name="getLectionaryCounter")
 	public HttpEntity<Set<String>> getLectionaryByDate(HttpServletRequest request, @RequestParam(required=false, value="date") @DateTimeFormat(pattern="MM-dd-yyyy") Date date) throws Throwable
@@ -97,5 +102,20 @@ public class ChristianCalendarController extends BaseController {
 		
 		log.info("Request leciontary by date: {}", dateTime);
 		return new HttpEntity<Set<String>>(getLectionaryByDateProvider.get().setDate(dateTime).execute(), createEntityHeaders());
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/lectionary", produces = "application/json")
+	@StatisticTimer(name="getLectionaryTimer")
+	@StatisticCounter(name="getLectionaryCounter")
+	public HttpEntity<Map<String, LectionaryVerseDTO>> getLectionary(HttpServletRequest request, @RequestParam(required=false, value="date") @DateTimeFormat(pattern="MM-dd-yyyy") Date date) throws Throwable
+	{
+		if(date==null){
+			date = new Date();
+		}
+		
+		DateTime dateTime = new DateTime(date);
+		
+		log.info("Request leciontary by date: {}", dateTime);
+		return new HttpEntity<Map<String, LectionaryVerseDTO>>(getLectionaryProvider.get().setDate(dateTime).execute(), createEntityHeaders());
 	}
 }
