@@ -4,6 +4,10 @@ sudo: true
 
 services:
   - docker
+  - elasticsearch
+
+before_script:
+  - sleep 10
   
 cache:
   directories:

@@ -52,6 +52,11 @@
 		    <scope>test</scope>
 		</dependency>
 		<dependency>
+		  <groupId>org.springframework.data</groupId>
+		  <artifactId>spring-data-elasticsearch</artifactId>
+		  <version>2.0.2.RELEASE</version>
+		</dependency>
+		<dependency>
 			<groupId>com.netflix.hystrix</groupId>
 			<artifactId>hystrix-core</artifactId>
 			<version>${netflix.hystrix}</version>
