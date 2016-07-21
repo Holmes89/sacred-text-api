@@ -7,8 +7,8 @@ services:
   - elasticsearch
 
 before_script:
-  - sleep 10
-  - curl -s -XPOST http://localhost:9200/_bulk --data-binary @src/main/resources/json/relgiousTextImport1.json
+  - sleep 30
+  - curl -s -XPOST http://127.0.0.1:9200/_bulk --data-binary @src/main/resources/json/relgiousTextImport1.json
   
 cache:
   directories:
