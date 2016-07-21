@@ -2,15 +2,14 @@ language: java
 
 sudo: true
 
+before_script:
+  -  - curl -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.4/elasticsearch-2.3.4.deb && sudo dpkg -i --force-confnew elasticsearch-1.2.4.deb && sudo service elasticsearch restart
+  - sleep 30
+  - curl -v -s -XPOST http://127.0.0.1:9200/_bulk --data-binary @src/main/resources/json/relgiousTextImport1.json
+
 services:
   - docker
   - elasticsearch
-
-group: edge
-
-before_script:
-  - sleep 30
-  - curl -v -s -XPOST http://127.0.0.1:9200/_bulk --data-binary @src/main/resources/json/relgiousTextImport1.json
   
 cache:
   directories:
