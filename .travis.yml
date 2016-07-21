@@ -9,7 +9,6 @@ before_script:
 
 services:
   - docker
-  - elasticsearch
   
 cache:
   directories:
