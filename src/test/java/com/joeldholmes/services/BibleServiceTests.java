@@ -3,6 +3,7 @@ package com.joeldholmes.services;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import com.joeldholmes.services.interfaces.IBibleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
+@Ignore
 public class BibleServiceTests {
 
 	@Autowired

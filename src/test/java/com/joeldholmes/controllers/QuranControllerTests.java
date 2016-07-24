@@ -12,6 +12,7 @@ import javax.inject.Provider;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -43,6 +44,7 @@ import com.joeldholmes.enums.QuranVersionEnum;
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 @WebAppConfiguration
+@Ignore
 public class QuranControllerTests {
 
 	@Autowired
