@@ -6,7 +6,6 @@ group: edge
 
 services:
   - docker
-  - mongodb
   
 cache:
   directories:
@@ -16,7 +15,7 @@ jdk:
 os:
   - linux
 
-script: mvn clean install -Ddb.name=test
+script: mvn clean install -Ddb.host=$DB_HOST -Ddb.port=$DB_PORT -Ddb.username=$DB_USERNAME -Ddb.password=$DB_PASSWORD
 
 branches:
   only:

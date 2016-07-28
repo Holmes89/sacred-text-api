@@ -3,7 +3,7 @@ package com.joeldholmes.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection="religious_text")
+@Document(collection="religiousTexts")
 public class VerseEntity {
 	
 	@Id

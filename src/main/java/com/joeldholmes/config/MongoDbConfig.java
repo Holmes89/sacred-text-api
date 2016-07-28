@@ -17,7 +17,7 @@ import com.mongodb.ServerAddress;
 @EnableMongoRepositories
 class MongoDbConfig extends AbstractMongoConfiguration {
 	
-	@Value("${db.name:religious_texts}")
+	@Value("${db.name:sacred-texts}")
 	String database;
 	
 	@Value("${db.host:localhost}")
@@ -34,7 +34,8 @@ class MongoDbConfig extends AbstractMongoConfiguration {
 		
 	@Override
 	public Mongo mongo() throws Exception {
-		System.out.println(database);
+		System.out.println("Username:"+userName);
+		System.out.println("Password:"+password);
 		MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
 		MongoClient mongoClient = new MongoClient(new ServerAddress(host, port), Arrays.asList(credential));
 		return mongoClient;
