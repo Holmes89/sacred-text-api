@@ -1,21 +1,13 @@
 package com.joeldholmes.factories;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.FactoryException;
 import com.joeldholmes.utils.ErrorCodes;
@@ -32,36 +24,36 @@ public class QuranFactory {
 		//No code, singleton, only one instance.
 	}
 	
-	@PostConstruct
-	private void init() throws FactoryException{
-		for(QuranVersionEnum version: QuranVersionEnum.values()){
-			String name = version.getName();
-			Resource resource = new ClassPathResource(ENG_BASE_PATH+name+".json");
-			try{
-				InputStream resourceInputStream = resource.getInputStream();
-				TypeReference<LinkedHashMap<Integer, LinkedHashMap<String, String>>> typeRef = new TypeReference<LinkedHashMap<Integer, LinkedHashMap<String, String>>>() {};
-				ObjectMapper mapper = new ObjectMapper();
-				Map<Integer, Map<String, String>> jsonMap = mapper.readValue(resourceInputStream, typeRef);
-				Map<Integer, Map<Integer, String>> quranMap = new LinkedHashMap<Integer, Map<Integer, String>>();
-				Map<Integer, String> chapterNameMap = new LinkedHashMap<Integer, String>();
-				for(int chapter: jsonMap.keySet()){
-					Map<Integer, String> verseMap = new LinkedHashMap<Integer, String>();
-					Map<String, String> jsonLoadMap = jsonMap.get(chapter);
-					chapterNameMap.put(chapter, jsonLoadMap.get("name"));
-					jsonLoadMap.remove("name");
-					for(String verseString: jsonLoadMap.keySet()){
-						Integer verse = Integer.valueOf(verseString);
-						verseMap.put(verse, jsonLoadMap.get(verseString));
-					}
-					quranMap.put(chapter, verseMap);
-				}
-				engChapterName.put(version, chapterNameMap);
-				engQuranMap.put(version, quranMap);
-			}catch(IOException e){
-				throw new FactoryException("Mapping failure", e);
-			}
-		}
-	}
+//	@PostConstruct
+//	private void init() throws FactoryException{
+//		for(QuranVersionEnum version: QuranVersionEnum.values()){
+//			String name = version.getName();
+//			Resource resource = new ClassPathResource(ENG_BASE_PATH+name+".json");
+//			try{
+//				InputStream resourceInputStream = resource.getInputStream();
+//				TypeReference<LinkedHashMap<Integer, LinkedHashMap<String, String>>> typeRef = new TypeReference<LinkedHashMap<Integer, LinkedHashMap<String, String>>>() {};
+//				ObjectMapper mapper = new ObjectMapper();
+//				Map<Integer, Map<String, String>> jsonMap = mapper.readValue(resourceInputStream, typeRef);
+//				Map<Integer, Map<Integer, String>> quranMap = new LinkedHashMap<Integer, Map<Integer, String>>();
+//				Map<Integer, String> chapterNameMap = new LinkedHashMap<Integer, String>();
+//				for(int chapter: jsonMap.keySet()){
+//					Map<Integer, String> verseMap = new LinkedHashMap<Integer, String>();
+//					Map<String, String> jsonLoadMap = jsonMap.get(chapter);
+//					chapterNameMap.put(chapter, jsonLoadMap.get("name"));
+//					jsonLoadMap.remove("name");
+//					for(String verseString: jsonLoadMap.keySet()){
+//						Integer verse = Integer.valueOf(verseString);
+//						verseMap.put(verse, jsonLoadMap.get(verseString));
+//					}
+//					quranMap.put(chapter, verseMap);
+//				}
+//				engChapterName.put(version, chapterNameMap);
+//				engQuranMap.put(version, quranMap);
+//			}catch(IOException e){
+//				throw new FactoryException("Mapping failure", e);
+//			}
+//		}
+//	}
 	
 	public String getVerse(QuranVersionEnum version, int chapter, int verse) throws FactoryException{
 		if(version == null){

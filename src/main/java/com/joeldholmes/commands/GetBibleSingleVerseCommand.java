@@ -11,7 +11,6 @@ import com.joeldholmes.dto.BibleVerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.FactoryException;
 import com.joeldholmes.factories.BibleFactory;
-import com.joeldholmes.utils.ErrorCodes;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;

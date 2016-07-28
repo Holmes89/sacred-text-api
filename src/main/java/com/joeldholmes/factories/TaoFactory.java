@@ -1,21 +1,12 @@
 package com.joeldholmes.factories;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joeldholmes.exceptions.FactoryException;
 import com.joeldholmes.utils.ErrorCodes;
 
@@ -31,18 +22,18 @@ public class TaoFactory {
 		//No code, singleton, only one instance.
 	}
 	
-	@PostConstruct
-	private void init() throws FactoryException{
-		Resource resource = new ClassPathResource(ENG_FILE);
-		try{
-			InputStream resourceInputStream = resource.getInputStream();
-			TypeReference<LinkedHashMap<Integer, LinkedHashMap<Integer, String>>> typeRef = new TypeReference<LinkedHashMap<Integer, LinkedHashMap<Integer, String>>>() {};
-			ObjectMapper mapper = new ObjectMapper();
-			engTao = mapper.readValue(resourceInputStream, typeRef);
-		}catch(IOException e){
-			throw new FactoryException("Mapping failure", e);
-		}
-	}
+//	@PostConstruct
+//	private void init() throws FactoryException{
+//		Resource resource = new ClassPathResource(ENG_FILE);
+//		try{
+//			InputStream resourceInputStream = resource.getInputStream();
+//			TypeReference<LinkedHashMap<Integer, LinkedHashMap<Integer, String>>> typeRef = new TypeReference<LinkedHashMap<Integer, LinkedHashMap<Integer, String>>>() {};
+//			ObjectMapper mapper = new ObjectMapper();
+//			engTao = mapper.readValue(resourceInputStream, typeRef);
+//		}catch(IOException e){
+//			throw new FactoryException("Mapping failure", e);
+//		}
+//	}
 	
 	public String getVerse(int chapter, int verse) throws FactoryException{
 		if(!engTao.keySet().contains(chapter)){

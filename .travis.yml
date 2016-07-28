@@ -17,11 +17,13 @@ jdk:
   - oraclejdk8
 os:
   - linux
+env:
+  - db.database=test
 
 branches:
   only:
     - master
-    - elasticsearch
+    - mongodb
 
 after_success:
   - docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"

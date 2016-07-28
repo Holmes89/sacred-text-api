@@ -1,6 +1,5 @@
 package com.joeldholmes.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import com.joeldholmes.dto.BibleVerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.IBibleService;
-import com.joeldholmes.utils.ErrorCodes;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;

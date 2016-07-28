@@ -1,21 +1,13 @@
 package com.joeldholmes.factories;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.FactoryException;
 import com.joeldholmes.utils.ErrorCodes;
@@ -32,21 +24,21 @@ public class BibleFactory {
 		//No code, singleton, only one instance.
 	}
 	
-	@PostConstruct
-	private void init() throws FactoryException{
-		for(BibleVersionEnum version: BibleVersionEnum.values()){
-			String abbr = version.getAbbr();
-			Resource resource = new ClassPathResource(ENG_BASE_PATH+abbr+".json");
-			try{
-				InputStream resourceInputStream = resource.getInputStream();
-				TypeReference<LinkedHashMap<String, LinkedHashMap<Integer, LinkedHashMap<Integer, String>>>> typeRef = new TypeReference<LinkedHashMap<String, LinkedHashMap<Integer, LinkedHashMap<Integer, String>>>>() {};
-				ObjectMapper mapper = new ObjectMapper();
-				engBibleMap.put(version, mapper.readValue(resourceInputStream, typeRef));
-			}catch(IOException e){
-				throw new FactoryException("Mapping failure", e);
-			}
-		}
-	}
+//	@PostConstruct
+//	private void init() throws FactoryException{
+//		for(BibleVersionEnum version: BibleVersionEnum.values()){
+//			String abbr = version.getAbbr();
+//			Resource resource = new ClassPathResource(ENG_BASE_PATH+abbr+".json");
+//			try{
+//				InputStream resourceInputStream = resource.getInputStream();
+//				TypeReference<LinkedHashMap<String, LinkedHashMap<Integer, LinkedHashMap<Integer, String>>>> typeRef = new TypeReference<LinkedHashMap<String, LinkedHashMap<Integer, LinkedHashMap<Integer, String>>>>() {};
+//				ObjectMapper mapper = new ObjectMapper();
+//				engBibleMap.put(version, mapper.readValue(resourceInputStream, typeRef));
+//			}catch(IOException e){
+//				throw new FactoryException("Mapping failure", e);
+//			}
+//		}
+//	}
 	
 	public String getVerse(BibleVersionEnum version, String book, int chapter, int verse) throws FactoryException{
 		if(version == null){

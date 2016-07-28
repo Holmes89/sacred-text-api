@@ -1,9 +1,9 @@
 package com.joeldholmes.entity;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(indexName="religious_text")
+@Document(collection="religious_text")
 public class VerseEntity {
 	
 	@Id

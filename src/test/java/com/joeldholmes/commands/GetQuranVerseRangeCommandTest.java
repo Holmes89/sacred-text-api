@@ -14,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.joeldholmes.dto.QuranVerseDTO;
-import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.impl.QuranService;
