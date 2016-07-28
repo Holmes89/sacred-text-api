@@ -2,13 +2,11 @@ language: java
 
 sudo: true
 
-before_script:
-  - curl -v -O https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.4/elasticsearch-2.3.4.deb && sudo dpkg -i --force-confnew elasticsearch-2.3.4.deb && sudo service elasticsearch restart
-  - sleep 30
-  - curl -v -s -XPOST http://127.0.0.1:9200/_bulk --data-binary @src/main/resources/json/testReligiousTextImport.json
+group: edge
 
 services:
   - docker
+  - mongodb
   
 cache:
   directories:
@@ -17,8 +15,8 @@ jdk:
   - oraclejdk8
 os:
   - linux
-env:
-  - db.database=test
+
+script: mvn clean install -Ddb.name=test
 
 branches:
   only:
