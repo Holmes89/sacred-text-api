@@ -3,7 +3,6 @@ package com.joeldholmes.services;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import com.joeldholmes.services.interfaces.IBibleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
-@Ignore
 public class BibleServiceTests {
 
 	@Autowired
@@ -31,7 +29,7 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -42,12 +40,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, null, 6);
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -58,12 +56,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, 2, 6);
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -74,12 +72,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 3, 3, 3);
 		Assert.assertEquals(33, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -106,18 +104,8 @@ public class BibleServiceTests {
 	}
 	
 	@Test(expected=ServiceException.class)
-	public void testGetVerses_nullVerse() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, null, null, null);
-	}
-	
-	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter() throws Exception{
 		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", -1, 2, null, null);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testGetVerses_throughChapter_nullVerse() throws Exception{
-		bibleService.getVersesInRange(BibleVersionEnum.KJV, "Joel", 2, 2, 3, null);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -150,7 +138,7 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> verses = bibleService.getVersesInChapter(BibleVersionEnum.KJV, "Joel", 2);
 		Assert.assertEquals(32, verses.size());
 		BibleVerseDTO result = verses.get(verses.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(32, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -181,7 +169,7 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -192,12 +180,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, null, 6);
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -208,12 +196,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, 2, 6);
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -224,12 +212,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, 3, 3, 3);
 		Assert.assertEquals(33, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -240,12 +228,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, null, 3, null);
 		Assert.assertEquals(53, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(1, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(21, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -256,12 +244,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, null, null, null);
 		Assert.assertEquals(32, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(1, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(32, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -272,12 +260,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVerses(BibleVersionEnum.KJV, "Joel", 2, null, 3, 2);
 		Assert.assertEquals(34, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(1, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(2, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -338,7 +326,7 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3");
 		Assert.assertEquals(1, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -349,12 +337,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6");
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -365,12 +353,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6,9");
 		Assert.assertEquals(5, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(9, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -381,12 +369,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6,9-11");
 		Assert.assertEquals(7, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(11, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -413,12 +401,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, 3:9");
 		Assert.assertEquals(5, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(9, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -429,12 +417,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6,3:9-11");
 		Assert.assertEquals(7, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(11, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -445,12 +433,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, Exodus 3:9-11");
 		Assert.assertEquals(7, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Exodus", result.getBook());
+		Assert.assertEquals("exodus", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(11, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -461,12 +449,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, Exodus 3:9-11, 14");
 		Assert.assertEquals(8, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Exodus", result.getBook());
+		Assert.assertEquals("exodus", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(14, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -476,12 +464,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-6, Exodus 3:9-11, 4:14");
 		Assert.assertEquals(8, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Exodus", result.getBook());
+		Assert.assertEquals("exodus", result.getBook());
 		Assert.assertEquals(4, result.getChapter());
 		Assert.assertEquals(14, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -491,12 +479,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-2:6");
 		Assert.assertEquals(4, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -507,12 +495,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2:3-3:3");
 		Assert.assertEquals(33, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -523,12 +511,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2-3");
 		Assert.assertEquals(53, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(1, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(21, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -539,12 +527,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2");
 		Assert.assertEquals(32, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(1, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(32, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -555,12 +543,12 @@ public class BibleServiceTests {
 		List<BibleVerseDTO> dtos = bibleService.getVersesFromString(BibleVersionEnum.KJV, "Joel 2-3:2");
 		Assert.assertEquals(34, dtos.size());
 		BibleVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(1, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("Joel", result.getBook());
+		Assert.assertEquals("joel", result.getBook());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(2, result.getVerse());
 		Assert.assertNotNull(result.getContent());

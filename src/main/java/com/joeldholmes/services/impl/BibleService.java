@@ -1,8 +1,8 @@
 package com.joeldholmes.services.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -10,18 +10,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joeldholmes.dto.BibleVerseDTO;
+import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.BibleVersionEnum;
-import com.joeldholmes.exceptions.FactoryException;
 import com.joeldholmes.exceptions.ServiceException;
-import com.joeldholmes.factories.BibleFactory;
+import com.joeldholmes.repository.IVerseRepository;
 import com.joeldholmes.services.interfaces.IBibleService;
+import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 import com.joeldholmes.utils.ErrorCodes;
 
 @Service("BibleService")
 public class BibleService implements IBibleService{
 	
 	@Autowired
-	BibleFactory bibleFactory;
+	IVerseRepository verseRepository;
+	
+	@Autowired
+	IReligiousTextIndexService indexService;
 	
 	@Override
 	public List<BibleVerseDTO> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
@@ -31,110 +35,20 @@ public class BibleService implements IBibleService{
 		if(book == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
 		}
+		book = book.toLowerCase().trim();
 		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
-		try{	
-			List<Integer> chapterList = bibleFactory.getChapterList(version, book);
-			if(!chapterList.contains(chapter)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
-			}
-			Map<Integer, String> versesInChapter = bibleFactory.getVerses(version, book, chapter);
-			
-			for(int verse: versesInChapter.keySet()){
-				String content = versesInChapter.get(verse);
-				dtos.add(new BibleVerseDTO(book, chapter, verse, content));
-			}
-			
-		}catch(FactoryException e){
-			throw new ServiceException("Factory error", e);
+		
+		int chapterSize = indexService.maxBibleBookChapters(book);
+		
+		if((chapter < 1) || (chapter > chapterSize)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 		}
+		List<VerseEntity> versesInChapter = verseRepository.getBibleVersesInChapter(version.getAbbr(), book, chapter);
+			
+		dtos.addAll(convertEntitiesToDTOs(versesInChapter));
 		return dtos;
 	}
 	
-	@Override
-	@Deprecated
-	public List<BibleVerseDTO> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
-		if(version == null){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
-		}
-		if(book == null){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
-		}
-		if(chapter == null){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null");
-		}
-		if(verse == null){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null");
-		}
-		if(chapter == throughChapter){
-			throughChapter = null;
-		}
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
-		try{
-			
-			List<Integer> chapterList = bibleFactory.getChapterList(version, book);
-			if(!chapterList.contains(chapter)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
-			}
-			
-			if((throughChapter == null) && (throughVerse == null)){
-				String singleVerseContent = bibleFactory.getVerse(version, book, chapter, verse);
-				BibleVerseDTO singleDTO = new BibleVerseDTO(book, chapter, verse, singleVerseContent);
-				dtos.add(singleDTO);
-				return dtos;
-			}
-			else if((throughChapter != null) && (throughVerse == null)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Range can only end in chapter and verse or verse only");
-			}
-			else if((throughChapter == null) && (throughVerse != null)){
-				if(throughVerse<verse){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End verse cannot be earlier than beginning verse");
-				}
-				Map<Integer, String> versesInChapter = bibleFactory.getVerses(version, book, chapter);
-				if(!versesInChapter.keySet().contains(throughVerse)){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End verse is not within chapter");
-				}
-				for(int index=verse; index<=throughVerse; index++){
-					String content = versesInChapter.get(index);
-					BibleVerseDTO dto = new BibleVerseDTO(book, chapter, index, content);
-					dtos.add(dto);
-				}
-				return dtos;
-			}
-			else{
-				if(throughChapter<chapter){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End chapter cannot be earlier than beginning chapter");
-				}
-				if(!chapterList.contains(throughChapter)){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End chapter not in book");
-				}
-				for(int chapterIndex=chapter; chapterIndex<=throughChapter; chapterIndex++){
-					Map<Integer, String> versesInChapter = bibleFactory.getVerses(version, book, chapterIndex);
-					if(chapterIndex==throughChapter){
-						if(!versesInChapter.keySet().contains(throughVerse)){
-							throw new ServiceException(ErrorCodes.INVALID_INPUT, "End verse is not within chapter");
-						}
-						for(int verseIndex=1; verseIndex<=throughVerse; verseIndex++){
-							String content = versesInChapter.get(verseIndex);
-							BibleVerseDTO dto = new BibleVerseDTO(book, chapterIndex, verseIndex, content);
-							dtos.add(dto);
-						}
-					}
-					else{
-						int numberOfVerses = versesInChapter.size();
-						for(int verseIndex=verse; verseIndex<=numberOfVerses; verseIndex++){
-							String content = versesInChapter.get(verseIndex);
-							BibleVerseDTO dto = new BibleVerseDTO(book, chapterIndex, verseIndex, content);
-							dtos.add(dto);
-						}
-						verse=1;
-					}
-				}
-				return dtos;
-			}
-		}catch(FactoryException e){
-			throw new ServiceException("Factory error", e);
-		}
-	}
 	
 	@Override
 	public List<BibleVerseDTO> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
@@ -153,78 +67,90 @@ public class BibleService implements IBibleService{
 		if((throughChapter!=null) && (chapter > throughChapter)){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Start Chapter cannot be less than end chapter");
 		}
-			
+		
+		book = book.toLowerCase().trim();
+		
 		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
-		try{
+	
+		
+		int chapterSize = indexService.maxBibleBookChapters(book);
+		
+		if((chapter < 1) || (chapter > chapterSize)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
+		}
+		
+		if((chapter != null) && (verse == null) && (throughChapter == null) && (throughVerse == null)){
+			return getVersesInChapter(version, book, chapter);
+		}
+		else if((chapter != null) && (verse == null) && (throughChapter != null) && (throughVerse == null)){
 			
-			List<Integer> chapterList = bibleFactory.getChapterList(version, book);
-			if(!chapterList.contains(chapter)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter not in book");
+			List<VerseEntity> versesInChapter = verseRepository.getBibleVersesInChapterRange(version.getAbbr(), book, chapter, throughChapter);
+			dtos.addAll(convertEntitiesToDTOs(versesInChapter));
+			return dtos;
+		}
+		else if((throughChapter == null) && (throughVerse == null)){
+			
+			int maxVerseSize = indexService.maxBibleBookChapterVerses(book, chapter);
+			
+			if((verse < 1) || (verse > maxVerseSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
 			}
 			
-			if((chapter != null) && (verse == null) && (throughChapter == null) && (throughVerse == null)){
-				return getVersesInChapter(version, book, chapter);
+			VerseEntity entity = verseRepository.getSingleBibleVerse(version.getAbbr(), book, chapter, verse);
+			BibleVerseDTO singleDTO = new BibleVerseDTO(entity);
+			dtos.add(singleDTO);
+			return dtos;
+		}
+		else if((throughChapter == null) && (throughVerse != null)){
+			if(throughVerse<verse){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Start verse cannot be less than end verse");
 			}
-			else if((chapter != null) && (verse == null) && (throughChapter != null) && (throughVerse == null)){
-				for(int x = chapter; x<=throughChapter; x++){
-					dtos.addAll(this.getVersesInChapter(version, book, x));
-				}
-				return dtos;
+			int maxVerseSize = indexService.maxBibleBookChapterVerses(book, chapter);
+			
+			if((verse < 1) || (verse > maxVerseSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
 			}
-			else if((throughChapter == null) && (throughVerse == null)){
-				String singleVerseContent = bibleFactory.getVerse(version, book, chapter, verse);
-				BibleVerseDTO singleDTO = new BibleVerseDTO(book, chapter, verse, singleVerseContent);
-				dtos.add(singleDTO);
-				return dtos;
+			
+			if((throughVerse < 1) || (throughVerse > maxVerseSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
 			}
-			else if((throughChapter == null) && (throughVerse != null)){
-				if(throughVerse<verse){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "Start verse cannot be less than end verse");
-				}
-				Map<Integer, String> versesInChapter = bibleFactory.getVerses(version, book, chapter);
-				if(!versesInChapter.keySet().contains(throughVerse)){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
-				}
-				for(int index=verse; index<=throughVerse; index++){
-					String content = versesInChapter.get(index);
-					BibleVerseDTO dto = new BibleVerseDTO(book, chapter, index, content);
-					dtos.add(dto);
-				}
-				return dtos;
+			
+			List<VerseEntity> versesInChapter = verseRepository.getBibleVersesInChapter(version.getAbbr(), book, chapter, verse, throughVerse);
+			
+			dtos.addAll(convertEntitiesToDTOs(versesInChapter));
+			return dtos;
+		}
+		else if((throughChapter != null) && (throughVerse != null)){
+			if(verse==null){
+				verse=1;
 			}
-			else if((throughChapter != null) && (throughVerse != null)){
-				if(verse==null){
-					verse=1;
-				}
-				if(!chapterList.contains(throughChapter)){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "Book does not contain chapter");
-				}
-				for(int chapterIndex=chapter; chapterIndex<=throughChapter; chapterIndex++){
-					Map<Integer, String> versesInChapter = bibleFactory.getVerses(version, book, chapterIndex);
-					if(chapterIndex==throughChapter){
-						if(!versesInChapter.keySet().contains(throughVerse)){
-							throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
-						}
-						for(int verseIndex=1; verseIndex<=throughVerse; verseIndex++){
-							String content = versesInChapter.get(verseIndex);
-							BibleVerseDTO dto = new BibleVerseDTO(book, chapterIndex, verseIndex, content);
-							dtos.add(dto);
-						}
-					}
-					else{
-						int numberOfVerses = versesInChapter.size();
-						for(int verseIndex=verse; verseIndex<=numberOfVerses; verseIndex++){
-							String content = versesInChapter.get(verseIndex);
-							BibleVerseDTO dto = new BibleVerseDTO(book, chapterIndex, verseIndex, content);
-							dtos.add(dto);
-						}
-						verse=1;
-					}
-				}
-				
+			
+			if((chapter < 1) || (chapter > chapterSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 			}
-		}catch(FactoryException e){
-			throw new ServiceException("Factory error", e);
+			if((throughChapter < 1) || (throughChapter > chapterSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
+			}
+			
+			int versesInChapter = indexService.maxBibleBookChapterVerses(book, chapter);
+			if((verse < 1) || (verse > versesInChapter)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
+			}
+			
+			int versesInThroughChapter = indexService.maxBibleBookChapterVerses(book, throughChapter);
+			if((throughVerse < 1) || (throughVerse > versesInThroughChapter)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
+			}
+			//First Verse Set
+			List<VerseEntity> entities = verseRepository.getBibleVersesInChapter(version.getAbbr(), book, chapter, verse, versesInChapter);
+			
+			//End Verse Set
+			 entities.addAll(verseRepository.getBibleVersesInChapter(version.getAbbr(), book, throughChapter, 1, throughVerse));
+			 
+			 if(throughChapter-chapter>1){
+				 entities.addAll(verseRepository.getBibleVersesInChapterRange(version.getAbbr(), book, chapter+1, throughChapter-1));
+			 }
+			 dtos.addAll(convertEntitiesToDTOs(entities));
 		}
 		return dtos;
 	}
@@ -374,4 +300,23 @@ public class BibleService implements IBibleService{
 	public List<BibleVerseDTO> getVersesFromString(String verses) throws ServiceException{
 		return getVersesFromString(BibleVersionEnum.NIV, verses);
 	}
+	
+	@Deprecated
+	@Override
+	public List<BibleVerseDTO> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,
+			Integer throughChapter, Integer throughVerse) throws ServiceException {
+
+		return getVerses(version, book, chapter, verse, throughChapter, throughVerse);
+	}
+	
+	private List<BibleVerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
+		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		for(VerseEntity verseEntity: entities){
+			dtos.add(new BibleVerseDTO(verseEntity));
+		}
+		Collections.sort(dtos);
+		return dtos;
+	}
+
+
 }
