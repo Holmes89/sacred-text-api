@@ -90,14 +90,7 @@ public class BibleService implements IBibleService{
 		}
 		else if((throughChapter == null) && (throughVerse == null)){
 			
-			int maxVerseSize = indexService.maxBibleBookChapterVerses(book, chapter);
-			
-			if((verse < 1) || (verse > maxVerseSize)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
-			}
-			
-			VerseEntity entity = verseRepository.getSingleBibleVerse(version.getAbbr(), book, chapter, verse);
-			BibleVerseDTO singleDTO = new BibleVerseDTO(entity);
+			BibleVerseDTO singleDTO = getSingleVerse(version, book, chapter, verse);
 			dtos.add(singleDTO);
 			return dtos;
 		}
@@ -299,6 +292,36 @@ public class BibleService implements IBibleService{
 	@Override
 	public List<BibleVerseDTO> getVersesFromString(String verses) throws ServiceException{
 		return getVersesFromString(BibleVersionEnum.NIV, verses);
+	}
+	
+	@Override
+	public BibleVerseDTO getSingleVerse(BibleVersionEnum version, String book, int chapter, int verse) throws ServiceException{
+		
+		if(version == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(book == null || book.isEmpty()){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
+		}
+		
+		book = book.toLowerCase().trim();
+		
+		int chapterSize = indexService.maxBibleBookChapters(book);
+		
+		if((chapter < 1) || (chapter > chapterSize)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
+		}
+		
+		int maxVerseSize = indexService.maxBibleBookChapterVerses(book, chapter);
+		
+		if((verse < 1) || (verse > maxVerseSize)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
+		}
+		
+		VerseEntity entity = verseRepository.getSingleBibleVerse(version.getAbbr(), book, chapter, verse);
+		
+		return new BibleVerseDTO(entity);
+		
 	}
 	
 	@Deprecated

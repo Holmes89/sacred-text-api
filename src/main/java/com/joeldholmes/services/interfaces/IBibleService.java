@@ -20,4 +20,6 @@ public interface IBibleService {
 	List<BibleVerseDTO> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse,
 			Integer throughChapter, Integer throughVerse) throws ServiceException;
 
+	BibleVerseDTO getSingleVerse(BibleVersionEnum version, String book, int chapter, int verse) throws ServiceException;
+
 }

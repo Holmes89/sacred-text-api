@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.joeldholmes.dto.BibleVerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
-import com.joeldholmes.exceptions.FactoryException;
-import com.joeldholmes.factories.BibleFactory;
+import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.services.interfaces.IBibleService;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
@@ -20,7 +20,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 public class GetBibleSingleVerseCommand extends BaseCommand<List<BibleVerseDTO>> {
 	
 	@Autowired
-	BibleFactory bibleFactory;
+	IBibleService bibleService;
 	
 	private BibleVersionEnum version;
 	private String book;
@@ -55,12 +55,11 @@ public class GetBibleSingleVerseCommand extends BaseCommand<List<BibleVerseDTO>>
 	@Override
 	protected List<BibleVerseDTO> run() throws Exception {
 		try{
-			String content = bibleFactory.getVerse(this.version, this.book, this.chapter, this.verse);
-			List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
-			dtos.add(new BibleVerseDTO(this.book, this.chapter, this.verse, content));
-			return dtos;
+			List<BibleVerseDTO> list =  new ArrayList<BibleVerseDTO>();
+			list.add(bibleService.getSingleVerse(this.version, this.book, this.chapter, this.verse));
+			return list;
 		}
-		catch(FactoryException e){
+		catch(ServiceException e){
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}

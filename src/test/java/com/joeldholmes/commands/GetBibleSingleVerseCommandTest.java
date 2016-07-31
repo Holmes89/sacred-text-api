@@ -16,7 +16,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import com.joeldholmes.dto.BibleVerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.FactoryException;
-import com.joeldholmes.factories.BibleFactory;
+import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.services.impl.BibleService;
 import com.joeldholmes.utils.ErrorCodes;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
@@ -25,13 +26,14 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 public class GetBibleSingleVerseCommandTest {
 
 	@Mock
-	BibleFactory bibleFactory;
+	BibleService bibleService;
 	
 	@InjectMocks
 	private GetBibleSingleVerseCommand cmd = new GetBibleSingleVerseCommand();
 	
 	@Mock
-	List<BibleVerseDTO> dtos;
+	BibleVerseDTO dto;
+	
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -43,18 +45,18 @@ public class GetBibleSingleVerseCommandTest {
 	
 
 	@Test
-	public void testCommand() throws FactoryException{
+	public void testCommand() throws ServiceException{
 
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
+		Mockito.when(bibleService.getSingleVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dto);
 		
 		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
-	public void testException() throws FactoryException{
+	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleFactory.getVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new FactoryException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
+		Mockito.when(bibleService.getSingleVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new FactoryException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
 		
 		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		
