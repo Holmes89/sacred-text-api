@@ -84,7 +84,6 @@ public class VerseRepositoryTests {
 		Assert.assertEquals(95, verses.size());
 	}
 	
-	@Ignore
 	@Test
 	public void testGetSingleTaoVerse() throws Exception{
 		String expectedVerseContent = "Therefore the sage manages affairs without doing anything, and conveys his instructions without the use of speech.";
@@ -93,7 +92,6 @@ public class VerseRepositoryTests {
 		Assert.assertEquals(expectedVerseContent, verse.getContent());
 	}
 	
-	@Ignore
 	@Test
 	public void testGetTaoVersesInChapter() throws Exception{
 		List<VerseEntity> verses = verseRepo.getTaoVersesInChapter(2);
@@ -102,8 +100,7 @@ public class VerseRepositoryTests {
 		Assert.assertEquals(4, verses.size());
 	}
 	
-	@Ignore
-	@Test
+        @Test
 	public void testGetTaoVersesInChapterWithVerses() throws Exception{
 		List<VerseEntity> verses = verseRepo.getTaoVersesInChapter(2, 2, 4);
 		Assert.assertNotNull(verses);
@@ -111,7 +108,6 @@ public class VerseRepositoryTests {
 		Assert.assertEquals(3, verses.size());
 	}
 	
-	@Ignore
 	@Test
 	public void testGetTaoVersesInChapterRange() throws Exception{
 		List<VerseEntity> verses = verseRepo.getTaoVersesInChapterRange(2, 4);
