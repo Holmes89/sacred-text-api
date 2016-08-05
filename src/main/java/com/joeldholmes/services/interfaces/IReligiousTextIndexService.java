@@ -10,5 +10,6 @@ public interface IReligiousTextIndexService {
 	int maxQuranChapterVerses(int chapter) throws ServiceException;
 	int maxTaoChapters() throws ServiceException;
 	int maxTaoChapterVerses(int chapter) throws ServiceException;
+	int quranChapterNameLookup(String name) throws ServiceException;
 	
 }

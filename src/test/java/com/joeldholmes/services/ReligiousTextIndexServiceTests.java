@@ -95,5 +95,21 @@ public class ReligiousTextIndexServiceTests {
 	public void testMaxTaoChapterVerses_invalid_chapter() throws Exception{
 		textIndexService.maxTaoChapterVerses(-2);
 	}
+	
+	@Test
+	public void testQuranChapterNameLookup() throws Exception{
+		int chapter = textIndexService.quranChapterNameLookup("The Victory");
+		Assert.assertEquals(48, chapter);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testQuranChapterNameLookup_null() throws Exception{
+		textIndexService.quranChapterNameLookup(null);
+	}
+	
+	@Test(expected=ServiceException.class)
+	public void testQuranChapterNameLookup_empty() throws Exception{
+		textIndexService.quranChapterNameLookup("");
+	}
 
 }

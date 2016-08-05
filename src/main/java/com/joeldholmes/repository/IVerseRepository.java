@@ -19,10 +19,24 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	
 	@Query("{\"religiousText\": \"bible\",\"version\": ?0, \"book\": ?1,\"chapter\": ?2, \"verse\": { $lte:?4, $gte:?3 }}")
 	List<VerseEntity> getBibleVersesInChapter(String version, String book, int chapter, int startVerse, int endVerse);	
-
+	
 	@Query("{\"religiousText\": \"bible\",\"version\": ?0, \"book\": ?1,\"chapter\": ?2}")
 	List<VerseEntity> getBibleVersesInChapter(String version, String book, int chapter);	
 	
 	@Query("{\"religiousText\": \"bible\",\"version\": ?0, \"book\": ?1,\"chapter\": { $lte:?3, $gte:?2 }}")
 	List<VerseEntity> getBibleVersesInChapterRange(String version, String book, int startChapter, int endChapter);	
+
+	@Query("{\"religiousText\": \"quran\",\"version\": ?0, \"chapter\": ?1, \"verse\": ?2 }")
+	VerseEntity getSingleQuranVerse(String version,  int chapter, int verse);
+	
+	@Query("{\"religiousText\": \"quran\",\"version\": ?0, \"chapter\": ?1, \"verse\": { $lte:?3, $gte:?2 }}")
+	List<VerseEntity> getQuranVersesInChapter(String version,  int chapter, int startVerse, int endVerse);	
+	
+	@Query("{\"religiousText\": \"quran\",\"version\": ?0,\"chapter\": ?1}")
+	List<VerseEntity> getQuranVersesInChapter(String version,  int chapter);	
+	
+	@Query("{\"religiousText\": \"quran\",\"version\": ?0, \"chapter\": { $lte:?2, $gte:?1 }}")
+	List<VerseEntity> getQuranVersesInChapterRange(String version, int startChapter, int endChapter);	
+	
+	
 }
