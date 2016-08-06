@@ -20,7 +20,6 @@ import com.joeldholmes.services.impl.QuranService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-@Ignore
 public class GetQuranVerseRangeCommandTest {
 	
 	@Mock
@@ -44,7 +43,7 @@ public class GetQuranVerseRangeCommandTest {
 	@Test
 	public void testCommand() throws ServiceException{
 
-		Mockito.when(quranService.getVersesInRange(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
+		Mockito.when(quranService.getVerses(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
 		
 		List<QuranVerseDTO> response = cmd.setVersion(QuranVersionEnum.PICKTHALL).setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
@@ -53,7 +52,7 @@ public class GetQuranVerseRangeCommandTest {
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(quranService.getVersesInRange(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
+		Mockito.when(quranService.getVerses(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
 		
 		cmd.setVersion(QuranVersionEnum.PICKTHALL).setChapter(-1).setVerse(-1).execute();
 		

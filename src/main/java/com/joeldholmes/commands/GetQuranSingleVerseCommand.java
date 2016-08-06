@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import com.joeldholmes.dto.QuranVerseDTO;
 import com.joeldholmes.enums.QuranVersionEnum;
-import com.joeldholmes.exceptions.FactoryException;
-import com.joeldholmes.factories.QuranFactory;
+import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.services.interfaces.IQuranService;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
@@ -20,7 +20,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 public class GetQuranSingleVerseCommand extends BaseCommand<List<QuranVerseDTO>> {
 	
 	@Autowired
-	QuranFactory quranFactory;
+	IQuranService quranService;
 	
 	private QuranVersionEnum version;
 	private Integer chapter;
@@ -49,13 +49,11 @@ public class GetQuranSingleVerseCommand extends BaseCommand<List<QuranVerseDTO>>
 	@Override
 	protected List<QuranVerseDTO> run() throws Exception {
 		try{
-			String content = quranFactory.getVerse(this.version, this.chapter, this.verse);
-			String chapterName = quranFactory.getChapterName(this.version, this.chapter);
 			List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
-			dtos.add(new QuranVerseDTO(chapterName, this.chapter, this.verse, content));
+			dtos.add(quranService.getSingleVerse(version, chapter, verse));
 			return dtos;
 		}
-		catch(FactoryException e){
+		catch(ServiceException e){
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}

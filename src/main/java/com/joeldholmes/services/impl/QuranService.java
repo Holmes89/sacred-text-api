@@ -26,14 +26,14 @@ public class QuranService implements IQuranService {
 	@Autowired
 	IReligiousTextIndexService indexService;
 	
-	private int maxChapterSize = indexService.maxQuranChapters();
+	private final int MAX_CHAPTER_SIZE = 114;
 		
 	@Override
 	public List<QuranVerseDTO> getVersesInChapter(QuranVersionEnum version, int chapter) throws ServiceException {
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
-		if((chapter < 1) || (chapter > maxChapterSize)){
+		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 		}
 		List<VerseEntity> verses = verseRepository.getQuranVersesInChapter(version.getName(), chapter);
@@ -90,7 +90,7 @@ public class QuranService implements IQuranService {
 	
 		
 		
-		if((chapter < 1) || (chapter > maxChapterSize)){
+		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist");
 		}
 		
@@ -133,10 +133,10 @@ public class QuranService implements IQuranService {
 				verse=1;
 			}
 			
-			if((chapter < 1) || (chapter > maxChapterSize)){
+			if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 			}
-			if((throughChapter < 1) || (throughChapter > maxChapterSize)){
+			if((throughChapter < 1) || (throughChapter > MAX_CHAPTER_SIZE)){
 				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 			}
 			
@@ -177,7 +177,7 @@ public class QuranService implements IQuranService {
 		}
 		
 		
-		if((chapter < 1) || (chapter > maxChapterSize)){
+		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 		}
 		

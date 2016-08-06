@@ -60,7 +60,7 @@ public class GetQuranVerseRangeCommand extends BaseCommand<List<QuranVerseDTO>> 
 	@Override
 	protected List<QuranVerseDTO> run() throws Exception {
 		try{
-			return quranService.getVersesInRange(this.version, this.chapter, this.verse, this.throughChapter, this.throughVerse);
+			return quranService.getVerses(this.version, this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}
 		catch(ServiceException e){
 			log.error("error creating getting verse "+e);

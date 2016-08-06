@@ -18,7 +18,6 @@ import com.joeldholmes.services.interfaces.IQuranService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
-@Ignore
 public class QuranServiceTests {
 
 	@Autowired
@@ -26,7 +25,7 @@ public class QuranServiceTests {
 
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		List<QuranVerseDTO> dtos = quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 3, null, null);
+		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterName());
@@ -37,7 +36,7 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSingleChapter() throws Exception{
-		List<QuranVerseDTO> dtos = quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 3, null, 6);
+		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, 6);
 		Assert.assertEquals(4, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterName());
@@ -53,7 +52,7 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSameChapter() throws Exception{
-		List<QuranVerseDTO> dtos = quranService.getVersesInRange(QuranVersionEnum.PICKTHALL,  2, 3, 2, 6);
+		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL,  2, 3, 2, 6);
 		Assert.assertEquals(4, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterName());
@@ -69,7 +68,7 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesMultipleChapter() throws Exception{
-		List<QuranVerseDTO> dtos = quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 3, 3, 3);
+		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, 3, 3);
 		Assert.assertEquals(287, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterName());
@@ -85,52 +84,53 @@ public class QuranServiceTests {
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullType() throws Exception{
-		quranService.getVersesInRange(null, 2, 3, null, null);
+		quranService.getVerses(null, 2, 3, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullChapter() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, null, 3, null, null);
+		Integer chapter =null;
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, chapter, 3, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullVerse() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, null, null, null);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, null, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, -1, 2, null, null);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, -1, 2, null, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_throughChapter_nullVerse() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 2, 3, null);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 2, 3, null);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullThroughChapter_invalidVerse() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 2, null, -99);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 2, null, -99);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullThroughChapter_invalidLowerVerse() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 2, null, 1);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 2, null, 1);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidLowerThroughChapter() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 2, 1, 1);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 2, 1, 1);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidThroughChapter() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL, 2, 2, 99999, 1);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 2, 99999, 1);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_throughChapter_invalidVerse() throws Exception{
-		quranService.getVersesInRange(QuranVersionEnum.PICKTHALL,  2, 2, 3, -1);
+		quranService.getVerses(QuranVersionEnum.PICKTHALL,  2, 2, 3, -1);
 	}
 	
 	@Test
