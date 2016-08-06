@@ -45,7 +45,7 @@ public class GetBibleVerseRangeCommandTest {
 	@Test
 	public void testCommand() throws ServiceException{
 
-		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
+		Mockito.when(bibleService.getVerses(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
 		
 		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
@@ -54,7 +54,7 @@ public class GetBibleVerseRangeCommandTest {
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleService.getVersesInRange(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
+		Mockito.when(bibleService.getVerses(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
 		
 		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		

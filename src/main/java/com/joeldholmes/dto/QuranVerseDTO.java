@@ -1,6 +1,8 @@
 package com.joeldholmes.dto;
 
-public class QuranVerseDTO {
+import com.joeldholmes.entity.VerseEntity;
+
+public class QuranVerseDTO implements Comparable<QuranVerseDTO>{
 
 	private String chapterName;
 	private int chapter;
@@ -17,6 +19,14 @@ public class QuranVerseDTO {
 		this.chapter=chapter;
 		this.verse=verse;
 		this.content=content;
+	}
+	
+	public QuranVerseDTO(VerseEntity entity){
+		this();
+		this.chapterName=entity.getChapterTitle();
+		this.chapter=entity.getChapter();
+		this.verse=entity.getVerse();
+		this.content=entity.getContent();
 	}
 
 	public String getChapterName() {
@@ -49,5 +59,26 @@ public class QuranVerseDTO {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+
+	@Override
+	public int compareTo(QuranVerseDTO other) {
+				
+		if(this.getChapter()>other.getChapter()){
+			return 1;
+		}
+		else if(this.getChapter()<other.getChapter()){
+			return -1;
+		}
+		
+		if(this.getVerse()>other.getVerse()){
+			return 1;
+		}
+		else if(this.getVerse()<other.getVerse()){
+			return -1;
+		}
+		
+		return 0;
 	}
 }

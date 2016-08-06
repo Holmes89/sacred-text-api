@@ -66,7 +66,7 @@ public class GetBibleVerseRangeCommand extends BaseCommand<List<BibleVerseDTO>> 
 	@Override
 	protected List<BibleVerseDTO> run() throws Exception {
 		try{
-			return bibleService.getVersesInRange(this.version, this.book, this.chapter, this.verse, this.throughChapter, this.throughVerse);
+			return bibleService.getVerses(this.version, this.book, this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}
 		catch(ServiceException e){
 			log.error("error creating getting verse "+e);

@@ -2,7 +2,7 @@ package com.joeldholmes.dto;
 
 import com.joeldholmes.entity.VerseEntity;
 
-public class BibleVerseDTO implements Comparable {
+public class BibleVerseDTO implements Comparable<BibleVerseDTO> {
 
 	private String book;
 	private int chapter;
@@ -26,7 +26,7 @@ public class BibleVerseDTO implements Comparable {
 		this.book=entity.getBook();
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
-		this.content=entity.getId();
+		this.content=entity.getContent();
 	}
 	
 	public String getBook() {
@@ -62,8 +62,7 @@ public class BibleVerseDTO implements Comparable {
 	}
 
 	@Override
-	public int compareTo(Object o) {
-		BibleVerseDTO other = (BibleVerseDTO)o;
+	public int compareTo(BibleVerseDTO other) {
 		
 		if(!this.getBook().equals(other.getBook())){
 			return this.getBook().compareTo(other.getBook());
