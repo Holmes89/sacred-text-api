@@ -28,7 +28,7 @@ public class QuranServiceTests {
 		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -39,12 +39,12 @@ public class QuranServiceTests {
 		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, 6);
 		Assert.assertEquals(4, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -55,12 +55,12 @@ public class QuranServiceTests {
 		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL,  2, 3, 2, 6);
 		Assert.assertEquals(4, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(6, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -71,12 +71,12 @@ public class QuranServiceTests {
 		List<QuranVerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, 3, 3);
 		Assert.assertEquals(287, dtos.size());
 		QuranVerseDTO result = dtos.iterator().next();
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals("The Family Of Imran", result.getChapterName());
+		Assert.assertEquals("the family of imran", result.getChapterName());
 		Assert.assertEquals(3, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -93,20 +93,12 @@ public class QuranServiceTests {
 		quranService.getVerses(QuranVersionEnum.PICKTHALL, chapter, 3, null, null);
 	}
 	
-	@Test(expected=ServiceException.class)
-	public void testGetVerses_nullVerse() throws Exception{
-		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, null, null, null);
-	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_invalidChapter() throws Exception{
 		quranService.getVerses(QuranVersionEnum.PICKTHALL, -1, 2, null, null);
 	}
 	
-	@Test(expected=ServiceException.class)
-	public void testGetVerses_throughChapter_nullVerse() throws Exception{
-		quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 2, 3, null);
-	}
 	
 	@Test(expected=ServiceException.class)
 	public void testGetVerses_nullThroughChapter_invalidVerse() throws Exception{
@@ -138,7 +130,7 @@ public class QuranServiceTests {
 		List<QuranVerseDTO> verses = quranService.getVersesInChapter(QuranVersionEnum.PICKTHALL, 2);
 		Assert.assertEquals(286, verses.size());
 		QuranVerseDTO result = verses.get(verses.size()-1);
-		Assert.assertEquals("The Cow", result.getChapterName());
+		Assert.assertEquals("the cow", result.getChapterName());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(286, result.getVerse());
 		Assert.assertNotNull(result.getContent());

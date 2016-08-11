@@ -55,7 +55,7 @@ public class GetBibleSingleVerseCommandTest {
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleService.getSingleVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new FactoryException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
+		Mockito.when(bibleService.getSingleVerse(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
 		
 		cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).setVerse(-1).execute();
 		
