@@ -26,16 +26,16 @@ class MongoDbConfig extends AbstractMongoConfiguration {
 	@Value("${db.port:27017}")
 	Integer port;
 	
-	@Value("${db.username:''}")
+	@Value("${db.username:#{null}}")
 	String userName;
 
-	@Value("${db.password:''}")
+	@Value("${db.password:#{null}}")
 	String password;
 		
 	@Override
 	public Mongo mongo() throws Exception {
 		MongoClient mongoClient;
-		if(userName.isEmpty()&&(password.isEmpty())){
+		if((userName==null)&&(password==null)){
 			mongoClient = new MongoClient(new ServerAddress(host, port));
 		}
 		else{
