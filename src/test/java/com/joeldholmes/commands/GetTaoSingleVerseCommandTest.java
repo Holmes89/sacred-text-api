@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,18 +13,21 @@ import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.joeldholmes.dto.TaoVerseDTO;
-import com.joeldholmes.exceptions.FactoryException;
-import com.joeldholmes.factories.TaoFactory;
+import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.services.interfaces.ITaoService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
 public class GetTaoSingleVerseCommandTest {
 	
 	@Mock
-	TaoFactory taoFactory;
+	ITaoService taoService;
 	
 	@InjectMocks
 	private GetTaoSingleVerseCommand cmd = new GetTaoSingleVerseCommand();
+	
+	@Mock
+	TaoVerseDTO dto;
 	
 	@Mock
 	List<TaoVerseDTO> dtos;
@@ -40,18 +42,18 @@ public class GetTaoSingleVerseCommandTest {
 	
 
 	@Test
-	public void testCommand() throws FactoryException{
+	public void testCommand() throws ServiceException{
 
-		Mockito.when(taoFactory.getVerse(Mockito.anyInt(), Mockito.anyInt())).thenReturn(MOCKED_RESPONSE);
+		Mockito.when(taoService.getSingleVerse(Mockito.anyInt(), Mockito.anyInt())).thenReturn(dto);
 		
 		List<TaoVerseDTO> response = cmd.setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
-	public void testException() throws FactoryException{
+	public void testException() throws ServiceException{
 		
-		Mockito.when(taoFactory.getVerse(Mockito.anyInt(), Mockito.anyInt())).thenThrow(FactoryException.class);
+		Mockito.when(taoService.getSingleVerse(Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
 		
 		cmd.setChapter(-1).setVerse(-1).execute();
 		

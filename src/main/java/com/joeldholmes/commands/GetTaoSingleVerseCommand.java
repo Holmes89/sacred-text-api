@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.joeldholmes.dto.TaoVerseDTO;
-import com.joeldholmes.exceptions.FactoryException;
-import com.joeldholmes.factories.TaoFactory;
+import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.services.interfaces.ITaoService;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
@@ -19,7 +19,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 public class GetTaoSingleVerseCommand extends BaseCommand<List<TaoVerseDTO>> {
 	
 	@Autowired
-	TaoFactory taoFactory;
+	ITaoService taoService;
 	
 	private Integer chapter;
 	private Integer verse;
@@ -43,12 +43,11 @@ public class GetTaoSingleVerseCommand extends BaseCommand<List<TaoVerseDTO>> {
 	@Override
 	protected List<TaoVerseDTO> run() throws Exception {
 		try{
-			String content = taoFactory.getVerse(this.chapter, this.verse);
 			List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
-			dtos.add(new TaoVerseDTO(this.chapter, this.verse, content));
+			dtos.add(taoService.getSingleVerse(chapter, verse));
 			return dtos;
 		}
-		catch(FactoryException e){
+		catch(ServiceException e){
 			log.error("error creating getting verse "+e);
 			throw new HystrixBadRequestException("unable to process request", e);
 		}
