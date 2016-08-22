@@ -7,8 +7,14 @@ import com.joeldholmes.exceptions.ServiceException;
 
 public interface ITaoService {
 
-	List<TaoVerseDTO> getVersesInRange(Integer chapter, Integer verse,	Integer throughChapter, Integer throughVerse) throws ServiceException;
-
 	List<TaoVerseDTO> getVersesInChapter(int chapter) throws ServiceException;
+	List<TaoVerseDTO> getVersesFromString(String verses) throws ServiceException;
+
+	List<TaoVerseDTO> getVerses(Integer chapter, Integer verse,
+			Integer throughChapter, Integer throughVerse) throws ServiceException;
+	
+
+	TaoVerseDTO getSingleVerse(int chapter, int verse) throws ServiceException;
+
 
 }

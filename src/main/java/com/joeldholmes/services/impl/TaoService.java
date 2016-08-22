@@ -1,16 +1,17 @@
 package com.joeldholmes.services.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.joeldholmes.dto.TaoVerseDTO;
-import com.joeldholmes.exceptions.FactoryException;
+import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.exceptions.ServiceException;
-import com.joeldholmes.factories.TaoFactory;
+import com.joeldholmes.repository.IVerseRepository;
+import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 import com.joeldholmes.services.interfaces.ITaoService;
 import com.joeldholmes.utils.ErrorCodes;
 
@@ -18,105 +19,141 @@ import com.joeldholmes.utils.ErrorCodes;
 public class TaoService implements ITaoService {
 
 	@Autowired
-	TaoFactory taoFactory;
-	
+	IVerseRepository verseRepository;
+
+	@Autowired
+	IReligiousTextIndexService indexService;
+
+	private final int MAX_CHAPTER_SIZE=81;
+
 	@Override
-	public List<TaoVerseDTO> getVersesInRange(Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException {
+	public List<TaoVerseDTO> getVerses(Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException {
 		if(chapter == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null");
-		}
-		if(verse == null){
-			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null");
 		}
 		if(chapter == throughChapter){
 			throughChapter = null;
 		}
+		if((throughChapter!=null) && (chapter > throughChapter)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Start Chapter cannot be less than end chapter");
+		}
+
+
 		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
-		try{
-			
-			List<Integer> chapterList = taoFactory.getChapterList();
-			if(!chapterList.contains(chapter)){
+
+
+
+		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist");
+		}
+
+		if((chapter != null) && (verse == null) && (throughChapter == null) && (throughVerse == null)){
+			return getVersesInChapter(chapter);
+		}
+		else if((chapter != null) && (verse == null) && (throughChapter != null) && (throughVerse == null)){
+
+			List<VerseEntity> versesInChapter = verseRepository.getTaoVersesInChapterRange(chapter, throughChapter);
+			dtos.addAll(convertEntitiesToDTOs(versesInChapter));
+			return dtos;
+		}
+		else if((throughChapter == null) && (throughVerse == null)){
+
+			TaoVerseDTO singleDTO = getSingleVerse(chapter, verse);
+			dtos.add(singleDTO);
+			return dtos;
+		}
+		else if((throughChapter == null) && (throughVerse != null)){
+			if(throughVerse<verse){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Start verse cannot be less than end verse");
+			}
+			int maxVerseSize = indexService.maxTaoChapterVerses(chapter);
+
+			if((verse < 1) || (verse > maxVerseSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
+			}
+
+			if((throughVerse < 1) || (throughVerse > maxVerseSize)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
+			}
+
+			List<VerseEntity> versesInChapter = verseRepository.getTaoVersesInChapter(chapter, verse, throughVerse);
+
+			dtos.addAll(convertEntitiesToDTOs(versesInChapter));
+			return dtos;
+		}
+		else if((throughChapter != null) && (throughVerse != null)){
+			if(verse==null){
+				verse=1;
+			}
+
+			if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 			}
-			
-			if((throughChapter == null) && (throughVerse == null)){
-				String singleVerseContent = taoFactory.getVerse(chapter, verse);
-				TaoVerseDTO singleDTO = new TaoVerseDTO(chapter, verse, singleVerseContent);
-				dtos.add(singleDTO);
-				return dtos;
+			if((throughChapter < 1) || (throughChapter > MAX_CHAPTER_SIZE)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 			}
-			else if((throughChapter != null) && (throughVerse == null)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Range can only end in chapter and verse or verse only");
+
+			int versesInChapter = indexService.maxTaoChapterVerses(chapter);
+			if((verse < 1) || (verse > versesInChapter)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
 			}
-			else if((throughChapter == null) && (throughVerse != null)){
-				if(throughVerse<verse){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End verse cannot be earlier than beginning verse");
-				}
-				Map<Integer, String> versesInChapter = taoFactory.getChapter(chapter);
-				if(!versesInChapter.keySet().contains(throughVerse)){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End verse is not within chapter");
-				}
-				for(int index=verse; index<=throughVerse; index++){
-					String content = versesInChapter.get(index);
-					TaoVerseDTO dto = new TaoVerseDTO(chapter, index, content);
-					dtos.add(dto);
-				}
-				return dtos;
+
+			int versesInThroughChapter = indexService.maxTaoChapterVerses(chapter);
+			if((throughVerse < 1) || (throughVerse > versesInThroughChapter)){
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
 			}
-			else{
-				if(throughChapter<chapter){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End chapter cannot be earlier than beginning chapter");
-				}
-				if(!chapterList.contains(throughChapter)){
-					throw new ServiceException(ErrorCodes.INVALID_INPUT, "End chapter not in book");
-				}
-				for(int chapterIndex=chapter; chapterIndex<=throughChapter; chapterIndex++){
-					Map<Integer, String> versesInChapter = taoFactory.getChapter(chapterIndex);
-					if(chapterIndex==throughChapter){
-						if(!versesInChapter.keySet().contains(throughVerse)){
-							throw new ServiceException(ErrorCodes.INVALID_INPUT, "End verse is not within chapter");
-						}
-						for(int verseIndex=1; verseIndex<=throughVerse; verseIndex++){
-							String content = versesInChapter.get(verseIndex);
-							TaoVerseDTO dto = new TaoVerseDTO(chapterIndex, verseIndex, content);
-							dtos.add(dto);
-						}
-					}
-					else{
-						int numberOfVerses = versesInChapter.size();
-						for(int verseIndex=verse; verseIndex<=numberOfVerses; verseIndex++){
-							String content = versesInChapter.get(verseIndex);
-							TaoVerseDTO dto = new TaoVerseDTO(chapterIndex, verseIndex, content);
-							dtos.add(dto);
-						}
-						verse=1;
-					}
-				}
-				return dtos;
+			//First Verse Set
+			List<VerseEntity> entities = verseRepository.getTaoVersesInChapter(chapter, verse, versesInChapter);
+
+			//End Verse Set
+			entities.addAll(verseRepository.getTaoVersesInChapter(throughChapter, 1, throughVerse));
+
+			if(throughChapter-chapter>1){
+				entities.addAll(verseRepository.getTaoVersesInChapterRange(chapter+1, throughChapter-1));
 			}
-		}catch(FactoryException e){
-			throw new ServiceException("Factory error", e);
+			dtos.addAll(convertEntitiesToDTOs(entities));
 		}
+		return dtos;
 	}
 
 	@Override
 	public List<TaoVerseDTO> getVersesInChapter(int chapter) throws ServiceException {
-		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
-		try{	
-			List<Integer> chapterList = taoFactory.getChapterList();
-			if(!chapterList.contains(chapter)){
-				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
-			}
-			Map<Integer, String> versesInChapter = taoFactory.getChapter(chapter);
-			
-			for(int verse: versesInChapter.keySet()){
-				String content = versesInChapter.get(verse);
-				dtos.add(new TaoVerseDTO(chapter, verse, content));
-			}
-			
-		}catch(FactoryException e){
-			throw new ServiceException("Factory error", e);
+		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 		}
+		List<VerseEntity> verses = verseRepository.getTaoVersesInChapter(chapter);
+		return convertEntitiesToDTOs(verses);
+	}
+
+	@Override
+	public TaoVerseDTO getSingleVerse(int chapter, int verse) throws ServiceException {
+		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
+		}
+
+		int maxVerseSize = indexService.maxTaoChapterVerses(chapter);
+
+		if((verse < 1) || (verse > maxVerseSize)){
+			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not contain verse");
+		}
+
+		VerseEntity entity = verseRepository.getSingleTaoVerse( chapter, verse);
+
+		return new TaoVerseDTO(entity);
+	}
+
+	@Override
+	public List<TaoVerseDTO> getVersesFromString(String verses) throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<TaoVerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
+		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
+		for(VerseEntity verseEntity: entities){
+			dtos.add(new TaoVerseDTO(verseEntity));
+		}
+		Collections.sort(dtos);
 		return dtos;
 	}
 

@@ -53,7 +53,7 @@ public class GetTaoVerseRangeCommand extends BaseCommand<List<TaoVerseDTO>> {
 	@Override
 	protected List<TaoVerseDTO> run() throws Exception {
 		try{
-			return taoService.getVersesInRange(this.chapter, this.verse, this.throughChapter, this.throughVerse);
+			return taoService.getVerses(this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}
 		catch(ServiceException e){
 			log.error("error creating getting verse "+e);

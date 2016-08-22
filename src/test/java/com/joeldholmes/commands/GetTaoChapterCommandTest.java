@@ -19,7 +19,6 @@ import com.joeldholmes.services.impl.TaoService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-@Ignore
 public class GetTaoChapterCommandTest {
 
 	@Mock

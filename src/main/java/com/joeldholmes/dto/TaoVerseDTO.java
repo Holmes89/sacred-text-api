@@ -1,6 +1,8 @@
 package com.joeldholmes.dto;
 
-public class TaoVerseDTO {
+import com.joeldholmes.entity.VerseEntity;
+
+public class TaoVerseDTO implements Comparable<TaoVerseDTO>{
 
 	private int chapter;
 	private int verse;
@@ -15,6 +17,13 @@ public class TaoVerseDTO {
 		this.chapter=chapter;
 		this.verse=verse;
 		this.content=content;
+	}
+
+	public TaoVerseDTO(VerseEntity entity) {
+		this();
+		this.chapter=entity.getChapter();
+		this.verse=entity.getVerse();
+		this.content=entity.getContent();
 	}
 
 	public int getChapter() {
@@ -39,5 +48,25 @@ public class TaoVerseDTO {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	@Override
+	public int compareTo(TaoVerseDTO other) {
+				
+		if(this.getChapter()>other.getChapter()){
+			return 1;
+		}
+		else if(this.getChapter()<other.getChapter()){
+			return -1;
+		}
+		
+		if(this.getVerse()>other.getVerse()){
+			return 1;
+		}
+		else if(this.getVerse()<other.getVerse()){
+			return -1;
+		}
+		
+		return 0;
 	}
 }

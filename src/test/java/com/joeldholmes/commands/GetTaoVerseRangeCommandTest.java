@@ -19,7 +19,6 @@ import com.joeldholmes.services.impl.TaoService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-@Ignore
 public class GetTaoVerseRangeCommandTest {
 	
 	@Mock
@@ -43,7 +42,7 @@ public class GetTaoVerseRangeCommandTest {
 	@Test
 	public void testCommand() throws ServiceException{
 
-		Mockito.when(taoService.getVersesInRange(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
+		Mockito.when(taoService.getVerses(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dtos);
 		
 		List<TaoVerseDTO> response = cmd.setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
@@ -52,7 +51,7 @@ public class GetTaoVerseRangeCommandTest {
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(taoService.getVersesInRange(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
+		Mockito.when(taoService.getVerses(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())).thenThrow(ServiceException.class);
 		
 		cmd.setChapter(-1).setVerse(-1).execute();
 		

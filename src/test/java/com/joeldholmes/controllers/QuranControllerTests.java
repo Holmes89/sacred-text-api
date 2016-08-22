@@ -19,6 +19,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.modules.junit4.PowerMockRunner;
 import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +43,9 @@ import com.joeldholmes.enums.QuranVersionEnum;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
+@PowerMockIgnore("javax.management.*")
 @SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 @WebAppConfiguration
-@Ignore
 public class QuranControllerTests {
 
 	@Autowired
