@@ -146,5 +146,10 @@ public class QuranServiceTests {
 	public void testGetVersesInChapter_invalidChapter() throws Exception{
 		quranService.getVersesInChapter(QuranVersionEnum.PICKTHALL, 20000);
 	}
+	
+	@Test
+	public void testGetVersesFromString() throws Exception{
+		quranService.getVersesFromString("The Cow 1, Muhammad");
+	}
 }
 

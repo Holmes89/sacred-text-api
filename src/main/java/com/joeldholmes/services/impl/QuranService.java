@@ -3,11 +3,12 @@ package com.joeldholmes.services.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joeldholmes.dto.BibleVerseDTO;
 import com.joeldholmes.dto.QuranVerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.QuranVersionEnum;
@@ -66,7 +67,8 @@ public class QuranService implements IQuranService {
 
 	@Override
 	public List<QuranVerseDTO> getVersesFromString(QuranVersionEnum version, String verses) throws ServiceException {
-		// TODO Auto-generated method stub
+		System.out.println(verses);
+		System.out.println(sanitizeVerseString(verses));
 		return null;
 	}
 
@@ -220,5 +222,20 @@ public class QuranService implements IQuranService {
 		}
 		Collections.sort(dtos);
 		return dtos;
+	}
+	
+	private String sanitizeVerseString(String verse) throws ServiceException{
+		String bookRegex = "([A-z\\s]+)";
+		Pattern bookRegexPattern = Pattern.compile(bookRegex);
+		String newVerse = verse;
+		Matcher m = bookRegexPattern.matcher(verse);
+		while(m.find()){
+			String book = m.group(1).trim();
+			int chapter = indexService.quranChapterNameLookup(book.toLowerCase());
+			newVerse = newVerse.replace(book+" ", chapter+":");
+			newVerse = newVerse.replace(book, chapter+"");
+		}
+		verse = newVerse;
+		return verse;
 	}
 }

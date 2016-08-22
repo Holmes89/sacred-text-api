@@ -203,7 +203,7 @@ public class ReligiousTextIndexService implements IReligiousTextIndexService {
 		quranChapterNames.put("The Resurrection".toLowerCase(), 75);
 		quranChapterNames.put("The Clothe Done".toLowerCase(), 74);
 		quranChapterNames.put("The Wrapped Up".toLowerCase(), 73);
-		quranChapterNames.put("The Jinn.toLowerCase()", 72);
+		quranChapterNames.put("The Jinn".toLowerCase(), 72);
 		quranChapterNames.put("Nuh".toLowerCase(), 71);
 		quranChapterNames.put("The Ways Of Ascent".toLowerCase(), 70);
 		quranChapterNames.put("Those Who Pull Out".toLowerCase(), 79);
