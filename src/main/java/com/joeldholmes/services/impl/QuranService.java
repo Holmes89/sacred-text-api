@@ -109,8 +109,12 @@ public class QuranService implements IQuranService {
 						endChapter = null;
 					}
 					else{
-						startVerse = Integer.parseInt(cvSplit[0].trim());
-						
+						if(startChapter==null){
+							startChapter = Integer.parseInt(cvSplit[0].trim());
+						}
+						else{
+							startVerse = Integer.parseInt(cvSplit[0].trim());
+						}
 					}
 					if(throughChapterVerse!=null){
 						cvSplit = throughChapterVerse.split(":");

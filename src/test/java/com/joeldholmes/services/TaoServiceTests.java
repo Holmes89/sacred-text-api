@@ -137,4 +137,16 @@ public class TaoServiceTests {
 	public void testGetVersesInChapter_invalidChapter() throws Exception{
 		taoService.getVersesInChapter(200);
 	}
+	
+	@Test
+	public void testGetVersesFromString() throws Exception{
+		List<TaoVerseDTO> verses = taoService.getVersesFromString("2:1-3");
+		Assert.assertEquals(3, verses.size());
+		verses = taoService.getVersesFromString("2:1, 3-4");
+		Assert.assertEquals(3, verses.size());
+		verses = taoService.getVersesFromString("2:1, 1:3-4");
+		Assert.assertEquals(3, verses.size());
+		verses = taoService.getVersesFromString("2");
+		Assert.assertEquals(4, verses.size());
+	}
 }

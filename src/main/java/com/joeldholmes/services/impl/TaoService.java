@@ -3,10 +3,13 @@ package com.joeldholmes.services.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.joeldholmes.dto.QuranVerseDTO;
 import com.joeldholmes.dto.TaoVerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.exceptions.ServiceException;
@@ -144,8 +147,83 @@ public class TaoService implements ITaoService {
 
 	@Override
 	public List<TaoVerseDTO> getVersesFromString(String verses) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		if(verses == null || verses.isEmpty()){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null or empty");
+		}
+		
+		verses = verses.replaceAll("\\s+", " ");
+		List<TaoVerseDTO> verseList = new ArrayList<TaoVerseDTO>();
+		
+		String chapterVerseRegex = "([\\d:\\s]+)-?([\\d:\\s]+)?";
+		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
+
+		Integer startChapter = null;
+		Integer startVerse = null;
+		Integer endChapter = null;
+		Integer endVerse = null;
+		
+		String[] verseArray = verses.trim().split(",");
+		for(String verse: verseArray){
+			verse = verse.trim();
+			if(verse.matches(chapterVerseRegex)){
+				Matcher m = chapterVersePattern.matcher(verse);
+				if(m.matches()){
+					String chapterVerse = m.group(1);
+					String throughChapterVerse = m.group(2);
+					String[] cvSplit = chapterVerse.split(":");
+					//Chapter declaration
+					if(chapterVerse.contains(":")){
+						startChapter=Integer.parseInt(cvSplit[0].trim());
+						if(cvSplit.length==2){
+							startVerse = Integer.parseInt(cvSplit[1].trim());
+						}
+						else{
+							startVerse = null;
+						}
+						endVerse = null;
+						endChapter = null;
+					}
+					else{
+						if(startChapter==null){
+							startChapter = Integer.parseInt(cvSplit[0].trim());
+						}
+						else{
+							startVerse = Integer.parseInt(cvSplit[0].trim());
+						}
+						
+					}
+					if(throughChapterVerse!=null){
+						cvSplit = throughChapterVerse.split(":");
+						if(throughChapterVerse.contains(":")){
+							endChapter=Integer.parseInt(cvSplit[0].trim());
+							if(cvSplit.length==2){
+								endVerse = Integer.parseInt(cvSplit[1].trim());
+							}
+							else{
+								endVerse = null;
+							}
+						}
+						else{
+							endVerse = Integer.parseInt(cvSplit[0].trim());
+						}
+					}
+				}
+			}
+			else{
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+			}
+			//get verses here.
+			verseList.addAll(getVerses(startChapter, startVerse, endChapter, endVerse));
+			if(endChapter!=null)
+				startChapter = endChapter;
+			if(endVerse!=null)
+				startVerse = endVerse;
+			endChapter = null;
+			endVerse = null;
+			
+		}
+		
+		return verseList;
 	}
 
 	private List<TaoVerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
