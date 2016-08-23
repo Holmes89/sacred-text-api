@@ -1,6 +1,6 @@
 package com.joeldholmes.dto;
 
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.lang3.text.WordUtils;
 
 import com.joeldholmes.entity.VerseEntity;
 
