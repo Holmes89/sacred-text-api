@@ -10,7 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.SacredTextApiApplication;
-import com.joeldholmes.dto.TaoVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.ITaoService;
 
@@ -25,9 +25,9 @@ public class TaoServiceTests {
 
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		List<TaoVerseDTO> dtos = taoService.getVerses(2, 3, null, null);
+		List<VerseDTO> dtos = taoService.getVerses(2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
-		TaoVerseDTO result = dtos.iterator().next();
+		VerseDTO result = dtos.iterator().next();
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -35,9 +35,9 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSingleChapter() throws Exception{
-		List<TaoVerseDTO> dtos = taoService.getVerses(2, 3, null, 4);
+		List<VerseDTO> dtos = taoService.getVerses(2, 3, null, 4);
 		Assert.assertEquals(2, dtos.size());
-		TaoVerseDTO result = dtos.iterator().next();
+		VerseDTO result = dtos.iterator().next();
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -49,9 +49,9 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSameChapter() throws Exception{
-		List<TaoVerseDTO> dtos = taoService.getVerses(2, 3, 2, 4);
+		List<VerseDTO> dtos = taoService.getVerses(2, 3, 2, 4);
 		Assert.assertEquals(2, dtos.size());
-		TaoVerseDTO result = dtos.iterator().next();
+		VerseDTO result = dtos.iterator().next();
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -63,9 +63,9 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesMultipleChapter() throws Exception{
-		List<TaoVerseDTO> dtos = taoService.getVerses(2, 3, 3, 3);
+		List<VerseDTO> dtos = taoService.getVerses(2, 3, 3, 3);
 		Assert.assertEquals(5, dtos.size());
-		TaoVerseDTO result = dtos.iterator().next();
+		VerseDTO result = dtos.iterator().next();
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -83,7 +83,7 @@ public class TaoServiceTests {
 	
 	
 	public void testGetVerses_nullVerse() throws Exception{
-		List<TaoVerseDTO> dtos = taoService.getVerses(2, null, null, null);
+		List<VerseDTO> dtos = taoService.getVerses(2, null, null, null);
 		Assert.assertEquals(4, dtos.size());
 	}
 	
@@ -94,7 +94,7 @@ public class TaoServiceTests {
 	
 	
 	public void testGetVerses_throughChapter_nullVerse() throws Exception{
-		List<TaoVerseDTO> dtos = taoService.getVerses(2, 2, 3, null);
+		List<VerseDTO> dtos = taoService.getVerses(2, 2, 3, null);
 		Assert.assertEquals(6, dtos.size());
 	}
 	
@@ -125,9 +125,9 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetVersesInChapter() throws Exception{
-		List<TaoVerseDTO> verses = taoService.getVersesInChapter(2);
+		List<VerseDTO> verses = taoService.getVersesInChapter(2);
 		Assert.assertEquals(4, verses.size());
-		TaoVerseDTO result = verses.get(verses.size()-1);
+		VerseDTO result = verses.get(verses.size()-1);
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(4, result.getVerse());
 		Assert.assertNotNull(result.getContent());
@@ -140,7 +140,7 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetVersesFromString() throws Exception{
-		List<TaoVerseDTO> verses = taoService.getVersesFromString("2:1-3");
+		List<VerseDTO> verses = taoService.getVersesFromString("2:1-3");
 		Assert.assertEquals(3, verses.size());
 		verses = taoService.getVersesFromString("2:1, 3-4");
 		Assert.assertEquals(3, verses.size());

@@ -39,7 +39,7 @@ import com.joeldholmes.commands.GetBibleChapterCommand;
 import com.joeldholmes.commands.GetBibleSingleVerseCommand;
 import com.joeldholmes.commands.GetBibleVerseRangeCommand;
 import com.joeldholmes.commands.GetBibleVersesByStringCommand;
-import com.joeldholmes.dto.BibleVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 
 @RunWith(PowerMockRunner.class)
@@ -99,13 +99,13 @@ public class BibleControllerTests {
 	
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		BibleVerseDTO dto = new BibleVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setBook("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		
 		when(getSingleVerseCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getSingleVerseCommand);
@@ -122,22 +122,22 @@ public class BibleControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(1, response.size());
-		BibleVerseDTO verse = response.iterator().next();
+		VerseDTO verse = response.iterator().next();
 		Assert.assertEquals("Blah", verse.getBook());
 	}
 	
 	@Test
 	public void testGetRangeVerses() throws Exception{
-		BibleVerseDTO dto = new BibleVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setBook("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -157,19 +157,19 @@ public class BibleControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	@Test
 	public void testGetRangeVerses_verseOnly() throws Exception{
-		BibleVerseDTO dto = new BibleVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setBook("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -189,20 +189,20 @@ public class BibleControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	
 	@Test
 	public void testGetChapterVerse() throws Exception{
-		BibleVerseDTO dto = new BibleVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setBook("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -219,20 +219,20 @@ public class BibleControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	
 	@Test
 	public void testGetVerse() throws Exception{
-		BibleVerseDTO dto = new BibleVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setBook("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -248,7 +248,7 @@ public class BibleControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<BibleVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<BibleVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}

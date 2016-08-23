@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.joeldholmes.dto.TaoVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.ITaoService;
 import com.netflix.hystrix.HystrixCommandGroupKey;
@@ -16,7 +16,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @Component
 @Scope("prototype")
-public class GetTaoSingleVerseCommand extends BaseCommand<List<TaoVerseDTO>> {
+public class GetTaoSingleVerseCommand extends BaseCommand<List<VerseDTO>> {
 	
 	@Autowired
 	ITaoService taoService;
@@ -41,9 +41,9 @@ public class GetTaoSingleVerseCommand extends BaseCommand<List<TaoVerseDTO>> {
 	}
 	
 	@Override
-	protected List<TaoVerseDTO> run() throws Exception {
+	protected List<VerseDTO> run() throws Exception {
 		try{
-			List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
+			List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 			dtos.add(taoService.getSingleVerse(chapter, verse));
 			return dtos;
 		}

@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.joeldholmes.dto.TaoVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.ITaoService;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
@@ -27,10 +27,10 @@ public class GetTaoSingleVerseCommandTest {
 	private GetTaoSingleVerseCommand cmd = new GetTaoSingleVerseCommand();
 	
 	@Mock
-	TaoVerseDTO dto;
+	VerseDTO dto;
 	
 	@Mock
-	List<TaoVerseDTO> dtos;
+	List<VerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -46,7 +46,7 @@ public class GetTaoSingleVerseCommandTest {
 
 		Mockito.when(taoService.getSingleVerse(Mockito.anyInt(), Mockito.anyInt())).thenReturn(dto);
 		
-		List<TaoVerseDTO> response = cmd.setChapter(-1).setVerse(-1).execute();
+		List<VerseDTO> response = cmd.setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	

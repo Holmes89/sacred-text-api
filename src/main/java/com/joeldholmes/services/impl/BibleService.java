@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joeldholmes.dto.BibleVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
@@ -28,7 +28,7 @@ public class BibleService implements IBibleService{
 	IReligiousTextIndexService indexService;
 	
 	@Override
-	public List<BibleVerseDTO> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
+	public List<VerseDTO> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -36,7 +36,7 @@ public class BibleService implements IBibleService{
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
 		}
 		book = book.toLowerCase().trim();
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		
 		int chapterSize = indexService.maxBibleBookChapters(book);
 		
@@ -51,7 +51,7 @@ public class BibleService implements IBibleService{
 	
 	
 	@Override
-	public List<BibleVerseDTO> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
+	public List<VerseDTO> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -70,7 +70,7 @@ public class BibleService implements IBibleService{
 		
 		book = book.toLowerCase().trim();
 		
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 	
 		
 		int chapterSize = indexService.maxBibleBookChapters(book);
@@ -90,7 +90,7 @@ public class BibleService implements IBibleService{
 		}
 		else if((throughChapter == null) && (throughVerse == null)){
 			
-			BibleVerseDTO singleDTO = getSingleVerse(version, book, chapter, verse);
+			VerseDTO singleDTO = getSingleVerse(version, book, chapter, verse);
 			dtos.add(singleDTO);
 			return dtos;
 		}
@@ -149,7 +149,7 @@ public class BibleService implements IBibleService{
 	}
 	
 	@Override
-	public List<BibleVerseDTO> getVersesFromString(BibleVersionEnum version, String verses) throws ServiceException{
+	public List<VerseDTO> getVersesFromString(BibleVersionEnum version, String verses) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -158,7 +158,7 @@ public class BibleService implements IBibleService{
 		}
 		
 		verses = verses.replaceAll("\\s+", " ");
-		List<BibleVerseDTO> verseList = new ArrayList<BibleVerseDTO>();
+		List<VerseDTO> verseList = new ArrayList<VerseDTO>();
 		
 		String fullRegex = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
 		String chapterVerseRegex = "([\\d:]+)-?([\\d:]+)?";
@@ -291,12 +291,12 @@ public class BibleService implements IBibleService{
 	}
 	
 	@Override
-	public List<BibleVerseDTO> getVersesFromString(String verses) throws ServiceException{
+	public List<VerseDTO> getVersesFromString(String verses) throws ServiceException{
 		return getVersesFromString(BibleVersionEnum.NIV, verses);
 	}
 	
 	@Override
-	public BibleVerseDTO getSingleVerse(BibleVersionEnum version, String book, int chapter, int verse) throws ServiceException{
+	public VerseDTO getSingleVerse(BibleVersionEnum version, String book, int chapter, int verse) throws ServiceException{
 		
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
@@ -321,22 +321,22 @@ public class BibleService implements IBibleService{
 		
 		VerseEntity entity = verseRepository.getSingleBibleVerse(version.getAbbr(), book, chapter, verse);
 		
-		return new BibleVerseDTO(entity);
+		return new VerseDTO(entity);
 		
 	}
 	
 	@Deprecated
 	@Override
-	public List<BibleVerseDTO> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,
+	public List<VerseDTO> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,
 			Integer throughChapter, Integer throughVerse) throws ServiceException {
 
 		return getVerses(version, book, chapter, verse, throughChapter, throughVerse);
 	}
 	
-	private List<BibleVerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
-		List<BibleVerseDTO> dtos = new ArrayList<BibleVerseDTO>();
+	private List<VerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		for(VerseEntity verseEntity: entities){
-			dtos.add(new BibleVerseDTO(verseEntity));
+			dtos.add(new VerseDTO(verseEntity));
 		}
 		Collections.sort(dtos);
 		return dtos;

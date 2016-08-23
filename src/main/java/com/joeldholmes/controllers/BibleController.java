@@ -16,7 +16,7 @@ import com.joeldholmes.commands.GetBibleChapterCommand;
 import com.joeldholmes.commands.GetBibleSingleVerseCommand;
 import com.joeldholmes.commands.GetBibleVerseRangeCommand;
 import com.joeldholmes.commands.GetBibleVersesByStringCommand;
-import com.joeldholmes.dto.BibleVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.APIException;
 import com.joeldholmes.utils.StatisticCounter;
@@ -45,7 +45,7 @@ public class BibleController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET, value="/", produces = "application/json")
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<BibleVerseDTO>> getVerse(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
+	public HttpEntity<List<VerseDTO>> getVerse(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="book") String book, @RequestParam(required=true, value="chapter") Integer chapter, @RequestParam(required=false, value="verse") Integer verse, @RequestParam(required=false, value="throughChapter") Integer throughChapter, @RequestParam(required=false, value="throughVerse") Integer throughVerse) throws Throwable
 	{
 		if(versionAbbr==null){
 			versionAbbr = BibleVersionEnum.NKJV;
@@ -53,19 +53,19 @@ public class BibleController extends BaseController {
 		//Get Chapter Verses
 		if((verse==null)&&(throughChapter==null)&&(throughVerse==null)){
 			log.info("Request Bible to get {} version of {} chapter {}", versionAbbr, book, chapter);
-			return new HttpEntity<List<BibleVerseDTO>>(getChapterProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).execute(), createEntityHeaders());
+			return new HttpEntity<List<VerseDTO>>(getChapterProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).execute(), createEntityHeaders());
 		}
 		else if((verse!=null)&&(throughChapter==null)&&(throughVerse==null)){
 			log.info("Request Bible to get {} version of {} {}:{}", versionAbbr, book, chapter, verse);
-			return new HttpEntity<List<BibleVerseDTO>>(getSingleVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).execute(), createEntityHeaders());
+			return new HttpEntity<List<VerseDTO>>(getSingleVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).execute(), createEntityHeaders());
 		}
 		else if((verse!=null)&&(throughChapter!=null)&&(throughVerse!=null)){
 			log.info("Request Bible to get {} version of {} {}:{} through {}:{}", versionAbbr, book, chapter, verse, throughChapter, throughVerse);
-			return new HttpEntity<List<BibleVerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughChapter(throughChapter).setThroughVerse(throughVerse).execute(), createEntityHeaders());
+			return new HttpEntity<List<VerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughChapter(throughChapter).setThroughVerse(throughVerse).execute(), createEntityHeaders());
 		}
 		else if((verse!=null)&&(throughChapter==null)&&(throughVerse!=null)){
 			log.info("Request Bible to get {} version of {} {}:{} - {}", versionAbbr, book, chapter, verse, throughVerse);
-			return new HttpEntity<List<BibleVerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughVerse(throughVerse).execute(), createEntityHeaders());
+			return new HttpEntity<List<VerseDTO>>(getRangeVerseProvider.get().setVersion(versionAbbr).setBook(book).setChapter(chapter).setVerse(verse).setThroughVerse(throughVerse).execute(), createEntityHeaders());
 		}
 		else{
 			throw new APIException("Invalid Parameters");
@@ -75,12 +75,12 @@ public class BibleController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET, value="/search", produces = "application/json")
 	@StatisticTimer(name="getBibleVerseTimer")
 	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<BibleVerseDTO>> searchVerses(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="verses") String search) throws Throwable
+	public HttpEntity<List<VerseDTO>> searchVerses(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="verses") String search) throws Throwable
 	{
 		if(versionAbbr==null){
 			versionAbbr = BibleVersionEnum.NKJV;
 		}
 		log.info("Request Bible to search {} version of {}", versionAbbr, search);
-		return new HttpEntity<List<BibleVerseDTO>>(getBibleVersesByStringProvider.get().setVersion(versionAbbr).setVerses(search).execute(), createEntityHeaders());
+		return new HttpEntity<List<VerseDTO>>(getBibleVersesByStringProvider.get().setVersion(versionAbbr).setVerses(search).execute(), createEntityHeaders());
 	}
 }

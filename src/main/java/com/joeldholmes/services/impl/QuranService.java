@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joeldholmes.dto.BibleVerseDTO;
-import com.joeldholmes.dto.QuranVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
@@ -31,7 +31,7 @@ public class QuranService implements IQuranService {
 	private final int MAX_CHAPTER_SIZE = 114;
 		
 	@Override
-	public List<QuranVerseDTO> getVersesInChapter(QuranVersionEnum version, int chapter) throws ServiceException {
+	public List<VerseDTO> getVersesInChapter(QuranVersionEnum version, int chapter) throws ServiceException {
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -43,7 +43,7 @@ public class QuranService implements IQuranService {
 	}
 	
 	@Override
-	public List<QuranVerseDTO> getVersesInChapter(QuranVersionEnum version, String chapterName) throws ServiceException {
+	public List<VerseDTO> getVersesInChapter(QuranVersionEnum version, String chapterName) throws ServiceException {
 		if(chapterName==null || chapterName.isEmpty()){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter Name cannot be null");
 		}
@@ -52,22 +52,22 @@ public class QuranService implements IQuranService {
 	}
 
 	@Override
-	public List<QuranVerseDTO> getVersesInChapter(int chapter) throws ServiceException {
+	public List<VerseDTO> getVersesInChapter(int chapter) throws ServiceException {
 		return getVersesInChapter(QuranVersionEnum.SHAKIR, chapter);
 	}
 
 	@Override
-	public List<QuranVerseDTO> getVersesInChapter(String chapterName) throws ServiceException {
+	public List<VerseDTO> getVersesInChapter(String chapterName) throws ServiceException {
 		return getVersesInChapter(QuranVersionEnum.SHAKIR, chapterName);
 	}
 
 	@Override
-	public List<QuranVerseDTO> getVersesFromString(String verses) throws ServiceException {
+	public List<VerseDTO> getVersesFromString(String verses) throws ServiceException {
 		return getVersesFromString(QuranVersionEnum.SHAKIR, verses);
 	}
 
 	@Override
-	public List<QuranVerseDTO> getVersesFromString(QuranVersionEnum version, String verses) throws ServiceException {
+	public List<VerseDTO> getVersesFromString(QuranVersionEnum version, String verses) throws ServiceException {
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -77,7 +77,7 @@ public class QuranService implements IQuranService {
 		
 		verses = verses.replaceAll("\\s+", " ");
 		verses = sanitizeVerseString(verses);
-		List<QuranVerseDTO> verseList = new ArrayList<QuranVerseDTO>();
+		List<VerseDTO> verseList = new ArrayList<VerseDTO>();
 		
 		String chapterVerseRegex = "([\\d:\\s]+)-?([\\d:\\s]+)?";
 		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
@@ -151,7 +151,7 @@ public class QuranService implements IQuranService {
 	}
 
 	@Override
-	public List<QuranVerseDTO> getVerses(QuranVersionEnum version, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException {
+	public List<VerseDTO> getVerses(QuranVersionEnum version, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException {
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -166,7 +166,7 @@ public class QuranService implements IQuranService {
 		}
 		
 		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 	
 		
 		
@@ -185,7 +185,7 @@ public class QuranService implements IQuranService {
 		}
 		else if((throughChapter == null) && (throughVerse == null)){
 			
-			QuranVerseDTO singleDTO = getSingleVerse(version, chapter, verse);
+			VerseDTO singleDTO = getSingleVerse(version, chapter, verse);
 			dtos.add(singleDTO);
 			return dtos;
 		}
@@ -244,14 +244,14 @@ public class QuranService implements IQuranService {
 	}
 	
 	@Override
-	public List<QuranVerseDTO> getVerses(QuranVersionEnum version, String chapterName, Integer verse, String throughChapterName, Integer throughVerse) throws ServiceException {
+	public List<VerseDTO> getVerses(QuranVersionEnum version, String chapterName, Integer verse, String throughChapterName, Integer throughVerse) throws ServiceException {
 		int chapter = indexService.quranChapterNameLookup(chapterName);
 		int throughChapter = indexService.quranChapterNameLookup(throughChapterName);
 		return getVerses(version, chapter, verse, throughChapter, throughVerse);
 	}
 
 	@Override
-	public QuranVerseDTO getSingleVerse(QuranVersionEnum version, int chapter, int verse) throws ServiceException {
+	public VerseDTO getSingleVerse(QuranVersionEnum version, int chapter, int verse) throws ServiceException {
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -269,12 +269,12 @@ public class QuranService implements IQuranService {
 		
 		VerseEntity entity = verseRepository.getSingleQuranVerse(version.getName(),  chapter, verse);
 		
-		return new QuranVerseDTO(entity);
+		return new VerseDTO(entity);
 		
 	}
 
 	@Override
-	public QuranVerseDTO getSingleVerse(QuranVersionEnum version, String chapterName, int verse) throws ServiceException {
+	public VerseDTO getSingleVerse(QuranVersionEnum version, String chapterName, int verse) throws ServiceException {
 			if(chapterName==null || chapterName.isEmpty()){
 				throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter Name cannot be null");
 			}
@@ -284,19 +284,19 @@ public class QuranService implements IQuranService {
 	}
 	
 	@Override
-	public QuranVerseDTO getSingleVerse(int chapter, int verse) throws ServiceException{
+	public VerseDTO getSingleVerse(int chapter, int verse) throws ServiceException{
 		return getSingleVerse(QuranVersionEnum.SHAKIR, chapter ,verse);
 	}
 	
 	@Override
-	public QuranVerseDTO getSingleVerse(String chapterName, int verse) throws ServiceException{
+	public VerseDTO getSingleVerse(String chapterName, int verse) throws ServiceException{
 		return getSingleVerse(QuranVersionEnum.SHAKIR, chapterName ,verse);
 	}
 
-	private List<QuranVerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+	private List<VerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		for(VerseEntity verseEntity: entities){
-			dtos.add(new QuranVerseDTO(verseEntity));
+			dtos.add(new VerseDTO(verseEntity));
 		}
 		Collections.sort(dtos);
 		return dtos;

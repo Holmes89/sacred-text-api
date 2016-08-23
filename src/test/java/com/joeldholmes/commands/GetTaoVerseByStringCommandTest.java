@@ -12,8 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.joeldholmes.dto.QuranVerseDTO;
-import com.joeldholmes.dto.TaoVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.impl.TaoService;
@@ -30,7 +30,7 @@ public class GetTaoVerseByStringCommandTest {
 	private GetTaoVersesByStringCommand cmd = new GetTaoVersesByStringCommand();
 	
 	@Mock
-	List<TaoVerseDTO> dtos;
+	List<VerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -46,7 +46,7 @@ public class GetTaoVerseByStringCommandTest {
 
 		Mockito.when(taoService.getVersesFromString(Mockito.anyString())).thenReturn(dtos);
 		
-		List<TaoVerseDTO> response = cmd.setVerses("AGAS").execute();
+		List<VerseDTO> response = cmd.setVerses("AGAS").execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	

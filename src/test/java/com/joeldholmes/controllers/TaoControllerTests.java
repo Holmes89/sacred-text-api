@@ -38,7 +38,7 @@ import com.joeldholmes.SacredTextApiApplication;
 import com.joeldholmes.commands.GetTaoChapterCommand;
 import com.joeldholmes.commands.GetTaoSingleVerseCommand;
 import com.joeldholmes.commands.GetTaoVerseRangeCommand;
-import com.joeldholmes.dto.TaoVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 
 @RunWith(PowerMockRunner.class)
 @PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
@@ -89,12 +89,12 @@ public class TaoControllerTests {
 	
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		TaoVerseDTO dto = new TaoVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		
 		when(getSingleVerseCommand.setChapter(Mockito.anyInt())).thenReturn(getSingleVerseCommand);
@@ -109,20 +109,20 @@ public class TaoControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(1, response.size());
-		TaoVerseDTO verse = response.iterator().next();
+		VerseDTO verse = response.iterator().next();
 	}
 	
 	@Test
 	public void testGetRangeVerses() throws Exception{
-		TaoVerseDTO dto = new TaoVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -140,18 +140,18 @@ public class TaoControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	@Test
 	public void testGetRangeVerses_verseOnly() throws Exception{
-		TaoVerseDTO dto = new TaoVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -169,19 +169,19 @@ public class TaoControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	
 	@Test
 	public void testGetChapterVerse() throws Exception{
-		TaoVerseDTO dto = new TaoVerseDTO();
+		VerseDTO dto = new VerseDTO();
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<TaoVerseDTO> dtos = new ArrayList<TaoVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -196,7 +196,7 @@ public class TaoControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<TaoVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<TaoVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}

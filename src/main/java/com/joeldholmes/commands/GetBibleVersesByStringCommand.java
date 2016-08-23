@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.joeldholmes.dto.BibleVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.IBibleService;
@@ -16,7 +16,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @Component
 @Scope("prototype")
-public class GetBibleVersesByStringCommand extends BaseCommand<List<BibleVerseDTO>> {
+public class GetBibleVersesByStringCommand extends BaseCommand<List<VerseDTO>> {
 	
 	@Autowired
 	IBibleService bibleService;
@@ -41,7 +41,7 @@ public class GetBibleVersesByStringCommand extends BaseCommand<List<BibleVerseDT
 	
 		
 	@Override
-	protected List<BibleVerseDTO> run() throws Exception {
+	protected List<VerseDTO> run() throws Exception {
 		try{
 			return bibleService.getVersesFromString(version, verses);
 		}

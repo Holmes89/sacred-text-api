@@ -6,10 +6,10 @@ import com.joeldholmes.entity.VerseEntity;
 
 public class VerseDTO implements Comparable<VerseDTO>{
 	
-	private Integer chapter; 
+	private int chapter; 
 	private String version; 
 	private String content;
-	private Integer verse;
+	private int verse;
 	private String book;
 	private String chapterTitle;
 	private String religiousText;
@@ -46,7 +46,7 @@ public class VerseDTO implements Comparable<VerseDTO>{
 		
 	}
 	
-	public Integer getChapter() {
+	public int getChapter() {
 		return chapter;
 	}
 	public String getVersion() {
@@ -55,7 +55,7 @@ public class VerseDTO implements Comparable<VerseDTO>{
 	public String getContent() {
 		return content;
 	}
-	public Integer getVerse() {
+	public int getVerse() {
 		return verse;
 	}
 	public String getBook() {
@@ -66,6 +66,42 @@ public class VerseDTO implements Comparable<VerseDTO>{
 	}
 	public String getReligiousText() {
 		return religiousText;
+	}
+
+	public void setChapter(int chapter) {
+		this.chapter = chapter;
+	}
+
+	public void setVersion(String version) {
+		if(version!=null){
+			this.version = WordUtils.capitalizeFully(version);
+		}
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public void setVerse(int verse) {
+		this.verse = verse;
+	}
+
+	public void setBook(String book) {
+		if(book!=null){
+			this.book = WordUtils.capitalizeFully(book);
+		}
+	}
+
+	public void setChapterTitle(String chapterTitle) {
+		if(chapterTitle!=null){
+			this.chapterTitle = WordUtils.capitalizeFully(chapterTitle);
+		}
+	}
+
+	public void setReligiousText(String religiousText) {
+		if(religiousText!=null){
+			this.religiousText = WordUtils.capitalizeFully(religiousText);
+		}
 	}
 
 	@Override

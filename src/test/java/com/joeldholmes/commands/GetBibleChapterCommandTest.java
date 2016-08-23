@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.joeldholmes.dto.BibleVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.impl.BibleService;
@@ -30,7 +30,7 @@ public class GetBibleChapterCommandTest {
 	private GetBibleChapterCommand cmd = new GetBibleChapterCommand();
 	
 	@Mock
-	List<BibleVerseDTO> dtos;
+	List<VerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -46,7 +46,7 @@ public class GetBibleChapterCommandTest {
 
 		Mockito.when(bibleService.getVersesInChapter(Mockito.any(BibleVersionEnum.class), Mockito.anyString(), Mockito.anyInt())).thenReturn(dtos);
 		
-		List<BibleVerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).execute();
+		List<VerseDTO> response = cmd.setVersion(BibleVersionEnum.KJV).setBook("AGAS").setChapter(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	

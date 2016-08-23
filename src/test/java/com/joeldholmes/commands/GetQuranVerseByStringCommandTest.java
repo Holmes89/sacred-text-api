@@ -12,8 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.joeldholmes.dto.BibleVerseDTO;
-import com.joeldholmes.dto.QuranVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
@@ -31,7 +31,7 @@ public class GetQuranVerseByStringCommandTest {
 	private GetQuranVersesByStringCommand cmd = new GetQuranVersesByStringCommand();
 	
 	@Mock
-	List<QuranVerseDTO> dtos;
+	List<VerseDTO> dtos;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -47,7 +47,7 @@ public class GetQuranVerseByStringCommandTest {
 
 		Mockito.when(quranService.getVersesFromString(Mockito.any(QuranVersionEnum.class), Mockito.anyString())).thenReturn(dtos);
 		
-		List<QuranVerseDTO> response = cmd.setVersion(QuranVersionEnum.PICKTHALL).setVerses("AGAS").execute();
+		List<VerseDTO> response = cmd.setVersion(QuranVersionEnum.PICKTHALL).setVerses("AGAS").execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	

@@ -38,7 +38,7 @@ import com.joeldholmes.SacredTextApiApplication;
 import com.joeldholmes.commands.GetQuranChapterCommand;
 import com.joeldholmes.commands.GetQuranSingleVerseCommand;
 import com.joeldholmes.commands.GetQuranVerseRangeCommand;
-import com.joeldholmes.dto.QuranVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.QuranVersionEnum;
 
 @RunWith(PowerMockRunner.class)
@@ -90,13 +90,13 @@ public class QuranControllerTests {
 	
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		VerseDTO dto = new VerseDTO();
+		dto.setChapterTitle("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		
 		when(getSingleVerseCommand.setVersion(Mockito.any(QuranVersionEnum.class))).thenReturn(getSingleVerseCommand);
@@ -112,23 +112,23 @@ public class QuranControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(1, response.size());
-		QuranVerseDTO verse = response.iterator().next();
-		Assert.assertEquals("Blah", verse.getChapterName());
+		VerseDTO verse = response.iterator().next();
+		Assert.assertEquals("Blah", verse.getChapterTitle());
 	}
 	
 	@Test
 	public void testGetRangeVerses() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		VerseDTO dto = new VerseDTO();
+		dto.setChapterTitle("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
 		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -147,20 +147,20 @@ public class QuranControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	@Test
 	public void testGetRangeVerses_verseOnly() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		VerseDTO dto = new VerseDTO();
+		dto.setChapterTitle("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
 		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -179,21 +179,21 @@ public class QuranControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}
 	
 	@Test
 	public void testGetChapterVerse() throws Exception{
-		QuranVerseDTO dto = new QuranVerseDTO();
-		dto.setChapterName("blah");
+		VerseDTO dto = new VerseDTO();
+		dto.setChapterTitle("blah");
 		dto.setChapter(1);
 		dto.setVerse(1);
 		dto.setContent("asdfsad");
 		
 		
-		List<QuranVerseDTO> dtos = new ArrayList<QuranVerseDTO>();
+		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
 		dtos.add(dto);
 		dtos.add(dto);
 		
@@ -209,7 +209,7 @@ public class QuranControllerTests {
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andReturn();
 		
-		List<QuranVerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<QuranVerseDTO>>() { });
+		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
 		
 		Assert.assertEquals(2, response.size());
 	}

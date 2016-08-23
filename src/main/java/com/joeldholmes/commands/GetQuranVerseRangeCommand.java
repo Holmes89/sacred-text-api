@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import com.joeldholmes.dto.QuranVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.IQuranService;
@@ -16,7 +16,7 @@ import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @Component
 @Scope("prototype")
-public class GetQuranVerseRangeCommand extends BaseCommand<List<QuranVerseDTO>> {
+public class GetQuranVerseRangeCommand extends BaseCommand<List<VerseDTO>> {
 	
 	@Autowired
 	IQuranService quranService;
@@ -58,7 +58,7 @@ public class GetQuranVerseRangeCommand extends BaseCommand<List<QuranVerseDTO>> 
 	
 
 	@Override
-	protected List<QuranVerseDTO> run() throws Exception {
+	protected List<VerseDTO> run() throws Exception {
 		try{
 			return quranService.getVerses(this.version, this.chapter, this.verse, this.throughChapter, this.throughVerse);
 		}

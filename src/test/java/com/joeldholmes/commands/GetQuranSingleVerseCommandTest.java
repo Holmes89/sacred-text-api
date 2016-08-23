@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.joeldholmes.dto.QuranVerseDTO;
+import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.FactoryException;
 import com.joeldholmes.exceptions.ServiceException;
@@ -29,10 +29,10 @@ public class GetQuranSingleVerseCommandTest {
 	private GetQuranSingleVerseCommand cmd = new GetQuranSingleVerseCommand();
 	
 	@Mock
-	List<QuranVerseDTO> dtos;
+	List<VerseDTO> dtos;
 	
 	@Mock
-	QuranVerseDTO dto;
+	VerseDTO dto;
 	
 	private final String MOCKED_RESPONSE = "blah";
 	
@@ -47,7 +47,7 @@ public class GetQuranSingleVerseCommandTest {
 
 		Mockito.when(quranService.getSingleVerse(Mockito.any(QuranVersionEnum.class), Mockito.anyInt(), Mockito.anyInt())).thenReturn(dto);
 		
-		List<QuranVerseDTO> response = cmd.setVersion(QuranVersionEnum.PICKTHALL).setChapter(-1).setVerse(-1).execute();
+		List<VerseDTO> response = cmd.setVersion(QuranVersionEnum.PICKTHALL).setChapter(-1).setVerse(-1).execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
