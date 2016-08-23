@@ -118,27 +118,27 @@ public class VerseRepositoryTests {
 	
 	@Test
 	public void testSearchAllText() throws Exception{
-		List<VerseEntity> verses = verseRepo.searchAllText("Believe");
+		List<VerseEntity> verses = verseRepo.searchAllText("hatred");
 		Assert.assertNotNull(verses);
 		Assert.assertTrue(!verses.isEmpty());
-		Assert.assertEquals(1768, verses.size());
+		Assert.assertEquals(45, verses.size());
 	}
 	
 	@Test
 	public void testSearchAllBibleText() throws Exception{
-		List<VerseEntity> verses = verseRepo.searchAllBibleText("Believe");
+		List<VerseEntity> verses = verseRepo.searchAllBibleText("hatred");
 		Assert.assertNotNull(verses);
 		Assert.assertTrue(!verses.isEmpty());
-		Assert.assertEquals(505, verses.size());
+		Assert.assertEquals(29, verses.size());
 	}
 
 	
 	@Test
 	public void testSearchAllQuranText() throws Exception{
-		List<VerseEntity> verses = verseRepo.searchAllQuranText("Believe");
+		List<VerseEntity> verses = verseRepo.searchAllQuranText("Jesus");
 		Assert.assertNotNull(verses);
 		Assert.assertTrue(!verses.isEmpty());
-		Assert.assertEquals(1263, verses.size());
+		Assert.assertEquals(25, verses.size());
 	}
 
 	
