@@ -157,6 +157,7 @@ public class BibleService implements IBibleService{
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null or empty");
 		}
 		
+		verses = verses.replaceAll("\\s+", " ");
 		List<BibleVerseDTO> verseList = new ArrayList<BibleVerseDTO>();
 		
 		String fullRegex = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";

@@ -149,7 +149,9 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetVersesFromString() throws Exception{
-		quranService.getVersesFromString("The Cow 1, Muhammad");
+		List<QuranVerseDTO> verses = quranService.getVersesFromString("The Opening, The Thunder, 3:32-33");
+		Assert.assertEquals(52, verses.size());
 	}
+	
 }
 

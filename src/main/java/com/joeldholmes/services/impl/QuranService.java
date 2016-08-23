@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.joeldholmes.dto.BibleVerseDTO;
 import com.joeldholmes.dto.QuranVerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.QuranVersionEnum;
@@ -67,9 +68,100 @@ public class QuranService implements IQuranService {
 
 	@Override
 	public List<QuranVerseDTO> getVersesFromString(QuranVersionEnum version, String verses) throws ServiceException {
-		System.out.println(verses);
-		System.out.println(sanitizeVerseString(verses));
-		return null;
+		if(version == null){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
+		}
+		if(verses == null || verses.isEmpty()){
+			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null or empty");
+		}
+		
+		verses = sanitizeVerseString(verses);
+		
+		List<QuranVerseDTO> verseList = new ArrayList<QuranVerseDTO>();
+		
+		String chapterVerseRegex = "([\\d:]+)-?([\\d:]+)?";
+		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
+
+		Integer startChapter = null;
+		Integer startVerse = null;
+		Integer endChapter = null;
+		Integer endVerse = null;
+		
+		String[] verseArray = verses.trim().split(",");
+		for(String verse: verseArray){
+			verse = verse.trim();
+			if(verse.matches(chapterVerseRegex)){
+				Matcher m = chapterVersePattern.matcher(verse);
+				if(m.matches()){
+					String[] nextCv = m.group(1).split(":");
+				
+					if(nextCv.length==1){
+						startChapter = Integer.parseInt(nextCv[0]);
+					}
+					else if(nextCv.length==2){
+						startChapter = Integer.parseInt(nextCv[0]);
+						startVerse = Integer.parseInt(nextCv[1]);
+					}
+					else{
+						throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+					}
+				
+					if(m.group(2)!=null){
+						nextCv = m.group(2).split(":");
+						if(startChapter!=null && startVerse!=null){
+							if(nextCv.length==1){
+								endVerse = Integer.parseInt(nextCv[0]);
+							}
+							else if(nextCv.length==2){
+								endChapter = Integer.parseInt(nextCv[0]);
+								endVerse = Integer.parseInt(nextCv[1]);
+							}
+							else{
+								throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+							}
+						}
+						else if(startChapter!=null){
+							if(nextCv.length==1){
+								endChapter = Integer.parseInt(nextCv[0]);
+							}
+							else if(nextCv.length==2){
+								endChapter = Integer.parseInt(nextCv[0]);
+								endVerse = Integer.parseInt(nextCv[1]);
+							}
+							else{
+								return null;
+							}
+						}
+						else if(startVerse!=null){
+							if(nextCv.length==1){
+								endVerse = Integer.parseInt(nextCv[0]);
+							}
+							else if(nextCv.length==2){
+								endChapter = Integer.parseInt(nextCv[0]);
+								endVerse = Integer.parseInt(nextCv[1]);
+							}
+							else{
+								throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+							}
+						}
+					}
+				}
+			}
+			else{
+				throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+			}
+			//get verses here.
+			verseList.addAll(getVerses(version, startChapter, startVerse, endChapter, endVerse));
+			if(endChapter!=null)
+				startChapter = endChapter;
+			if(endVerse!=null)
+				startVerse = endVerse;
+			endChapter = null;
+			endVerse = null;
+			
+		}
+		
+		return verseList;
 	}
 
 	@Override
@@ -225,12 +317,15 @@ public class QuranService implements IQuranService {
 	}
 	
 	private String sanitizeVerseString(String verse) throws ServiceException{
+		verse = verse.replaceAll("\\s+", " ");
 		String bookRegex = "([A-z\\s]+)";
 		Pattern bookRegexPattern = Pattern.compile(bookRegex);
 		String newVerse = verse;
 		Matcher m = bookRegexPattern.matcher(verse);
 		while(m.find()){
 			String book = m.group(1).trim();
+			if(book==null || book.isEmpty())
+				continue;
 			int chapter = indexService.quranChapterNameLookup(book.toLowerCase());
 			newVerse = newVerse.replace(book+" ", chapter+":");
 			newVerse = newVerse.replace(book, chapter+"");
