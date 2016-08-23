@@ -75,7 +75,7 @@ public class QuranService implements IQuranService {
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null or empty");
 		}
 		
-		verses = sanitizeVerseString(verses);
+		verses = verses.replaceAll("\\s+", " ");
 		
 		List<QuranVerseDTO> verseList = new ArrayList<QuranVerseDTO>();
 		
@@ -90,6 +90,11 @@ public class QuranService implements IQuranService {
 		String[] verseArray = verses.trim().split(",");
 		for(String verse: verseArray){
 			verse = verse.trim();
+			if(!verse.matches(".*\\d+.*")){
+				startChapter = null;
+				startVerse = null;
+			}
+			verse = sanitizeVerseString(verse);
 			if(verse.matches(chapterVerseRegex)){
 				Matcher m = chapterVersePattern.matcher(verse);
 				if(m.matches()){
@@ -317,7 +322,6 @@ public class QuranService implements IQuranService {
 	}
 	
 	private String sanitizeVerseString(String verse) throws ServiceException{
-		verse = verse.replaceAll("\\s+", " ");
 		String bookRegex = "([A-z\\s]+)";
 		Pattern bookRegexPattern = Pattern.compile(bookRegex);
 		String newVerse = verse;

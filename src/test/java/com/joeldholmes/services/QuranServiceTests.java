@@ -151,6 +151,10 @@ public class QuranServiceTests {
 	public void testGetVersesFromString() throws Exception{
 		List<QuranVerseDTO> verses = quranService.getVersesFromString("The Opening, The Thunder, 3:32-33");
 		Assert.assertEquals(52, verses.size());
+		verses = quranService.getVersesFromString("The Opening 1, The Thunder, 3:32-33");
+		Assert.assertEquals(46, verses.size());
+		verses = quranService.getVersesFromString("The Opening 1, 3, The Thunder, 3:32-33");
+		Assert.assertEquals(47, verses.size());
 	}
 	
 }
