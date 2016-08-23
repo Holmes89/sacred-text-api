@@ -76,10 +76,10 @@ public class QuranService implements IQuranService {
 		}
 		
 		verses = verses.replaceAll("\\s+", " ");
-		
+		verses = sanitizeVerseString(verses);
 		List<QuranVerseDTO> verseList = new ArrayList<QuranVerseDTO>();
 		
-		String chapterVerseRegex = "([\\d:]+)-?([\\d:]+)?";
+		String chapterVerseRegex = "([\\d:\\s]+)-?([\\d:\\s]+)?";
 		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
 
 		Integer startChapter = null;
@@ -90,64 +90,41 @@ public class QuranService implements IQuranService {
 		String[] verseArray = verses.trim().split(",");
 		for(String verse: verseArray){
 			verse = verse.trim();
-			if(!verse.matches(".*\\d+.*")){
-				startChapter = null;
-				startVerse = null;
-			}
-			verse = sanitizeVerseString(verse);
 			if(verse.matches(chapterVerseRegex)){
 				Matcher m = chapterVersePattern.matcher(verse);
 				if(m.matches()){
-					String[] nextCv = m.group(1).split(":");
-				
-					if(nextCv.length==1){
-						startChapter = Integer.parseInt(nextCv[0]);
-					}
-					else if(nextCv.length==2){
-						startChapter = Integer.parseInt(nextCv[0]);
-						startVerse = Integer.parseInt(nextCv[1]);
+					String chapterVerse = m.group(1);
+					String throughChapterVerse = m.group(2);
+					String[] cvSplit = chapterVerse.split(":");
+					//Chapter declaration
+					if(chapterVerse.contains(":")){
+						startChapter=Integer.parseInt(cvSplit[0].trim());
+						if(cvSplit.length==2){
+							startVerse = Integer.parseInt(cvSplit[1].trim());
+						}
+						else{
+							startVerse = null;
+						}
+						endVerse = null;
+						endChapter = null;
 					}
 					else{
-						throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+						startVerse = Integer.parseInt(cvSplit[0].trim());
+						
 					}
-				
-					if(m.group(2)!=null){
-						nextCv = m.group(2).split(":");
-						if(startChapter!=null && startVerse!=null){
-							if(nextCv.length==1){
-								endVerse = Integer.parseInt(nextCv[0]);
-							}
-							else if(nextCv.length==2){
-								endChapter = Integer.parseInt(nextCv[0]);
-								endVerse = Integer.parseInt(nextCv[1]);
+					if(throughChapterVerse!=null){
+						cvSplit = throughChapterVerse.split(":");
+						if(throughChapterVerse.contains(":")){
+							endChapter=Integer.parseInt(cvSplit[0].trim());
+							if(cvSplit.length==2){
+								endVerse = Integer.parseInt(cvSplit[1].trim());
 							}
 							else{
-								throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
+								endVerse = null;
 							}
 						}
-						else if(startChapter!=null){
-							if(nextCv.length==1){
-								endChapter = Integer.parseInt(nextCv[0]);
-							}
-							else if(nextCv.length==2){
-								endChapter = Integer.parseInt(nextCv[0]);
-								endVerse = Integer.parseInt(nextCv[1]);
-							}
-							else{
-								return null;
-							}
-						}
-						else if(startVerse!=null){
-							if(nextCv.length==1){
-								endVerse = Integer.parseInt(nextCv[0]);
-							}
-							else if(nextCv.length==2){
-								endChapter = Integer.parseInt(nextCv[0]);
-								endVerse = Integer.parseInt(nextCv[1]);
-							}
-							else{
-								throw new ServiceException(ErrorCodes.INVALID_INPUT, "Improperly formatted verse request");
-							}
+						else{
+							endVerse = Integer.parseInt(cvSplit[0].trim());
 						}
 					}
 				}
@@ -331,8 +308,8 @@ public class QuranService implements IQuranService {
 			if(book==null || book.isEmpty())
 				continue;
 			int chapter = indexService.quranChapterNameLookup(book.toLowerCase());
-			newVerse = newVerse.replace(book+" ", chapter+":");
-			newVerse = newVerse.replace(book, chapter+"");
+			newVerse = newVerse.replace(book, chapter+":");
+			
 		}
 		verse = newVerse;
 		return verse;
