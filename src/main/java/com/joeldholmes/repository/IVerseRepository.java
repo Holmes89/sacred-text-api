@@ -53,5 +53,16 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	@Query("{\"religiousText\": \"tao-te-ching\", \"chapter\": { $lte:?1, $gte:?0 }}")
 	List<VerseEntity> getTaoVersesInChapterRange(int startChapter, int endChapter);	
 	
+	@Query("{$text: {$search: ?0}}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
+	List<VerseEntity> searchAllText(String term);
+	
+	@Query("{$text: {$search: ?0}, \"religiousText\":\"bible\"}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
+	List<VerseEntity> searchAllBibleText(String term);
+	
+	@Query("{$text: {$search: ?0}, \"religiousText\":\"tao-te-ching\"}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
+	List<VerseEntity> searchAllTaoText(String term);
+	
+	@Query("{$text: {$search: ?0}, \"religiousText\":\"quran\"}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
+	List<VerseEntity> searchAllQuranText(String term);
 	
 }

@@ -100,7 +100,7 @@ public class VerseRepositoryTests {
 		Assert.assertEquals(4, verses.size());
 	}
 	
-        @Test
+    @Test
 	public void testGetTaoVersesInChapterWithVerses() throws Exception{
 		List<VerseEntity> verses = verseRepo.getTaoVersesInChapter(2, 2, 4);
 		Assert.assertNotNull(verses);
@@ -115,4 +115,39 @@ public class VerseRepositoryTests {
 		Assert.assertTrue(!verses.isEmpty());
 		Assert.assertEquals(10, verses.size());
 	}
+	
+	@Test
+	public void testSearchAllText() throws Exception{
+		List<VerseEntity> verses = verseRepo.searchAllText("Believe");
+		Assert.assertNotNull(verses);
+		Assert.assertTrue(!verses.isEmpty());
+		Assert.assertEquals(1768, verses.size());
+	}
+	
+	@Test
+	public void testSearchAllBibleText() throws Exception{
+		List<VerseEntity> verses = verseRepo.searchAllBibleText("Believe");
+		Assert.assertNotNull(verses);
+		Assert.assertTrue(!verses.isEmpty());
+		Assert.assertEquals(505, verses.size());
+	}
+
+	
+	@Test
+	public void testSearchAllQuranText() throws Exception{
+		List<VerseEntity> verses = verseRepo.searchAllQuranText("Believe");
+		Assert.assertNotNull(verses);
+		Assert.assertTrue(!verses.isEmpty());
+		Assert.assertEquals(1263, verses.size());
+	}
+
+	
+	@Test
+	public void testSearchAllTaoText() throws Exception{
+		List<VerseEntity> verses = verseRepo.searchAllTaoText("love");
+		Assert.assertNotNull(verses);
+		Assert.assertTrue(!verses.isEmpty());
+		Assert.assertEquals(8, verses.size());
+	}
+
 }
