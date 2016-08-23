@@ -116,7 +116,7 @@ public class QuranControllerTests {
 		
 		Assert.assertEquals(1, response.size());
 		QuranVerseDTO verse = response.iterator().next();
-		Assert.assertEquals("blah", verse.getChapterName());
+		Assert.assertEquals("Blah", verse.getChapterName());
 	}
 	
 	@Test

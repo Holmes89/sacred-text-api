@@ -1,5 +1,7 @@
 package com.joeldholmes.dto;
 
+import org.apache.commons.lang.WordUtils;
+
 import com.joeldholmes.entity.VerseEntity;
 
 public class BibleVerseDTO implements Comparable<BibleVerseDTO> {
@@ -15,7 +17,11 @@ public class BibleVerseDTO implements Comparable<BibleVerseDTO> {
 	
 	public BibleVerseDTO(String book, int chapter, int verse, String content){
 		this();
-		this.book=book;
+		
+		if(book!=null){
+			this.book = WordUtils.capitalizeFully(book);
+		}
+		
 		this.chapter=chapter;
 		this.verse=verse;
 		this.content=content;
@@ -23,10 +29,17 @@ public class BibleVerseDTO implements Comparable<BibleVerseDTO> {
 
 	public BibleVerseDTO(VerseEntity entity){
 		this();
-		this.book=entity.getBook();
+		
+		String entityBook = entity.getBook();
+		
+		if(entityBook!=null){
+			this.book = WordUtils.capitalizeFully(entityBook);
+		}
+		
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
+		
 	}
 	
 	public String getBook() {
@@ -34,7 +47,9 @@ public class BibleVerseDTO implements Comparable<BibleVerseDTO> {
 	}
 
 	public void setBook(String book) {
-		this.book = book;
+		if(book!=null){
+			this.book = WordUtils.capitalizeFully(book);
+		}	
 	}
 
 	public int getChapter() {

@@ -126,7 +126,7 @@ public class BibleControllerTests {
 		
 		Assert.assertEquals(1, response.size());
 		BibleVerseDTO verse = response.iterator().next();
-		Assert.assertEquals("blah", verse.getBook());
+		Assert.assertEquals("Blah", verse.getBook());
 	}
 	
 	@Test

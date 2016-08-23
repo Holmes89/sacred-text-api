@@ -1,5 +1,7 @@
 package com.joeldholmes.dto;
 
+import org.apache.commons.lang.WordUtils;
+
 import com.joeldholmes.entity.VerseEntity;
 
 public class QuranVerseDTO implements Comparable<QuranVerseDTO>{
@@ -15,7 +17,11 @@ public class QuranVerseDTO implements Comparable<QuranVerseDTO>{
 	
 	public QuranVerseDTO(String chapterName, int chapter, int verse, String content){
 		this();
-		this.chapterName=chapterName;
+
+		if(chapterName!=null){
+			this.chapterName = WordUtils.capitalizeFully(chapterName);
+		}
+		
 		this.chapter=chapter;
 		this.verse=verse;
 		this.content=content;
@@ -23,7 +29,11 @@ public class QuranVerseDTO implements Comparable<QuranVerseDTO>{
 	
 	public QuranVerseDTO(VerseEntity entity){
 		this();
-		this.chapterName=entity.getChapterTitle();
+		
+		String chapterTitle = entity.getChapterTitle();
+		if(chapterTitle!=null){
+			this.chapterName=  WordUtils.capitalizeFully(chapterTitle);
+		}
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
@@ -34,7 +44,9 @@ public class QuranVerseDTO implements Comparable<QuranVerseDTO>{
 	}
 
 	public void setChapterName(String chapterName) {
-		this.chapterName = chapterName;
+		if(chapterName!=null){
+			this.chapterName=  WordUtils.capitalizeFully(chapterName);
+		}
 	}
 
 	public int getChapter() {
