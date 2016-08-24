@@ -223,33 +223,4 @@ public class BibleControllerTests {
 		
 		Assert.assertEquals(2, response.size());
 	}
-	
-	@Test
-	public void testGetVerse() throws Exception{
-		VerseDTO dto = new VerseDTO();
-		dto.setBook("blah");
-		dto.setChapter(1);
-		dto.setVerse(1);
-		dto.setContent("asdfsad");
-		
-		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
-		dtos.add(dto);
-		dtos.add(dto);
-		
-		when(getBibleVerseByStringCommand.setVersion(Mockito.any(BibleVersionEnum.class))).thenReturn(getBibleVerseByStringCommand);
-		when(getBibleVerseByStringCommand.setVerses(Mockito.anyString())).thenReturn(getBibleVerseByStringCommand);
-		
-		when(getBibleVerseByStringCommand.execute()).thenReturn(dtos);
-		
-		MvcResult mvcResult = this.mockMvc.perform(get("/bible/search?verses=Joel+2:2,4")
-				.accept(MediaType.APPLICATION_JSON)
-				)
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-				.andReturn();
-		
-		List<VerseDTO> response = mapper.readValue(mvcResult.getResponse().getContentAsString(), new TypeReference<List<VerseDTO>>() { });
-		
-		Assert.assertEquals(2, response.size());
-	}
 }

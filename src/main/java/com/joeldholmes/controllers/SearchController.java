@@ -26,15 +26,6 @@ import com.joeldholmes.utils.StatisticTimer;
 @RequestMapping("/search")
 @RestController
 public class SearchController extends BaseController {
-
-	@Autowired
-	Provider<GetBibleVersesByStringCommand> getBibleVersesByStringProvider;
-	
-	@Autowired
-	Provider<GetQuranVersesByStringCommand> getQuranVersesByStringProvider;
-	
-	@Autowired
-	Provider<GetTaoVersesByStringCommand> getTaoVersesByStringProvider;
 	
 	@Autowired
 	Provider<SearchAllTextAndVerseCommand> searchAllTextAndVerseProvider;
@@ -56,7 +47,7 @@ public class SearchController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET, value="/", produces = "application/json")
 	@StatisticTimer(name="searchBibleTime")
 	@StatisticCounter(name="searchBibleCounter")
-	public HttpEntity<List<VerseDTO>> searchAll(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	public HttpEntity<List<VerseDTO>> searchAll(HttpServletRequest request, @RequestParam(required=true, value="term") String search) throws Throwable
 	{
 		log.info("Request Bible to search {} version of {}", search);
 		return new HttpEntity<List<VerseDTO>>(searchAllTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
@@ -65,7 +56,7 @@ public class SearchController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET, value="/bible", produces = "application/json")
 	@StatisticTimer(name="searchBibleTime")
 	@StatisticCounter(name="searchBibleCounter")
-	public HttpEntity<List<VerseDTO>> searchBible(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	public HttpEntity<List<VerseDTO>> searchBible(HttpServletRequest request, @RequestParam(required=true, value="term") String search) throws Throwable
 	{
 		log.info("Request Bible to search {} version of {}", search);
 		return new HttpEntity<List<VerseDTO>>(searchBibleTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
@@ -74,7 +65,7 @@ public class SearchController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET, value="/tao-te-ching", produces = "application/json")
 	@StatisticTimer(name="searchBibleTime")
 	@StatisticCounter(name="searchBibleCounter")
-	public HttpEntity<List<VerseDTO>> searchTao(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	public HttpEntity<List<VerseDTO>> searchTao(HttpServletRequest request, @RequestParam(required=true, value="term") String search) throws Throwable
 	{
 		log.info("Request Bible to search {} version of {}", search);
 		return new HttpEntity<List<VerseDTO>>(searchTaoTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
@@ -83,7 +74,7 @@ public class SearchController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET, value="/quran", produces = "application/json")
 	@StatisticTimer(name="searchBibleTime")
 	@StatisticCounter(name="searchBibleCounter")
-	public HttpEntity<List<VerseDTO>> searchQuran(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	public HttpEntity<List<VerseDTO>> searchQuran(HttpServletRequest request, @RequestParam(required=true, value="term") String search) throws Throwable
 	{
 		log.info("Request Bible to search {} version of {}", search);
 		return new HttpEntity<List<VerseDTO>>(searchQuranTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
