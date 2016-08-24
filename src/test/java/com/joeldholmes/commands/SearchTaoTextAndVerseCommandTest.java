@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -16,18 +15,18 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
-import com.joeldholmes.services.impl.BibleService;
+import com.joeldholmes.services.impl.SearchService;
 import com.joeldholmes.utils.ErrorCodes;
 import com.netflix.hystrix.exception.HystrixBadRequestException;
 
 @RunWith(PowerMockRunner.class)
-public class GetBibleVerseByStringCommandTest {
+public class SearchTaoTextAndVerseCommandTest {
 
 	@Mock
-	BibleService bibleService;
+	SearchService searchService;
 	
 	@InjectMocks
-	private GetBibleVersesByStringCommand cmd = new GetBibleVersesByStringCommand();
+	private SearchTaoTextAndVerseCommand cmd = new SearchTaoTextAndVerseCommand();
 	
 	@Mock
 	List<VerseDTO> dtos;
@@ -44,18 +43,18 @@ public class GetBibleVerseByStringCommandTest {
 	@Test
 	public void testCommand() throws ServiceException{
 
-		Mockito.when(bibleService.getVersesFromString(Mockito.anyString())).thenReturn(dtos);
+		Mockito.when(searchService.searchTaoVerseAndText(Mockito.anyString())).thenReturn(dtos);
 		
-		List<VerseDTO> response = cmd.setVerses("AGAS").execute();
+		List<VerseDTO> response = cmd.setTerm("AGAS").execute();
 		Assert.assertTrue(!response.isEmpty());
 	}
 	
 	@Test(expected=HystrixBadRequestException.class)
 	public void testException() throws ServiceException{
 		
-		Mockito.when(bibleService.getVersesFromString(Mockito.anyString())).thenThrow(new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
+		Mockito.when(searchService.searchTaoVerseAndText(Mockito.anyString())).thenThrow(new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null"));
 		
-		cmd.setVerses("AGAS").execute();
+		cmd.setTerm("AGAS").execute();
 		
 	}
 	

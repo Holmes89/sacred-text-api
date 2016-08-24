@@ -15,8 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.joeldholmes.commands.GetBibleVersesByStringCommand;
 import com.joeldholmes.commands.GetQuranVersesByStringCommand;
 import com.joeldholmes.commands.GetTaoVersesByStringCommand;
+import com.joeldholmes.commands.SearchAllTextAndVerseCommand;
+import com.joeldholmes.commands.SearchBibleTextAndVerseCommand;
+import com.joeldholmes.commands.SearchQuranTextAndVerseCommand;
+import com.joeldholmes.commands.SearchTaoTextAndVerseCommand;
 import com.joeldholmes.dto.VerseDTO;
-import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.utils.StatisticCounter;
 import com.joeldholmes.utils.StatisticTimer;
 
@@ -33,20 +36,57 @@ public class SearchController extends BaseController {
 	@Autowired
 	Provider<GetTaoVersesByStringCommand> getTaoVersesByStringProvider;
 	
+	@Autowired
+	Provider<SearchAllTextAndVerseCommand> searchAllTextAndVerseProvider;
+	
+	@Autowired
+	Provider<SearchBibleTextAndVerseCommand> searchBibleTextAndVerseProvider;
+	
+	@Autowired
+	Provider<SearchQuranTextAndVerseCommand> searchQuranTextAndVerseProvider;
+	
+	@Autowired
+	Provider<SearchTaoTextAndVerseCommand> searchTaoTextAndVerseProvider;
+	
 	public SearchController() {
 		super();
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value="/bible", produces = "application/json")
-	@StatisticTimer(name="getBibleVerseTimer")
-	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<VerseDTO>> searchVerses(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="verses") String search) throws Throwable
+
+	@RequestMapping(method = RequestMethod.GET, value="/", produces = "application/json")
+	@StatisticTimer(name="searchBibleTime")
+	@StatisticCounter(name="searchBibleCounter")
+	public HttpEntity<List<VerseDTO>> searchAll(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
 	{
-		if(versionAbbr==null){
-			versionAbbr = BibleVersionEnum.NIV;
-		}
-		log.info("Request Bible to search {} version of {}", versionAbbr, search);
-		return new HttpEntity<List<VerseDTO>>(getBibleVersesByStringProvider.get().setVersion(versionAbbr).setVerses(search).execute(), createEntityHeaders());
+		log.info("Request Bible to search {} version of {}", search);
+		return new HttpEntity<List<VerseDTO>>(searchAllTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value="/bible", produces = "application/json")
+	@StatisticTimer(name="searchBibleTime")
+	@StatisticCounter(name="searchBibleCounter")
+	public HttpEntity<List<VerseDTO>> searchBible(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	{
+		log.info("Request Bible to search {} version of {}", search);
+		return new HttpEntity<List<VerseDTO>>(searchBibleTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value="/tao-te-ching", produces = "application/json")
+	@StatisticTimer(name="searchBibleTime")
+	@StatisticCounter(name="searchBibleCounter")
+	public HttpEntity<List<VerseDTO>> searchTao(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	{
+		log.info("Request Bible to search {} version of {}", search);
+		return new HttpEntity<List<VerseDTO>>(searchTaoTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value="/quran", produces = "application/json")
+	@StatisticTimer(name="searchBibleTime")
+	@StatisticCounter(name="searchBibleCounter")
+	public HttpEntity<List<VerseDTO>> searchQuran(HttpServletRequest request, @RequestParam(required=true, value="verses") String search) throws Throwable
+	{
+		log.info("Request Bible to search {} version of {}", search);
+		return new HttpEntity<List<VerseDTO>>(searchQuranTextAndVerseProvider.get().setTerm(search).execute(), createEntityHeaders());
 	}
 
 }

@@ -71,16 +71,4 @@ public class BibleController extends BaseController {
 			throw new APIException("Invalid Parameters");
 		}
 	}
-	
-	@RequestMapping(method = RequestMethod.GET, value="/search", produces = "application/json")
-	@StatisticTimer(name="getBibleVerseTimer")
-	@StatisticCounter(name="getBibleVerseCounter")
-	public HttpEntity<List<VerseDTO>> searchVerses(HttpServletRequest request, @RequestParam(required=false, value="versionAbbr") BibleVersionEnum versionAbbr, @RequestParam(required=true, value="verses") String search) throws Throwable
-	{
-		if(versionAbbr==null){
-			versionAbbr = BibleVersionEnum.NKJV;
-		}
-		log.info("Request Bible to search {} version of {}", versionAbbr, search);
-		return new HttpEntity<List<VerseDTO>>(getBibleVersesByStringProvider.get().setVersion(versionAbbr).setVerses(search).execute(), createEntityHeaders());
-	}
 }

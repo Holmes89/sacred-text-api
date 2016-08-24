@@ -11,5 +11,8 @@ public interface ISearchService {
 	List<VerseDTO> searchBibleText(String term) throws ServiceException;
 	List<VerseDTO> searchQuranText(String term) throws ServiceException;
 	List<VerseDTO> searchTaoText(String term) throws ServiceException;
-
+	List<VerseDTO> searchAllVerseAndText(String term) throws ServiceException;
+	List<VerseDTO> searchBibleVerseAndText(String term) throws ServiceException;
+	List<VerseDTO> searchQuranVerseAndText(String term) throws ServiceException;
+	List<VerseDTO> searchTaoVerseAndText(String term) throws ServiceException;
 }
