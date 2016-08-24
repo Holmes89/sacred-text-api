@@ -12,9 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.joeldholmes.commands.GetBibleVersesByStringCommand;
-import com.joeldholmes.commands.GetQuranVersesByStringCommand;
-import com.joeldholmes.commands.GetTaoVersesByStringCommand;
 import com.joeldholmes.commands.SearchAllTextAndVerseCommand;
 import com.joeldholmes.commands.SearchBibleTextAndVerseCommand;
 import com.joeldholmes.commands.SearchQuranTextAndVerseCommand;

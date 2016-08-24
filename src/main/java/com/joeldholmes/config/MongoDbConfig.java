@@ -42,6 +42,7 @@ class MongoDbConfig extends AbstractMongoConfiguration {
 			MongoCredential credential = MongoCredential.createCredential(userName, database, password.toCharArray());
 			mongoClient = new MongoClient(new ServerAddress(host, port), Arrays.asList(credential));
 		}
+		System.out.println("Mongo Client: "+mongoClient.toString());
 		return mongoClient;
 	}
 	
