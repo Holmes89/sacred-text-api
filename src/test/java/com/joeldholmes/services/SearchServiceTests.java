@@ -10,8 +10,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.SacredTextApiApplication;
-import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.resources.SearchResource;
 import com.joeldholmes.services.interfaces.ISearchService;
 
 
@@ -24,13 +24,13 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllText() throws Exception{
-		List<VerseDTO> results = searchService.searchAllText("hatred");
+		List<SearchResource> results = searchService.searchAllText("hatred");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		
 		int bibleCount = 0;
 		int quranCount = 0;
-		for(VerseDTO verse: results){
+		for(SearchResource verse: results){
 			String text = verse.getReligiousText();
 			if(text.equalsIgnoreCase("bible"))
 				bibleCount++;
@@ -44,7 +44,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllText_no_results() throws Exception{
-		List<VerseDTO> results = searchService.searchAllText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
+		List<SearchResource> results = searchService.searchAllText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
 		Assert.assertNull(results);
 	}
 	
@@ -60,7 +60,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchBibleText() throws Exception{
-		List<VerseDTO> results = searchService.searchBibleText("hatred");
+		List<SearchResource> results = searchService.searchBibleText("hatred");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		
@@ -69,7 +69,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllBibleText_no_results() throws Exception{
-		List<VerseDTO> results = searchService.searchBibleText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
+		List<SearchResource> results = searchService.searchBibleText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
 		Assert.assertNull(results);
 	}
 	
@@ -85,7 +85,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchQuranText() throws Exception{
-		List<VerseDTO> results = searchService.searchQuranText("Jesus");
+		List<SearchResource> results = searchService.searchQuranText("Jesus");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		
@@ -94,7 +94,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllQuranText_no_results() throws Exception{
-		List<VerseDTO> results = searchService.searchQuranText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
+		List<SearchResource> results = searchService.searchQuranText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
 		Assert.assertNull(results);
 	}
 	
@@ -110,7 +110,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchTaoText() throws Exception{
-		List<VerseDTO> results = searchService.searchTaoText("Love");
+		List<SearchResource> results = searchService.searchTaoText("Love");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		
@@ -119,7 +119,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllTaoText_no_results() throws Exception{
-		List<VerseDTO> results = searchService.searchTaoText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
+		List<SearchResource> results = searchService.searchTaoText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
 		Assert.assertNull(results);
 	}
 	
@@ -135,7 +135,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllVerseAndText() throws Exception{
-		List<VerseDTO> results = searchService.searchAllVerseAndText("hatred");
+		List<SearchResource> results = searchService.searchAllVerseAndText("hatred");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		Assert.assertEquals(45, results.size());
@@ -171,7 +171,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchBibleVerseAndText() throws Exception{
-		List<VerseDTO> results = searchService.searchBibleVerseAndText("hatred");
+		List<SearchResource> results = searchService.searchBibleVerseAndText("hatred");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		Assert.assertEquals(29, results.size());
@@ -197,7 +197,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchQuranVerseAndText() throws Exception{
-		List<VerseDTO> results = searchService.searchQuranVerseAndText("Jesus");
+		List<SearchResource> results = searchService.searchQuranVerseAndText("Jesus");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		Assert.assertEquals(25, results.size());
@@ -223,7 +223,7 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchTaoVerseAndText() throws Exception{
-		List<VerseDTO> results = searchService.searchTaoVerseAndText("Love");
+		List<SearchResource> results = searchService.searchTaoVerseAndText("Love");
 		Assert.assertNotNull(results);
 		Assert.assertTrue(!results.isEmpty());
 		Assert.assertEquals(8, results.size());

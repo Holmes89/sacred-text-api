@@ -3,8 +3,10 @@ package com.joeldholmes.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.joeldholmes.resources.SearchResource;
+
 @Document(collection="religiousTexts")
-public class VerseEntity {
+public class VerseEntity implements Comparable<VerseEntity>{
 	
 	@Id
 	private String id;
@@ -62,6 +64,32 @@ public class VerseEntity {
 	public String getId() {
 		return id;
 	}
+	
+	@Override
+	public int compareTo(VerseEntity other) {
+		if(this.book!=null){
+			if(!this.getBook().equals(other.getBook())){
+				return this.getBook().compareTo(other.getBook());
+			}
+		}
+		
+		if(this.getChapter()>other.getChapter()){
+			return 1;
+		}
+		else if(this.getChapter()<other.getChapter()){
+			return -1;
+		}
+		
+		if(this.getVerse()>other.getVerse()){
+			return 1;
+		}
+		else if(this.getVerse()<other.getVerse()){
+			return -1;
+		}
+		
+		return 0;
+	}
+
 	
 	
 }

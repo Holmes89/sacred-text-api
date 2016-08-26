@@ -2,19 +2,19 @@ package com.joeldholmes.services.interfaces;
 
 import java.util.List;
 
-import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.resources.SearchResource;
 
 public interface ITaoService {
 
-	List<VerseDTO> getVersesInChapter(int chapter) throws ServiceException;
-	List<VerseDTO> getVersesFromString(String verses) throws ServiceException;
+	List<SearchResource> getVersesInChapter(int chapter) throws ServiceException;
+	List<SearchResource> getVersesFromString(String verses) throws ServiceException;
 
-	List<VerseDTO> getVerses(Integer chapter, Integer verse,
+	List<SearchResource> getVerses(Integer chapter, Integer verse,
 			Integer throughChapter, Integer throughVerse) throws ServiceException;
 	
 
-	VerseDTO getSingleVerse(int chapter, int verse) throws ServiceException;
+	SearchResource getSingleVerse(int chapter, int verse) throws ServiceException;
 
 
 }

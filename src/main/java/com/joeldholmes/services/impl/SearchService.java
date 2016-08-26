@@ -6,10 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
+import com.joeldholmes.resources.SearchResource;
 import com.joeldholmes.services.interfaces.IBibleService;
 import com.joeldholmes.services.interfaces.IQuranService;
 import com.joeldholmes.services.interfaces.ISearchService;
@@ -32,7 +32,7 @@ public class SearchService implements ISearchService {
 	ITaoService taoService;
 	
 	@Override
-	public List<VerseDTO> searchAllText(String term) throws ServiceException {
+	public List<SearchResource> searchAllText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -44,7 +44,7 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchBibleText(String term) throws ServiceException {
+	public List<SearchResource> searchBibleText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -56,7 +56,7 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchQuranText(String term) throws ServiceException {
+	public List<SearchResource> searchQuranText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -69,7 +69,7 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchTaoText(String term) throws ServiceException {
+	public List<SearchResource> searchTaoText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -82,12 +82,12 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchAllVerseAndText(String term) throws ServiceException {
+	public List<SearchResource> searchAllVerseAndText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
 		
-		List<VerseDTO> verses = new ArrayList<VerseDTO>();
+		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
 		try{
 			verses.addAll(bibleService.getVersesFromString(term));
@@ -105,7 +105,7 @@ public class SearchService implements ISearchService {
 			//Swallow error, just searching
 		}
 		if(verses.isEmpty()){
-			List<VerseDTO> search =searchAllText(term);
+			List<SearchResource> search =searchAllText(term);
 			if(search!=null){
 				verses.addAll(search);
 			}
@@ -114,12 +114,12 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchBibleVerseAndText(String term) throws ServiceException {
+	public List<SearchResource> searchBibleVerseAndText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
 		
-		List<VerseDTO> verses = new ArrayList<VerseDTO>();
+		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
 		try{
 			verses.addAll(bibleService.getVersesFromString(term));
@@ -127,7 +127,7 @@ public class SearchService implements ISearchService {
 			//Swallow error, just searching
 		}
 		if(verses.isEmpty()){
-			List<VerseDTO> search =searchBibleText(term);
+			List<SearchResource> search =searchBibleText(term);
 			if(search!=null){
 				verses.addAll(search);
 			}
@@ -137,12 +137,12 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchQuranVerseAndText(String term) throws ServiceException {
+	public List<SearchResource> searchQuranVerseAndText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
 		
-		List<VerseDTO> verses = new ArrayList<VerseDTO>();
+		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
 		try{
 			verses.addAll(quranService.getVersesFromString(term));
@@ -150,7 +150,7 @@ public class SearchService implements ISearchService {
 			//Swallow error, just searching
 		}
 		if(verses.isEmpty()){
-			List<VerseDTO> search = searchQuranText(term);
+			List<SearchResource> search = searchQuranText(term);
 			if(search!=null){
 				verses.addAll(search);
 			}
@@ -159,12 +159,12 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<VerseDTO> searchTaoVerseAndText(String term) throws ServiceException {
+	public List<SearchResource> searchTaoVerseAndText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
 		
-		List<VerseDTO> verses = new ArrayList<VerseDTO>();
+		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
 		try{
 			verses.addAll(taoService.getVersesFromString(term));
@@ -172,7 +172,7 @@ public class SearchService implements ISearchService {
 			//Swallow error, just searching
 		}
 		if(verses.isEmpty()){
-			List<VerseDTO> search = searchTaoText(term);
+			List<SearchResource> search = searchTaoText(term);
 			if(search!=null){
 				verses.addAll(search);
 			}
@@ -181,10 +181,10 @@ public class SearchService implements ISearchService {
 	}
 	
 	
-	private List<VerseDTO> entitiesToDTOs(List<VerseEntity> entities){
-		List<VerseDTO> list = new ArrayList<VerseDTO>();
+	private List<SearchResource> entitiesToDTOs(List<VerseEntity> entities){
+		List<SearchResource> list = new ArrayList<SearchResource>();
 		for(VerseEntity entity: entities){
-			list.add(new VerseDTO(entity));
+			list.add(new SearchResource(entity));
 		}
 		
 		return list;

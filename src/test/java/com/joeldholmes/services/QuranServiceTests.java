@@ -3,7 +3,6 @@ package com.joeldholmes.services;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.SacredTextApiApplication;
-import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.resources.SearchResource;
 import com.joeldholmes.services.interfaces.IQuranService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,9 +24,9 @@ public class QuranServiceTests {
 
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		List<VerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, null);
+		List<SearchResource> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
-		VerseDTO result = dtos.iterator().next();
+		SearchResource result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterTitle());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
@@ -36,9 +35,9 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSingleChapter() throws Exception{
-		List<VerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, 6);
+		List<SearchResource> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, null, 6);
 		Assert.assertEquals(4, dtos.size());
-		VerseDTO result = dtos.iterator().next();
+		SearchResource result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterTitle());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
@@ -52,9 +51,9 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesSameChapter() throws Exception{
-		List<VerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL,  2, 3, 2, 6);
+		List<SearchResource> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL,  2, 3, 2, 6);
 		Assert.assertEquals(4, dtos.size());
-		VerseDTO result = dtos.iterator().next();
+		SearchResource result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterTitle());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
@@ -68,9 +67,9 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetMultipleVersesMultipleChapter() throws Exception{
-		List<VerseDTO> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, 3, 3);
+		List<SearchResource> dtos = quranService.getVerses(QuranVersionEnum.PICKTHALL, 2, 3, 3, 3);
 		Assert.assertEquals(287, dtos.size());
-		VerseDTO result = dtos.iterator().next();
+		SearchResource result = dtos.iterator().next();
 		Assert.assertEquals("The Cow", result.getChapterTitle());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(3, result.getVerse());
@@ -127,9 +126,9 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetVersesInChapter() throws Exception{
-		List<VerseDTO> verses = quranService.getVersesInChapter(QuranVersionEnum.PICKTHALL, 2);
+		List<SearchResource> verses = quranService.getVersesInChapter(QuranVersionEnum.PICKTHALL, 2);
 		Assert.assertEquals(286, verses.size());
-		VerseDTO result = verses.get(verses.size()-1);
+		SearchResource result = verses.get(verses.size()-1);
 		Assert.assertEquals("The Cow", result.getChapterTitle());
 		Assert.assertEquals(2, result.getChapter());
 		Assert.assertEquals(286, result.getVerse());
@@ -149,7 +148,7 @@ public class QuranServiceTests {
 	
 	@Test
 	public void testGetVersesFromString() throws Exception{
-		List<VerseDTO> verses = quranService.getVersesFromString("The Opening, The Thunder, 3:32-33");
+		List<SearchResource> verses = quranService.getVersesFromString("The Opening, The Thunder, 3:32-33");
 		Assert.assertEquals(52, verses.size());
 		verses = quranService.getVersesFromString("The Opening 1, The Thunder, 3:32-33");
 		Assert.assertEquals(46, verses.size());

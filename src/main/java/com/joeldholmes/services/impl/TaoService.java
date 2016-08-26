@@ -9,11 +9,10 @@ import java.util.regex.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.joeldholmes.dto.VerseDTO;
-import com.joeldholmes.dto.VerseDTO;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
+import com.joeldholmes.resources.SearchResource;
 import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 import com.joeldholmes.services.interfaces.ITaoService;
 import com.joeldholmes.utils.ErrorCodes;
@@ -30,7 +29,7 @@ public class TaoService implements ITaoService {
 	private final int MAX_CHAPTER_SIZE=81;
 
 	@Override
-	public List<VerseDTO> getVerses(Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException {
+	public List<SearchResource> getVerses(Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException {
 		if(chapter == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Chapter cannot be null");
 		}
@@ -42,7 +41,7 @@ public class TaoService implements ITaoService {
 		}
 
 
-		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
+		List<SearchResource> dtos = new ArrayList<SearchResource>();
 
 
 
@@ -61,7 +60,7 @@ public class TaoService implements ITaoService {
 		}
 		else if((throughChapter == null) && (throughVerse == null)){
 
-			VerseDTO singleDTO = getSingleVerse(chapter, verse);
+			SearchResource singleDTO = getSingleVerse(chapter, verse);
 			dtos.add(singleDTO);
 			return dtos;
 		}
@@ -120,7 +119,7 @@ public class TaoService implements ITaoService {
 	}
 
 	@Override
-	public List<VerseDTO> getVersesInChapter(int chapter) throws ServiceException {
+	public List<SearchResource> getVersesInChapter(int chapter) throws ServiceException {
 		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 		}
@@ -129,7 +128,7 @@ public class TaoService implements ITaoService {
 	}
 
 	@Override
-	public VerseDTO getSingleVerse(int chapter, int verse) throws ServiceException {
+	public SearchResource getSingleVerse(int chapter, int verse) throws ServiceException {
 		if((chapter < 1) || (chapter > MAX_CHAPTER_SIZE)){
 			throw new ServiceException(ErrorCodes.INVALID_INPUT, "Chapter does not exist in book");
 		}
@@ -142,17 +141,17 @@ public class TaoService implements ITaoService {
 
 		VerseEntity entity = verseRepository.getSingleTaoVerse( chapter, verse);
 
-		return new VerseDTO(entity);
+		return new SearchResource(entity);
 	}
 
 	@Override
-	public List<VerseDTO> getVersesFromString(String verses) throws ServiceException {
+	public List<SearchResource> getVersesFromString(String verses) throws ServiceException {
 		if(verses == null || verses.isEmpty()){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Verse cannot be null or empty");
 		}
 		
 		verses = verses.replaceAll("\\s+", " ");
-		List<VerseDTO> verseList = new ArrayList<VerseDTO>();
+		List<SearchResource> verseList = new ArrayList<SearchResource>();
 		
 		String chapterVerseRegex = "([\\d:\\s]+)-?([\\d:\\s]+)?";
 		Pattern chapterVersePattern =Pattern.compile(chapterVerseRegex);
@@ -226,10 +225,10 @@ public class TaoService implements ITaoService {
 		return verseList;
 	}
 
-	private List<VerseDTO> convertEntitiesToDTOs(List<VerseEntity> entities){
-		List<VerseDTO> dtos = new ArrayList<VerseDTO>();
+	private List<SearchResource> convertEntitiesToDTOs(List<VerseEntity> entities){
+		List<SearchResource> dtos = new ArrayList<SearchResource>();
 		for(VerseEntity verseEntity: entities){
-			dtos.add(new VerseDTO(verseEntity));
+			dtos.add(new SearchResource(verseEntity));
 		}
 		Collections.sort(dtos);
 		return dtos;
