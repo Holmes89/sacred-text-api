@@ -16,7 +16,6 @@ import com.joeldholmes.services.interfaces.ISearchService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 public class SearchServiceTests {
 
 	@Autowired
@@ -31,7 +30,7 @@ public class SearchServiceTests {
 		int bibleCount = 0;
 		int quranCount = 0;
 		for(SearchResource verse: results){
-			String text = verse.getReligiousText();
+			String text = verse.religiousText;
 			if(text.equalsIgnoreCase("bible"))
 				bibleCount++;
 			else

@@ -89,7 +89,7 @@ public class SearchService implements ISearchService {
 		
 		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
-		try{
+		/*try{
 			verses.addAll(bibleService.getVersesFromString(term));
 		}catch(ServiceException e){
 			//Swallow error, just searching
@@ -109,7 +109,7 @@ public class SearchService implements ISearchService {
 			if(search!=null){
 				verses.addAll(search);
 			}
-		}
+		}*/
 		return verses;
 	}
 
@@ -120,7 +120,7 @@ public class SearchService implements ISearchService {
 		}
 		
 		List<SearchResource> verses = new ArrayList<SearchResource>();
-		
+		/*
 		try{
 			verses.addAll(bibleService.getVersesFromString(term));
 		}catch(ServiceException e){
@@ -131,7 +131,7 @@ public class SearchService implements ISearchService {
 			if(search!=null){
 				verses.addAll(search);
 			}
-		}
+		}*/
 		
 		return verses;
 	}
@@ -144,11 +144,12 @@ public class SearchService implements ISearchService {
 		
 		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
+		/*
 		try{
 			verses.addAll(quranService.getVersesFromString(term));
 		}catch(ServiceException e){
 			//Swallow error, just searching
-		}
+		}*/
 		if(verses.isEmpty()){
 			List<SearchResource> search = searchQuranText(term);
 			if(search!=null){
@@ -166,11 +167,11 @@ public class SearchService implements ISearchService {
 		
 		List<SearchResource> verses = new ArrayList<SearchResource>();
 		
-		try{
+		/*try{
 			verses.addAll(taoService.getVersesFromString(term));
 		}catch(ServiceException e){
 			//Swallow error, just searching
-		}
+		}*/
 		if(verses.isEmpty()){
 			List<SearchResource> search = searchTaoText(term);
 			if(search!=null){

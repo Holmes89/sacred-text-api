@@ -4,11 +4,15 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import com.joeldholmes.entity.VerseEntity;
 
+import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
 @JsonApiResource(type="quranVerse")
 public class QuranVerseResource implements Comparable<QuranVerseResource>{
 
+	@JsonApiId
+	public String id;
+	
 	public String chapterTitle;
 	
 	public int chapter;
@@ -26,6 +30,7 @@ public class QuranVerseResource implements Comparable<QuranVerseResource>{
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
+		this.id = entity.getId();
 	}
 
 	@Override

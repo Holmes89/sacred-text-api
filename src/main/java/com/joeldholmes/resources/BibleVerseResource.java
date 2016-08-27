@@ -4,18 +4,22 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import com.joeldholmes.entity.VerseEntity;
 
+import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
 @JsonApiResource(type="bibleVerse")
 public class BibleVerseResource implements Comparable<BibleVerseResource>{
 
-
-	public String book;
-	public int chapter;
-	public int verse;
-	public String content;
+	@JsonApiId
+	public String id;
 	
-
+	public String book;
+	
+	public int chapter;
+	
+	public int verse;
+	
+	public String content;
 
 	public BibleVerseResource(VerseEntity entity){
 		super();
@@ -28,9 +32,9 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
+		this.id = entity.getId();
 		
 	}
-	
 
 	@Override
 	public int compareTo(BibleVerseResource other) {

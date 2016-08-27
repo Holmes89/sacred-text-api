@@ -15,6 +15,9 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	static final Logger logger = Logger.getLogger(IVerseRepository.class);
 	
 	//Bible
+	@Query("{\"_id\": ?0, \"religiousText\": \"bible\"}")
+	VerseEntity getBibleVerseById(String id);
+	
 	@Query("{\"religiousText\": \"bible\",\"version\": ?0, \"book\": ?1,\"chapter\": ?2, \"verse\": ?3 }")
 	VerseEntity getSingleBibleVerse(String version, String book, int chapter, int verse);
 	
@@ -28,6 +31,9 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	List<VerseEntity> getBibleVersesInChapterRange(String version, String book, int startChapter, int endChapter);	
 
 	//Quran
+	@Query("{\"_id\": ?0, \"religiousText\": \"quran\"}")
+	VerseEntity getQuranVerseById(String id);
+	
 	@Query("{\"religiousText\": \"quran\",\"version\": ?0, \"chapter\": ?1, \"verse\": ?2 }")
 	VerseEntity getSingleQuranVerse(String version,  int chapter, int verse);
 	
@@ -41,6 +47,9 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	List<VerseEntity> getQuranVersesInChapterRange(String version, int startChapter, int endChapter);	
 	
 	//Tao
+	@Query("{\"_id\": ?0, \"religiousText\": \"tao-te-ching	\"}")
+	VerseEntity getTaoVerseById(String id);
+	
 	@Query("{\"religiousText\": \"tao-te-ching\", \"chapter\": ?0, \"verse\": ?1 }")
 	VerseEntity getSingleTaoVerse(int chapter, int verse);
 	

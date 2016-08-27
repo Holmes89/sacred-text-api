@@ -4,10 +4,14 @@ import org.apache.commons.lang3.text.WordUtils;
 
 import com.joeldholmes.entity.VerseEntity;
 
+import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
 @JsonApiResource(type="searchResult")
 public class SearchResource implements Comparable<SearchResource>{
+	
+	@JsonApiId
+	public String id;
 	
 	public int chapter; 
 	
@@ -47,6 +51,7 @@ public class SearchResource implements Comparable<SearchResource>{
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
+		this.id = entity.getId();
 		
 	}
 	

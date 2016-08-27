@@ -12,7 +12,6 @@ import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 public class ReligiousTextIndexServiceTests {
 	
 	@Autowired

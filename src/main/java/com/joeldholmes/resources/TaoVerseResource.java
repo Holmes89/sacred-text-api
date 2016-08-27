@@ -2,11 +2,14 @@ package com.joeldholmes.resources;
 
 import com.joeldholmes.entity.VerseEntity;
 
+import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
 @JsonApiResource(type="taoVerse")
 public class TaoVerseResource implements Comparable<TaoVerseResource>{
 
+	@JsonApiId
+	public String id;
 	
 	public int chapter;
 	
@@ -16,6 +19,7 @@ public class TaoVerseResource implements Comparable<TaoVerseResource>{
 
 	public TaoVerseResource(VerseEntity entity) {
 		super();
+		this.id = entity.getId();
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();

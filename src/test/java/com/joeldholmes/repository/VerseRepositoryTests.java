@@ -13,7 +13,6 @@ import com.joeldholmes.SacredTextApiApplication;
 import com.joeldholmes.entity.VerseEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 public class VerseRepositoryTests {
 
 	@Autowired

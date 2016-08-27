@@ -11,13 +11,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.SacredTextApiApplication;
 import com.joeldholmes.exceptions.ServiceException;
-import com.joeldholmes.resources.SearchResource;
+import com.joeldholmes.resources.TaoVerseResource;
 import com.joeldholmes.services.interfaces.ITaoService;
 
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SacredTextApiApplication.class)
 public class TaoServiceTests {
 
 	@Autowired
@@ -25,54 +24,54 @@ public class TaoServiceTests {
 
 	@Test
 	public void testGetSingleVerse() throws Exception{
-		List<SearchResource> dtos = taoService.getVerses(2, 3, null, null);
+		List<TaoVerseResource> dtos = taoService.getVerses(2, 3, null, null);
 		Assert.assertEquals(1, dtos.size());
-		SearchResource result = dtos.iterator().next();
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(3, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		TaoVerseResource result = dtos.iterator().next();
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.content);
 	}
 	
 	@Test
 	public void testGetMultipleVersesSingleChapter() throws Exception{
-		List<SearchResource> dtos = taoService.getVerses(2, 3, null, 4);
+		List<TaoVerseResource> dtos = taoService.getVerses(2, 3, null, 4);
 		Assert.assertEquals(2, dtos.size());
-		SearchResource result = dtos.iterator().next();
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(3, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		TaoVerseResource result = dtos.iterator().next();
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.content);
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(4, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(4, result.verse);
+		Assert.assertNotNull(result.content);
 	}
 	
 	@Test
 	public void testGetMultipleVersesSameChapter() throws Exception{
-		List<SearchResource> dtos = taoService.getVerses(2, 3, 2, 4);
+		List<TaoVerseResource> dtos = taoService.getVerses(2, 3, 2, 4);
 		Assert.assertEquals(2, dtos.size());
-		SearchResource result = dtos.iterator().next();
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(3, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		TaoVerseResource result = dtos.iterator().next();
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.content);
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(4, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(4, result.verse);
+		Assert.assertNotNull(result.content);
 	}
 	
 	@Test
 	public void testGetMultipleVersesMultipleChapter() throws Exception{
-		List<SearchResource> dtos = taoService.getVerses(2, 3, 3, 3);
+		List<TaoVerseResource> dtos = taoService.getVerses(2, 3, 3, 3);
 		Assert.assertEquals(5, dtos.size());
-		SearchResource result = dtos.iterator().next();
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(3, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		TaoVerseResource result = dtos.iterator().next();
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.content);
 		result = dtos.get(dtos.size()-1);
-		Assert.assertEquals(3, result.getChapter());
-		Assert.assertEquals(3, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		Assert.assertEquals(3, result.chapter);
+		Assert.assertEquals(3, result.verse);
+		Assert.assertNotNull(result.content);
 	}
 	
 	
@@ -83,7 +82,7 @@ public class TaoServiceTests {
 	
 	
 	public void testGetVerses_nullVerse() throws Exception{
-		List<SearchResource> dtos = taoService.getVerses(2, null, null, null);
+		List<TaoVerseResource> dtos = taoService.getVerses(2, null, null, null);
 		Assert.assertEquals(4, dtos.size());
 	}
 	
@@ -94,7 +93,7 @@ public class TaoServiceTests {
 	
 	
 	public void testGetVerses_throughChapter_nullVerse() throws Exception{
-		List<SearchResource> dtos = taoService.getVerses(2, 2, 3, null);
+		List<TaoVerseResource> dtos = taoService.getVerses(2, 2, 3, null);
 		Assert.assertEquals(6, dtos.size());
 	}
 	
@@ -125,12 +124,12 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetVersesInChapter() throws Exception{
-		List<SearchResource> verses = taoService.getVersesInChapter(2);
+		List<TaoVerseResource> verses = taoService.getVersesInChapter(2);
 		Assert.assertEquals(4, verses.size());
-		SearchResource result = verses.get(verses.size()-1);
-		Assert.assertEquals(2, result.getChapter());
-		Assert.assertEquals(4, result.getVerse());
-		Assert.assertNotNull(result.getContent());
+		TaoVerseResource result = verses.get(verses.size()-1);
+		Assert.assertEquals(2, result.chapter);
+		Assert.assertEquals(4, result.verse);
+		Assert.assertNotNull(result.content);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -140,7 +139,7 @@ public class TaoServiceTests {
 	
 	@Test
 	public void testGetVersesFromString() throws Exception{
-		List<SearchResource> verses = taoService.getVersesFromString("2:1-3");
+		List<TaoVerseResource> verses = taoService.getVersesFromString("2:1-3");
 		Assert.assertEquals(3, verses.size());
 		verses = taoService.getVersesFromString("2:1, 3-4");
 		Assert.assertEquals(3, verses.size());

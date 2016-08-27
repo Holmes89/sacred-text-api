@@ -19,7 +19,6 @@ import io.katharsis.resource.registry.ResourceRegistry;
 @SpringBootApplication
 @EnableAutoConfiguration
 @EnableMongoRepositories("com.joeldholmes.repository")
-@EnableEurekaClient
 @EnableCircuitBreaker
 @RestController
 public class SacredTextApiApplication {
@@ -34,7 +33,7 @@ public class SacredTextApiApplication {
 	private ResourceRegistry resourceRegistry;
 
 
-	@RequestMapping("/resource")
+	@RequestMapping("/resourcesInfo")
 	public Map<?, ?> getResources() {
 		Map<String, String> result = new HashMap<>();
 		// Add all resources (i.e. Project and Task)

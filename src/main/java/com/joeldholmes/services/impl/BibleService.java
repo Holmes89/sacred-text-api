@@ -13,7 +13,7 @@ import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.BibleVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
-import com.joeldholmes.resources.SearchResource;
+import com.joeldholmes.resources.BibleVerseResource;
 import com.joeldholmes.services.interfaces.IBibleService;
 import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 import com.joeldholmes.utils.ErrorCodes;
@@ -28,7 +28,7 @@ public class BibleService implements IBibleService{
 	IReligiousTextIndexService indexService;
 	
 	@Override
-	public List<SearchResource> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
+	public List<BibleVerseResource> getVersesInChapter(BibleVersionEnum version, String book, int chapter) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -36,7 +36,7 @@ public class BibleService implements IBibleService{
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Book cannot be null");
 		}
 		book = book.toLowerCase().trim();
-		List<SearchResource> dtos = new ArrayList<SearchResource>();
+		List<BibleVerseResource> dtos = new ArrayList<BibleVerseResource>();
 		
 		int chapterSize = indexService.maxBibleBookChapters(book);
 		
@@ -51,7 +51,7 @@ public class BibleService implements IBibleService{
 	
 	
 	@Override
-	public List<SearchResource> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
+	public List<BibleVerseResource> getVerses(BibleVersionEnum version, String book, Integer chapter, Integer verse, Integer throughChapter, Integer throughVerse) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -70,7 +70,7 @@ public class BibleService implements IBibleService{
 		
 		book = book.toLowerCase().trim();
 		
-		List<SearchResource> dtos = new ArrayList<SearchResource>();
+		List<BibleVerseResource> dtos = new ArrayList<BibleVerseResource>();
 	
 		
 		int chapterSize = indexService.maxBibleBookChapters(book);
@@ -90,7 +90,7 @@ public class BibleService implements IBibleService{
 		}
 		else if((throughChapter == null) && (throughVerse == null)){
 			
-			SearchResource singleDTO = getSingleVerse(version, book, chapter, verse);
+			BibleVerseResource singleDTO = getSingleVerse(version, book, chapter, verse);
 			dtos.add(singleDTO);
 			return dtos;
 		}
@@ -149,7 +149,7 @@ public class BibleService implements IBibleService{
 	}
 	
 	@Override
-	public List<SearchResource> getVersesFromString(BibleVersionEnum version, String verses) throws ServiceException{
+	public List<BibleVerseResource> getVersesFromString(BibleVersionEnum version, String verses) throws ServiceException{
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
 		}
@@ -158,7 +158,7 @@ public class BibleService implements IBibleService{
 		}
 		
 		verses = verses.replaceAll("\\s+", " ");
-		List<SearchResource> verseList = new ArrayList<SearchResource>();
+		List<BibleVerseResource> verseList = new ArrayList<BibleVerseResource>();
 		
 		String fullRegex = "(\\d?\\s?\\w+)\\s([\\d:]+)-?([\\d:]+)?";
 		String chapterVerseRegex = "([\\d:]+)-?([\\d:]+)?";
@@ -291,12 +291,12 @@ public class BibleService implements IBibleService{
 	}
 	
 	@Override
-	public List<SearchResource> getVersesFromString(String verses) throws ServiceException{
+	public List<BibleVerseResource> getVersesFromString(String verses) throws ServiceException{
 		return getVersesFromString(BibleVersionEnum.NIV, verses);
 	}
 	
 	@Override
-	public SearchResource getSingleVerse(BibleVersionEnum version, String book, int chapter, int verse) throws ServiceException{
+	public BibleVerseResource getSingleVerse(BibleVersionEnum version, String book, int chapter, int verse) throws ServiceException{
 		
 		if(version == null){
 			throw new ServiceException(ErrorCodes.NULL_INPUT, "Version cannot be null");
@@ -321,25 +321,32 @@ public class BibleService implements IBibleService{
 		
 		VerseEntity entity = verseRepository.getSingleBibleVerse(version.getAbbr(), book, chapter, verse);
 		
-		return new SearchResource(entity);
+		return new BibleVerseResource(entity);
 		
 	}
 	
 	@Deprecated
 	@Override
-	public List<SearchResource> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,
+	public List<BibleVerseResource> getVersesInRange(BibleVersionEnum version, String book, Integer chapter, Integer verse,
 			Integer throughChapter, Integer throughVerse) throws ServiceException {
 
 		return getVerses(version, book, chapter, verse, throughChapter, throughVerse);
 	}
 	
-	private List<SearchResource> convertEntitiesToDTOs(List<VerseEntity> entities){
-		List<SearchResource> dtos = new ArrayList<SearchResource>();
+	private List<BibleVerseResource> convertEntitiesToDTOs(List<VerseEntity> entities){
+		List<BibleVerseResource> dtos = new ArrayList<BibleVerseResource>();
 		for(VerseEntity verseEntity: entities){
-			dtos.add(new SearchResource(verseEntity));
+			dtos.add(new BibleVerseResource(verseEntity));
 		}
 		Collections.sort(dtos);
 		return dtos;
+	}
+
+
+	@Override
+	public BibleVerseResource getVerseById(String id) throws ServiceException {
+		VerseEntity verseEntity = verseRepository.getBibleVerseById(id);
+		return new BibleVerseResource(verseEntity);
 	}
 
 
