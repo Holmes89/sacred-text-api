@@ -13,17 +13,7 @@ public class SearchResource implements Comparable<SearchResource>{
 	@JsonApiId
 	public String id;
 	//TODO: Change all options below into just displayVerse
-	public int chapter; 
-	
-	public String version; 
-	
-	public String content;
-	
-	public int verse;
-	
-	public String book;
-	
-	public String chapterTitle;
+	//Search results should have same Id as verse, and can be used to grab verse. Need to check which book though.
 	
 	public String religiousText;
 	
