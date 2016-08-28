@@ -12,7 +12,7 @@ public class SearchResource implements Comparable<SearchResource>{
 	
 	@JsonApiId
 	public String id;
-	
+	//TODO: Change all options below into just displayVerse
 	public int chapter; 
 	
 	public String version; 
