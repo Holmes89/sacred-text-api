@@ -33,7 +33,7 @@ public class BibleVerseRepository {
 		}
 		Map<String, Set<String>> bibleVerseParams =filterParams.get("bibleVerse").getParams();
 		Set<String> versions = bibleVerseParams.get("version");
-		Set<String> verses = bibleVerseParams.get("verses");
+		Set<String> verses = bibleVerseParams.get("displayVerse");
 		if(verses==null || verses.isEmpty()){
 			return null;
 		}

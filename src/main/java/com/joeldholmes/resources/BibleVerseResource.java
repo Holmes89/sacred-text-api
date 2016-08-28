@@ -13,6 +13,8 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 	@JsonApiId
 	public String id;
 	
+	public String displayVerse;
+	
 	public String book;
 	
 	public int chapter;
@@ -36,6 +38,7 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 		this.content=entity.getContent();
 		this.id = entity.getId();
 		this.version = entity.getVersion();
+		this.displayVerse = this.book+" "+this.chapter+":"+this.verse;
 		
 	}
 
