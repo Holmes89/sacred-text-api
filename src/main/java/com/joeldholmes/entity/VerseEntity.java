@@ -3,8 +3,6 @@ package com.joeldholmes.entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.joeldholmes.resources.SearchResource;
-
 @Document(collection="religiousTexts")
 public class VerseEntity implements Comparable<VerseEntity>{
 	

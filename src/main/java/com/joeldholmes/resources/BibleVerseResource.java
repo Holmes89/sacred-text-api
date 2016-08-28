@@ -20,6 +20,8 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 	public int verse;
 	
 	public String content;
+	
+	public String version;
 
 	public BibleVerseResource(VerseEntity entity){
 		super();
@@ -33,6 +35,7 @@ public class BibleVerseResource implements Comparable<BibleVerseResource>{
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
 		this.id = entity.getId();
+		this.version = entity.getVersion();
 		
 	}
 

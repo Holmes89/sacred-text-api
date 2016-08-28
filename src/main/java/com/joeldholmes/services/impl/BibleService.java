@@ -346,6 +346,9 @@ public class BibleService implements IBibleService{
 	@Override
 	public BibleVerseResource getVerseById(String id) throws ServiceException {
 		VerseEntity verseEntity = verseRepository.getBibleVerseById(id);
+		if(verseEntity == null){
+			return null;
+		}
 		return new BibleVerseResource(verseEntity);
 	}
 

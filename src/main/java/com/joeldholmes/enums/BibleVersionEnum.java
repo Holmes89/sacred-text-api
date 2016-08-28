@@ -41,4 +41,13 @@ public enum BibleVersionEnum {
 		}
 		return abbrs;
 	}
+	
+	public static BibleVersionEnum findByAbbreviation(String abbr){
+		for(BibleVersionEnum e: BibleVersionEnum.values()){
+			if(abbr.equalsIgnoreCase(e.getAbbr())){
+				return e;
+			}
+		}
+		return null;
+	}
 }
