@@ -3,9 +3,11 @@ package com.joeldholmes.services;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.exceptions.ServiceException;
@@ -14,6 +16,8 @@ import com.joeldholmes.services.interfaces.ISearchService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
+@Ignore
 public class SearchServiceTests {
 
 	@Autowired
