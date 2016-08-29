@@ -15,6 +15,8 @@ public class TaoVerseResource implements Comparable<TaoVerseResource>{
 	
 	public int verse;
 	
+	public String displayVerse;
+	
 	public String content;
 
 	public TaoVerseResource(VerseEntity entity) {
@@ -23,6 +25,7 @@ public class TaoVerseResource implements Comparable<TaoVerseResource>{
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
 		this.content=entity.getContent();
+		this.displayVerse = this.chapter+":"+this.verse;
 	}
 
 	

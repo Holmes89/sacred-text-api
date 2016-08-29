@@ -16,5 +16,6 @@ public interface ITaoService {
 
 	TaoVerseResource getSingleVerse(int chapter, int verse) throws ServiceException;
 
+	TaoVerseResource getVerseById(String id) throws ServiceException;
 
 }

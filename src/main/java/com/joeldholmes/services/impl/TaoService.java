@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
+import com.joeldholmes.resources.QuranVerseResource;
 import com.joeldholmes.resources.TaoVerseResource;
 import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
 import com.joeldholmes.services.interfaces.ITaoService;
@@ -224,7 +225,16 @@ public class TaoService implements ITaoService {
 		
 		return verseList;
 	}
-
+	
+	@Override
+	public TaoVerseResource getVerseById(String id) throws ServiceException {
+		VerseEntity verseEntity = verseRepository.getTaoVerseById(id);
+		if(verseEntity == null){
+			return null;
+		}
+		return new TaoVerseResource(verseEntity);
+	}
+	
 	private List<TaoVerseResource> convertEntitiesToDTOs(List<VerseEntity> entities){
 		List<TaoVerseResource> dtos = new ArrayList<TaoVerseResource>();
 		for(VerseEntity verseEntity: entities){

@@ -47,7 +47,7 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	List<VerseEntity> getQuranVersesInChapterRange(String version, int startChapter, int endChapter);	
 	
 	//Tao
-	@Query("{\"_id\": ?0, \"religiousText\": \"tao-te-ching	\"}")
+	@Query("{\"_id\": ?0, \"religiousText\": \"tao-te-ching\"}")
 	VerseEntity getTaoVerseById(String id);
 	
 	@Query("{\"religiousText\": \"tao-te-ching\", \"chapter\": ?0, \"verse\": ?1 }")
