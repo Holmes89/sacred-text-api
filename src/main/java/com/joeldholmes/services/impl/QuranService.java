@@ -291,6 +291,15 @@ public class QuranService implements IQuranService {
 	public QuranVerseResource getSingleVerse(String chapterName, int verse) throws ServiceException{
 		return getSingleVerse(QuranVersionEnum.SHAKIR, chapterName ,verse);
 	}
+	
+	@Override
+	public QuranVerseResource getVerseById(String id) throws ServiceException {
+		VerseEntity verseEntity = verseRepository.getQuranVerseById(id);
+		if(verseEntity == null){
+			return null;
+		}
+		return new QuranVerseResource(verseEntity);
+	}
 
 	private List<QuranVerseResource> convertEntitiesToDTOs(List<VerseEntity> entities){
 		List<QuranVerseResource> dtos = new ArrayList<QuranVerseResource>();

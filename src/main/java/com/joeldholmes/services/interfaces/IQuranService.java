@@ -35,4 +35,6 @@ public interface IQuranService {
 	
 	List<QuranVerseResource> getVersesInChapter(String chapterName) throws ServiceException;
 
+	QuranVerseResource getVerseById(String id) throws ServiceException;
+
 }

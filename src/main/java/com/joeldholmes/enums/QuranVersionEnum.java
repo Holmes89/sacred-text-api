@@ -13,4 +13,13 @@ public enum QuranVersionEnum {
 	public String getName(){
 		return this.name;
 	}
+	
+	public static QuranVersionEnum findByName(String name){
+		for(QuranVersionEnum e: QuranVersionEnum.values()){
+			if(name.equalsIgnoreCase(e.name())){
+				return e;
+			}
+		}
+		return null;
+	}
 }
