@@ -40,7 +40,7 @@ public class SearchService implements ISearchService {
 		if(entities==null||entities.isEmpty()){
 			return null;
 		}
-		return entitiesToDTOs(entities);
+		return entitiesToDTOs(entities, term);
 	}
 
 	@Override
@@ -52,7 +52,7 @@ public class SearchService implements ISearchService {
 		if(entities==null||entities.isEmpty()){
 			return null;
 		}
-		return entitiesToDTOs(entities);
+		return entitiesToDTOs(entities, term);
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class SearchService implements ISearchService {
 		if(entities==null||entities.isEmpty()){
 			return null;
 		}
-		return entitiesToDTOs(entities);
+		return entitiesToDTOs(entities, term);
 		
 	}
 
@@ -77,14 +77,16 @@ public class SearchService implements ISearchService {
 		if(entities==null||entities.isEmpty()){
 			return null;
 		}
-		return entitiesToDTOs(entities);
+		return entitiesToDTOs(entities, term);
 		
 	}
 	
-	private List<SearchResource> entitiesToDTOs(List<VerseEntity> entities){
+	private List<SearchResource> entitiesToDTOs(List<VerseEntity> entities, String term){
 		List<SearchResource> list = new ArrayList<SearchResource>();
 		for(VerseEntity entity: entities){
-			list.add(new SearchResource(entity));
+			SearchResource searchResource = new SearchResource(entity);
+			searchResource.searchTerm = term;
+			list.add(searchResource);
 		}
 		
 		return list;

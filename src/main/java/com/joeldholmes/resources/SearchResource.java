@@ -19,6 +19,8 @@ public class SearchResource{
 	
 	public String content;
 	
+	public String searchTerm;
+	
 	public SearchResource(VerseEntity entity){
 		super();
 		
