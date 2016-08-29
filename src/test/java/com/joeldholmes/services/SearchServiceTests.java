@@ -17,7 +17,6 @@ import com.joeldholmes.services.interfaces.ISearchService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@Ignore
 public class SearchServiceTests {
 
 	@Autowired
@@ -132,119 +131,5 @@ public class SearchServiceTests {
 	@Test(expected=ServiceException.class)
 	public void testSearchAllTaoText_empty() throws Exception{
 		searchService.searchTaoText("");
-	}
-	
-	@Test
-	public void testSearchAllVerseAndText() throws Exception{
-		List<SearchResource> results = searchService.searchAllVerseAndText("hatred");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(45, results.size());
-		
-		results = searchService.searchAllVerseAndText("Joel 2:3-6, Exodus 3:9-11, 4:14");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(8, results.size());
-		
-		results = searchService.searchAllVerseAndText("The Opening 1-3, 6-7, The Thunder, 3:32-33");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(50, results.size());
-		
-		results = searchService.searchAllVerseAndText("2:1, 1:3-4");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(6, results.size());
-		
-		results = searchService.searchAllVerseAndText("sadfasdfj;aslkdfj;alskdjf;asdf");
-		Assert.assertTrue(results.isEmpty());
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchAllVerseAndText_null() throws Exception{
-		searchService.searchAllVerseAndText(null);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchAllVerseAndText_empty() throws Exception{
-		searchService.searchAllVerseAndText("");
-	}
-	
-	@Test
-	public void testSearchBibleVerseAndText() throws Exception{
-		List<SearchResource> results = searchService.searchBibleVerseAndText("hatred");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(29, results.size());
-		
-		results = searchService.searchBibleVerseAndText("Joel 2:3-6, Exodus 3:9-11, 4:14");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(8, results.size());
-		
-		results = searchService.searchBibleVerseAndText("sadfasdfj;aslkdfj;alskdjf;asdf");
-		Assert.assertTrue(results.isEmpty());
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchBibleVerseAndText_null() throws Exception{
-		searchService.searchBibleVerseAndText(null);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchBibleVerseAndText_empty() throws Exception{
-		searchService.searchBibleVerseAndText("");
-	}
-	
-	@Test
-	public void testSearchQuranVerseAndText() throws Exception{
-		List<SearchResource> results = searchService.searchQuranVerseAndText("Jesus");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(25, results.size());
-		
-		results = searchService.searchQuranVerseAndText("The Opening 1-3, 6-7, The Thunder, 3:32-33");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(50, results.size());
-		
-		results = searchService.searchQuranVerseAndText("sadfasdfj;aslkdfj;alskdjf;asdf");
-		Assert.assertTrue(results.isEmpty());
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchQuranVerseAndText_null() throws Exception{
-		searchService.searchQuranVerseAndText(null);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchQuranVerseAndText_empty() throws Exception{
-		searchService.searchQuranVerseAndText("");
-	}
-	
-	@Test
-	public void testSearchTaoVerseAndText() throws Exception{
-		List<SearchResource> results = searchService.searchTaoVerseAndText("Love");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(8, results.size());
-		
-		results = searchService.searchTaoVerseAndText("2:1, 1:3-4");
-		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
-		Assert.assertEquals(3, results.size());
-		
-		results = searchService.searchTaoVerseAndText("sadfasdfj;aslkdfj;alskdjf;asdf");
-		Assert.assertTrue(results.isEmpty());
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchTaoVerseAndText_null() throws Exception{
-		searchService.searchTaoVerseAndText(null);
-	}
-	
-	@Test(expected=ServiceException.class)
-	public void testSearchTaoVerseAndText_empty() throws Exception{
-		searchService.searchTaoVerseAndText("");
 	}
 }

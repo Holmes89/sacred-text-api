@@ -8,66 +8,37 @@ import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
 @JsonApiResource(type="searchResult")
-public class SearchResource implements Comparable<SearchResource>{
+public class SearchResource{
 	
 	@JsonApiId
 	public String id;
-	//TODO: Change all options below into just displayVerse
-	//Search results should have same Id as verse, and can be used to grab verse. Need to check which book though.
+	
+	public String displayVerse;
 	
 	public String religiousText;
+	
+	public String content;
 	
 	public SearchResource(VerseEntity entity){
 		super();
 		
 		String entityBook = entity.getBook();
 		String entityChapterTitle= entity.getChapterTitle();
-		String entityReligiousText= entity.getReligiousText();
-		String entityVersion= entity.getVersion();
-
+		
+		this.id = entity.getId();
+		this.displayVerse = ""; 
+		
 		if(entityBook!=null){
-			this.book = WordUtils.capitalizeFully(entityBook);
+			this.displayVerse += WordUtils.capitalizeFully(entityBook)+" ";
 		}
 		if(entityChapterTitle!=null){
-			this.chapterTitle = WordUtils.capitalizeFully(entityChapterTitle);
+			this.displayVerse += WordUtils.capitalizeFully(entityChapterTitle)+" ";
 		}
-		if(entityReligiousText!=null){
-			this.religiousText = WordUtils.capitalizeFully(entityReligiousText);
-		}
-		if(entityVersion!=null){
-			this.version = WordUtils.capitalizeFully(entityVersion);
-		}
-
-		this.chapter=entity.getChapter();
-		this.verse=entity.getVerse();
+		this.displayVerse += entity.getChapter()+":";
+		this.displayVerse+=entity.getVerse();
+		
+		this.religiousText = entity.getReligiousText();
 		this.content=entity.getContent();
-		this.id = entity.getId();
-		
-	}
-	
-	@Override
-	public int compareTo(SearchResource other) {
-		if(this.book!=null){
-			if(!this.book.equals(other.book)){
-				return this.book.compareTo(other.book);
-			}
-		}
-		
-		if(this.chapter>other.chapter){
-			return 1;
-		}
-		else if(this.chapter<other.chapter){
-			return -1;
-		}
-		
-		if(this.verse>other.verse){
-			return 1;
-		}
-		else if(this.verse<other.verse){
-			return -1;
-		}
-		
-		return 0;
 	}
 
 }
