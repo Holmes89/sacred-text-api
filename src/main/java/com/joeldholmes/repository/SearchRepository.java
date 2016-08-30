@@ -23,11 +23,11 @@ public class SearchRepository {
 	
 	public List<SearchResource> findAll(QueryParams params) throws ServiceException{
 		Map<String, FilterParams> filterParams = params.getFilters().getParams();
-		if(!filterParams.containsKey("search")){
+		if(!filterParams.containsKey("searchTerm")){
 			return null;
 		}
-		Map<String, Set<String>> searchParams =filterParams.get("search").getParams();
-		Set<String> searchTerms = searchParams.get("searchTerm");
+		Map<String, Set<String>> searchParams =filterParams.get("searchTerm").getParams();
+		Set<String> searchTerms = searchParams.get("");
 		if(searchTerms==null || searchTerms.isEmpty()){
 			return null;
 		}

@@ -27,11 +27,10 @@ public class TaoVerseRepository {
 	
 	public List<TaoVerseResource> findAll(QueryParams params) throws ServiceException{
 		Map<String, FilterParams> filterParams = params.getFilters().getParams();
-		if(!filterParams.containsKey("taoVerse")){
+		if(!filterParams.containsKey("displayVerse")){
 			return null;
 		}
-		Map<String, Set<String>> taoVerseParams =filterParams.get("taoVerse").getParams();
-		Set<String> verses = taoVerseParams.get("displayVerse");
+		Set<String> verses = filterParams.get("displayVerse").getParams().get("");
 		if(verses==null || verses.isEmpty()){
 			return null;
 		}

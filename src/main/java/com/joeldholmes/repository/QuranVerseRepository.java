@@ -29,22 +29,23 @@ public class QuranVerseRepository {
 	
 	public List<QuranVerseResource> findAll(QueryParams params) throws ServiceException{
 		Map<String, FilterParams> filterParams = params.getFilters().getParams();
-		if(!filterParams.containsKey("quranVerse")){
+		if(!filterParams.containsKey("displayVerse")){
 			return null;
 		}
-		Map<String, Set<String>> quranVerseParams =filterParams.get("quranVerse").getParams();
-		Set<String> versions = quranVerseParams.get("version");
-		Set<String> verses = quranVerseParams.get("displayVerse");
-		if(verses==null || verses.isEmpty()){
-			return null;
-		}
+		
 		QuranVersionEnum version;
-		if(versions == null || versions.isEmpty()){
+		if(!filterParams.containsKey("version")){
 			version = QuranVersionEnum.SHAKIR;
 		}
 		else{
-			version = QuranVersionEnum.findByName(versions.iterator().next());
+			version = QuranVersionEnum.findByName(filterParams.get("version").getParams().get("").iterator().next());
 		}
+		
+		Set<String> verses = filterParams.get("displayVerse").getParams().get("");
+		if(verses==null || verses.isEmpty()){
+			return null;
+		}
+		
 		List<QuranVerseResource> resources = new ArrayList<QuranVerseResource>();
 		for(String verse: verses){
 			resources.addAll(quranService.getVersesFromString(version, verse));

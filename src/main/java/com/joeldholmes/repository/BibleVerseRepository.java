@@ -28,22 +28,23 @@ public class BibleVerseRepository {
 	
 	public List<BibleVerseResource> findAll(QueryParams params) throws ServiceException{
 		Map<String, FilterParams> filterParams = params.getFilters().getParams();
-		if(!filterParams.containsKey("bibleVerse")){
+		if(!filterParams.containsKey("displayVerse")){
 			return null;
 		}
-		Map<String, Set<String>> bibleVerseParams =filterParams.get("bibleVerse").getParams();
-		Set<String> versions = bibleVerseParams.get("version");
-		Set<String> verses = bibleVerseParams.get("displayVerse");
-		if(verses==null || verses.isEmpty()){
-			return null;
-		}
+		
 		BibleVersionEnum version;
-		if(versions == null || versions.isEmpty()){
+		if(!filterParams.containsKey("version")){
 			version = BibleVersionEnum.NIV;
 		}
 		else{
-			version = BibleVersionEnum.findByAbbreviation(versions.iterator().next().toUpperCase());
+			version = BibleVersionEnum.findByAbbreviation(filterParams.get("version").getParams().get("").iterator().next());
 		}
+		
+		Set<String> verses = filterParams.get("displayVerse").getParams().get("");
+		if(verses==null || verses.isEmpty()){
+			return null;
+		}
+		
 		List<BibleVerseResource> resources = new ArrayList<BibleVerseResource>();
 		for(String verse: verses){
 			resources.addAll(bibleService.getVersesFromString(version, verse));
