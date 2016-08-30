@@ -17,7 +17,7 @@ public class SearchResource{
 	
 	public String religiousText;
 	
-	public String content;
+	public String searchContent;
 	
 	public String searchTerm;
 	
@@ -30,17 +30,17 @@ public class SearchResource{
 		this.id = entity.getId();
 		this.displayVerse = ""; 
 		
-		if(entityBook!=null){
+		if(entityBook!=null && !entityBook.isEmpty()){
 			this.displayVerse += WordUtils.capitalizeFully(entityBook)+" ";
 		}
-		if(entityChapterTitle!=null){
+		if(entityChapterTitle!=null && !entityBook.isEmpty()){
 			this.displayVerse += WordUtils.capitalizeFully(entityChapterTitle)+" ";
 		}
 		this.displayVerse += entity.getChapter()+":";
 		this.displayVerse+=entity.getVerse();
 		
 		this.religiousText = entity.getReligiousText();
-		this.content=entity.getContent();
+		this.searchContent=entity.getContent();
 	}
 
 }
