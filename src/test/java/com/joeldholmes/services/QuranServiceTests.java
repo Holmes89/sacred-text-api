@@ -29,7 +29,7 @@ public class QuranServiceTests {
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -40,12 +40,12 @@ public class QuranServiceTests {
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -56,12 +56,12 @@ public class QuranServiceTests {
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -72,12 +72,12 @@ public class QuranServiceTests {
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("The Family Of Imran", result.chapterTitle);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -131,7 +131,7 @@ public class QuranServiceTests {
 		Assert.assertEquals("The Cow", result.chapterTitle);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(286, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test(expected=ServiceException.class)

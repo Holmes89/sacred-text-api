@@ -21,7 +21,7 @@ public class QuranVerseResource implements Comparable<QuranVerseResource>{
 	
 	public int verse;
 	
-	public String content;
+	public String verseContent;
 	
 	public QuranVerseResource(VerseEntity entity){
 		super();
@@ -31,7 +31,7 @@ public class QuranVerseResource implements Comparable<QuranVerseResource>{
 		}
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
-		this.content=entity.getContent();
+		this.verseContent=entity.getContent();
 		this.displayVerse = this.chapterTitle+" "+this.verse;
 		this.id = entity.getId();
 	}

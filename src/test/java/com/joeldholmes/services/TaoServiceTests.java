@@ -29,7 +29,7 @@ public class TaoServiceTests {
 		TaoVerseResource result = dtos.iterator().next();
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -39,11 +39,11 @@ public class TaoServiceTests {
 		TaoVerseResource result = dtos.iterator().next();
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(4, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -53,11 +53,11 @@ public class TaoServiceTests {
 		TaoVerseResource result = dtos.iterator().next();
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(4, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -67,11 +67,11 @@ public class TaoServiceTests {
 		TaoVerseResource result = dtos.iterator().next();
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	
@@ -129,7 +129,7 @@ public class TaoServiceTests {
 		TaoVerseResource result = verses.get(verses.size()-1);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(4, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test(expected=ServiceException.class)

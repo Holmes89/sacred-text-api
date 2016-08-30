@@ -31,7 +31,7 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -42,12 +42,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -58,12 +58,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -74,12 +74,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -140,7 +140,7 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(32, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -171,7 +171,7 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -182,12 +182,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -198,12 +198,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -214,12 +214,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}	
 	
 	@Test
@@ -230,12 +230,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(1, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(21, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -246,12 +246,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(1, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(32, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -262,12 +262,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(1, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(2, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test(expected=ServiceException.class)
@@ -328,7 +328,7 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -339,12 +339,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -355,12 +355,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(9, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -371,12 +371,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(11, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -387,12 +387,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("1 Kings", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("1 Kings", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(11, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -403,12 +403,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(9, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -419,12 +419,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(11, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -435,12 +435,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Exodus", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(11, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -451,12 +451,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Exodus", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(14, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	@Test
 	public void testGetVerseFromString_MultipleVersesSingleChapterPlusBookChapterVerseRange_3() throws Exception{
@@ -466,12 +466,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Exodus", result.book);
 		Assert.assertEquals(4, result.chapter);
 		Assert.assertEquals(14, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	@Test
 	public void testGetVerseFromStrings_MultipleVersesSameChapter() throws Exception{
@@ -481,12 +481,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(6, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -497,12 +497,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(3, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}	
 	
 	@Test
@@ -513,12 +513,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(1, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(21, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -529,12 +529,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(1, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(32, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 	@Test
@@ -545,12 +545,12 @@ public class BibleServiceTests {
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(2, result.chapter);
 		Assert.assertEquals(1, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 		result = dtos.get(dtos.size()-1);
 		Assert.assertEquals("Joel", result.book);
 		Assert.assertEquals(3, result.chapter);
 		Assert.assertEquals(2, result.verse);
-		Assert.assertNotNull(result.content);
+		Assert.assertNotNull(result.verseContent);
 	}
 	
 }

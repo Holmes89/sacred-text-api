@@ -17,14 +17,14 @@ public class TaoVerseResource implements Comparable<TaoVerseResource>{
 	
 	public String displayVerse;
 	
-	public String content;
+	public String verseContent;
 
 	public TaoVerseResource(VerseEntity entity) {
 		super();
 		this.id = entity.getId();
 		this.chapter=entity.getChapter();
 		this.verse=entity.getVerse();
-		this.content=entity.getContent();
+		this.verseContent=entity.getContent();
 		this.displayVerse = this.chapter+":"+this.verse;
 	}
 
