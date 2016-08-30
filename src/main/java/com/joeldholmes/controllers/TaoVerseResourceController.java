@@ -2,6 +2,8 @@ package com.joeldholmes.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.TaoVerseRepository;
@@ -14,6 +16,8 @@ import io.katharsis.repository.annotations.JsonApiFindOne;
 import io.katharsis.repository.annotations.JsonApiResourceRepository;
 
 @Component
+@RestController
+@CrossOrigin
 @JsonApiResourceRepository(TaoVerseResource.class)
 public class TaoVerseResourceController {
 
