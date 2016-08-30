@@ -7,7 +7,7 @@ import com.joeldholmes.entity.VerseEntity;
 import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
-@JsonApiResource(type="bibleVerse")
+@JsonApiResource(type="bible-verses")
 public class BibleVerseResource implements Comparable<BibleVerseResource>{
 
 	@JsonApiId

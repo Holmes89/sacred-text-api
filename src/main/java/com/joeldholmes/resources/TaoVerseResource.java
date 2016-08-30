@@ -5,7 +5,7 @@ import com.joeldholmes.entity.VerseEntity;
 import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
-@JsonApiResource(type="taoVerse")
+@JsonApiResource(type="tao-verses")
 public class TaoVerseResource implements Comparable<TaoVerseResource>{
 
 	@JsonApiId
