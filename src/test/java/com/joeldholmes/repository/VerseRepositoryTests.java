@@ -1,5 +1,6 @@
 package com.joeldholmes.repository;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
@@ -7,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.entity.VerseEntity;
@@ -116,10 +118,18 @@ public class VerseRepositoryTests {
 	
 	@Test
 	public void testSearchAllText() throws Exception{
-		List<VerseEntity> verses = verseRepo.searchAllText("hatred");
+		PageRequest pageRequest = new PageRequest(0, 25);
+		Iterable<VerseEntity> verses = verseRepo.searchAllText("hatred", pageRequest);
+		Iterator<VerseEntity> iter = verses.iterator();
 		Assert.assertNotNull(verses);
-		Assert.assertTrue(!verses.isEmpty());
-		Assert.assertEquals(45, verses.size());
+		Assert.assertTrue(verses.iterator().hasNext());
+		int count=0;
+		
+		while(iter.hasNext()){
+			iter.next();
+			count++;
+		}
+		Assert.assertEquals(25, count);
 	}
 	
 	@Test

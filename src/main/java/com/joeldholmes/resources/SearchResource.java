@@ -21,8 +21,11 @@ public class SearchResource{
 	
 	public String searchTerm;
 	
-	public SearchResource(VerseEntity entity){
+	public SearchResource(){
 		super();
+	}
+	public SearchResource(VerseEntity entity){
+		this();
 		
 		String entityBook = entity.getBook();
 		String entityChapterTitle= entity.getChapterTitle();

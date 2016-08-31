@@ -1,13 +1,14 @@
 package com.joeldholmes.services;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.joeldholmes.exceptions.ServiceException;
@@ -22,15 +23,21 @@ public class SearchServiceTests {
 	@Autowired
 	ISearchService searchService;
 	
+	private PageRequest pageRequest = new PageRequest(0, 50);
+	
 	@Test
 	public void testSearchAllText() throws Exception{
-		List<SearchResource> results = searchService.searchAllText("hatred");
+		
+		Iterable<SearchResource> results = searchService.searchAllText("hatred", pageRequest);
 		Assert.assertNotNull(results);
-		Assert.assertTrue(!results.isEmpty());
+		Iterator<SearchResource> iterator = results.iterator();
+		Assert.assertTrue(iterator.hasNext());
 		
 		int bibleCount = 0;
 		int quranCount = 0;
-		for(SearchResource verse: results){
+		results.iterator();
+		while(iterator.hasNext()){
+			SearchResource verse = iterator.next();
 			String text = verse.religiousText;
 			if(text.equalsIgnoreCase("bible"))
 				bibleCount++;
@@ -44,18 +51,18 @@ public class SearchServiceTests {
 	
 	@Test
 	public void testSearchAllText_no_results() throws Exception{
-		List<SearchResource> results = searchService.searchAllText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;");
-		Assert.assertNull(results);
+		Iterable<SearchResource> results = searchService.searchAllText("asdflkja;sldkfapoisdfja;sldjf;aosidjf;lasjdf;", pageRequest);
+		Assert.assertFalse(results.iterator().hasNext());
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testSearchAllText_null() throws Exception{
-		searchService.searchAllText(null);
+		searchService.searchAllText(null, pageRequest);
 	}
 	
 	@Test(expected=ServiceException.class)
 	public void testSearchAllText_empty() throws Exception{
-		searchService.searchAllText("");
+		searchService.searchAllText("", pageRequest);
 	}
 	
 	@Test

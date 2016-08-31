@@ -3,6 +3,8 @@ package com.joeldholmes.repository;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -63,7 +65,7 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	List<VerseEntity> getTaoVersesInChapterRange(int startChapter, int endChapter);	
 	
 	@Query("{$text: {$search: ?0}}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
-	List<VerseEntity> searchAllText(String term);
+	Page<VerseEntity> searchAllText(String term, Pageable page);
 	
 	@Query("{$text: {$search: ?0}, \"religiousText\":\"bible\"}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
 	List<VerseEntity> searchAllBibleText(String term);

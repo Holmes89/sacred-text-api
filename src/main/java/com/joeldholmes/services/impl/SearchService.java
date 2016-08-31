@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.joeldholmes.entity.VerseEntity;
@@ -32,14 +34,11 @@ public class SearchService implements ISearchService {
 	ITaoService taoService;
 	
 	@Override
-	public List<SearchResource> searchAllText(String term) throws ServiceException {
+	public Iterable<SearchResource> searchAllText(String term, Pageable page) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
-		List<VerseEntity> entities = verseRepository.searchAllText(term);
-		if(entities==null||entities.isEmpty()){
-			return null;
-		}
+		Page<VerseEntity> entities = verseRepository.searchAllText(term, page);
 		return entitiesToDTOs(entities, term);
 	}
 
@@ -81,7 +80,7 @@ public class SearchService implements ISearchService {
 		
 	}
 	
-	private List<SearchResource> entitiesToDTOs(List<VerseEntity> entities, String term){
+	private List<SearchResource> entitiesToDTOs(Iterable<VerseEntity> entities, String term){
 		List<SearchResource> list = new ArrayList<SearchResource>();
 		for(VerseEntity entity: entities){
 			SearchResource searchResource = new SearchResource(entity);
@@ -91,6 +90,7 @@ public class SearchService implements ISearchService {
 		
 		return list;
 	}
+	
 
 
 }
