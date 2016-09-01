@@ -17,7 +17,6 @@ import io.katharsis.repository.annotations.JsonApiResourceRepository;
 
 @Component
 @RestController
-@CrossOrigin
 @JsonApiResourceRepository(BibleVerseResource.class)
 public class BibleVerseResourceController {
 
