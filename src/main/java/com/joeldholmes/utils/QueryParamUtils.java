@@ -78,7 +78,10 @@ public class QueryParamUtils {
 			if (pageNumber != null && pageSize != null)
 			{
 				pag = new PageRequest(pageNumber, pageSize, sort);
-			}			
+			}	
+			else{
+				pag = new PageRequest(0, 25);
+			}
 			
 		}
 		else{
