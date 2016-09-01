@@ -75,13 +75,14 @@ public class QueryParamUtils {
 			//Integer offset = pagination.get(RestrictedPaginationKeys.offset);
 			//Integer limit = pagination.get(RestrictedPaginationKeys.limit);
 			
-			if (pageNumber != null && pageSize != null)
-			{
-				pag = new PageRequest(pageNumber, pageSize, sort);
-			}	
-			else{
-				pag = new PageRequest(0, 25);
+			if (pageNumber == null){
+				pageNumber=0;
 			}
+			if(pageSize == null){
+				pageSize=25;
+			}
+			pag = new PageRequest(pageNumber, pageSize, sort);
+				
 			
 		}
 		else{
