@@ -61,7 +61,11 @@ public class QueryParamUtils {
 				sort = new Sort(dir, sortList);
 			}
 		}
+		return getPageable(params, sort);
 		
+	}
+	
+	public static Pageable getPageable(QueryParams params, Sort sort){
 		Map<RestrictedPaginationKeys,Integer> pagination = params.getPagination();
 		PageRequest pag = null;
 		if (pagination != null && pagination.size() > 0)
@@ -84,6 +88,9 @@ public class QueryParamUtils {
 			pag = new PageRequest(pageNumber, pageSize, sort);
 				
 			
+		}
+		else if(sort !=null ){
+			pag = new PageRequest(0, 25, sort);
 		}
 		else{
 			pag = new PageRequest(0, 25);

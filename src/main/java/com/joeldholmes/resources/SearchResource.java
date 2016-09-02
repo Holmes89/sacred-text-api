@@ -21,6 +21,8 @@ public class SearchResource{
 	
 	public String searchTerm;
 	
+	public Double score;
+	
 	public SearchResource(){
 		super();
 	}

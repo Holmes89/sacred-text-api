@@ -1,7 +1,9 @@
 package com.joeldholmes.entity;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
 @Document(collection="religiousTexts")
 public class VerseEntity implements Comparable<VerseEntity>{
@@ -10,12 +12,17 @@ public class VerseEntity implements Comparable<VerseEntity>{
 	private String id;
 	
 	private Integer chapter; 
-	private String version; 
+	private String version;
+	
+	@TextIndexed
 	private String content;
 	private Integer verse;
 	private String book;
 	private String chapterTitle;
 	private String religiousText;
+	
+	@TextScore
+	private Float score;
 	
 	public Integer getChapter() {
 		return chapter;
@@ -86,6 +93,12 @@ public class VerseEntity implements Comparable<VerseEntity>{
 		}
 		
 		return 0;
+	}
+	public Float getScore() {
+		return score;
+	}
+	public void setScore(Float score) {
+		this.score = score;
 	}
 
 	

@@ -126,7 +126,7 @@ public class VerseRepositoryTests {
 		int count=0;
 		
 		while(iter.hasNext()){
-			iter.next();
+			VerseEntity entity = iter.next();
 			count++;
 		}
 		Assert.assertEquals(25, count);

@@ -1,10 +1,14 @@
 package com.joeldholmes.repository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Repository;
 
 import com.joeldholmes.exceptions.ServiceException;
@@ -21,7 +25,9 @@ public class SearchRepository {
 	ISearchService searchService;
 	
 	public Iterable<SearchResource> findAll(QueryParams params) throws ServiceException{
-		Pageable page = QueryParamUtils.getPageable(params);
+		Sort sort = new Sort(Direction.DESC, Arrays.asList("score"));
+		Pageable page = QueryParamUtils.getPageable(params, sort);
+		
 		Map<String, Set<String>> filters = QueryParamUtils.getFilters(SearchResource.class, params);
 		if(!filters.containsKey("searchTerm")){
 			return null;
