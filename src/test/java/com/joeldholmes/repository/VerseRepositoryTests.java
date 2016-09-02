@@ -1,5 +1,6 @@
 package com.joeldholmes.repository;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -156,6 +157,14 @@ public class VerseRepositoryTests {
 		Assert.assertNotNull(verses);
 		Assert.assertTrue(!verses.isEmpty());
 		Assert.assertEquals(8, verses.size());
+	}
+	
+	@Test
+	public void testGetAll() throws Exception{
+		List<VerseEntity> verses = verseRepo.findAll(Arrays.asList("57a4a461a69a6d457a4a87b1", "57a4a45ea69a6d457a4a6ad5"));
+		Assert.assertNotNull(verses);
+		Assert.assertTrue(!verses.isEmpty());
+		Assert.assertEquals(2, verses.size());
 	}
 
 }

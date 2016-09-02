@@ -351,6 +351,19 @@ public class BibleService implements IBibleService{
 		}
 		return new BibleVerseResource(verseEntity);
 	}
+	
+	@Override
+	public List<BibleVerseResource> getVersesByIds(List<String> ids) throws ServiceException {
+		List<VerseEntity> verseEntities = verseRepository.findAll(ids);
+		if(verseEntities == null){
+			return null;
+		}
+		List<BibleVerseResource> results = new ArrayList<BibleVerseResource>();
+		for(VerseEntity verse : verseEntities){
+			results.add(new BibleVerseResource(verse));
+		}
+		return results;
+	}
 
 
 }

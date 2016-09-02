@@ -7,8 +7,8 @@ import com.joeldholmes.entity.VerseEntity;
 import io.katharsis.resource.annotations.JsonApiId;
 import io.katharsis.resource.annotations.JsonApiResource;
 
-@JsonApiResource(type="search-results")
-public class SearchResource{
+@JsonApiResource(type="search-text-results")
+public class SearchTextResource{
 	
 	@JsonApiId
 	public String id;
@@ -23,10 +23,10 @@ public class SearchResource{
 	
 	public Double score;
 	
-	public SearchResource(){
+	public SearchTextResource(){
 		super();
 	}
-	public SearchResource(VerseEntity entity){
+	public SearchTextResource(VerseEntity entity){
 		this();
 		
 		String entityBook = entity.getBook();

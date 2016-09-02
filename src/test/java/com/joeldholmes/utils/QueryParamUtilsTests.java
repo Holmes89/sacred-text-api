@@ -8,7 +8,7 @@ import java.util.Set;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.joeldholmes.resources.SearchResource;
+import com.joeldholmes.resources.SearchTextResource;
 
 import io.katharsis.queryParams.DefaultQueryParamsParser;
 import io.katharsis.queryParams.QueryParams;
@@ -24,7 +24,7 @@ public class QueryParamUtilsTests {
 		params.put("filter[blah]", Collections.singleton("bar"));
 		QueryParams qParams = this.createParams(params);
 		
-		Map<String, Set<String>> filters = QueryParamUtils.getFilters(SearchResource.class, qParams);
+		Map<String, Set<String>> filters = QueryParamUtils.getFilters(SearchTextResource.class, qParams);
 		
 		Assert.assertEquals(1, filters.size());
 		Assert.assertNotNull(filters.get("searchTerm"));

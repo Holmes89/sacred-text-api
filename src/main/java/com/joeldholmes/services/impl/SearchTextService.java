@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
-import com.joeldholmes.resources.SearchResource;
+import com.joeldholmes.resources.SearchTextResource;
 import com.joeldholmes.services.interfaces.IBibleService;
 import com.joeldholmes.services.interfaces.IQuranService;
 import com.joeldholmes.services.interfaces.ISearchService;
 import com.joeldholmes.services.interfaces.ITaoService;
 import com.joeldholmes.utils.ErrorCodes;
 
-@Service("SearchService")
-public class SearchService implements ISearchService {
+@Service("SearchTextService")
+public class SearchTextService implements ISearchService {
 
 	@Autowired
 	IVerseRepository verseRepository;
@@ -34,7 +34,7 @@ public class SearchService implements ISearchService {
 	ITaoService taoService;
 	
 	@Override
-	public Iterable<SearchResource> searchAllText(String term, Pageable page) throws ServiceException {
+	public Iterable<SearchTextResource> searchAllText(String term, Pageable page) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -43,7 +43,7 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<SearchResource> searchBibleText(String term) throws ServiceException {
+	public List<SearchTextResource> searchBibleText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -55,7 +55,7 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<SearchResource> searchQuranText(String term) throws ServiceException {
+	public List<SearchTextResource> searchQuranText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -68,7 +68,7 @@ public class SearchService implements ISearchService {
 	}
 
 	@Override
-	public List<SearchResource> searchTaoText(String term) throws ServiceException {
+	public List<SearchTextResource> searchTaoText(String term) throws ServiceException {
 		if(term==null||term.isEmpty()){
 			throw new ServiceException("Search term cannot be null or empty", ErrorCodes.NULL_INPUT);
 		}
@@ -80,10 +80,10 @@ public class SearchService implements ISearchService {
 		
 	}
 	
-	private List<SearchResource> entitiesToDTOs(Iterable<VerseEntity> entities, String term){
-		List<SearchResource> list = new ArrayList<SearchResource>();
+	private List<SearchTextResource> entitiesToDTOs(Iterable<VerseEntity> entities, String term){
+		List<SearchTextResource> list = new ArrayList<SearchTextResource>();
 		for(VerseEntity entity: entities){
-			SearchResource searchResource = new SearchResource(entity);
+			SearchTextResource searchResource = new SearchTextResource(entity);
 			searchResource.searchTerm = term;
 			list.add(searchResource);
 		}

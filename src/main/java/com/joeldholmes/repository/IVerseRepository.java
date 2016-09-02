@@ -19,7 +19,7 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	//Bible
 	@Query("{\"_id\": ?0, \"religiousText\": \"bible\"}")
 	VerseEntity getBibleVerseById(String id);
-	
+		
 	@Query("{\"religiousText\": \"bible\",\"version\": ?0, \"book\": ?1,\"chapter\": ?2, \"verse\": ?3 }")
 	VerseEntity getSingleBibleVerse(String version, String book, int chapter, int verse);
 	
@@ -76,4 +76,8 @@ public interface IVerseRepository extends MongoRepository<VerseEntity, String>{
 	@Query("{$text: {$search: ?0}, \"religiousText\":\"quran\"}, {score: {$meta: \"textScore\"}}).sort({score:{$meta:\"textScore\"}}")
 	List<VerseEntity> searchAllQuranText(String term);
 	
+	//Find All
+	@Query("{\"_id\": {$in: ?0}}")
+	List<VerseEntity> findAll(List<String> ids);
+
 }

@@ -26,6 +26,10 @@ public class BibleVerseRepository {
 		return bibleService.getVerseById(id);
 	}
 	
+	public List<BibleVerseResource> findAll(List<String> ids, QueryParams params) throws ServiceException{
+		return bibleService.getVersesByIds(ids);
+	}
+	
 	public List<BibleVerseResource> findAll(QueryParams params) throws ServiceException{
 		Map<String, FilterParams> filterParams = params.getFilters().getParams();
 		if(!filterParams.containsKey("displayVerse")){
