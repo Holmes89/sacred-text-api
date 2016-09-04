@@ -18,4 +18,5 @@ public interface ITaoService {
 
 	TaoVerseResource getVerseById(String id) throws ServiceException;
 
+	List<TaoVerseResource> getVersesByIds(List<String> ids);
 }

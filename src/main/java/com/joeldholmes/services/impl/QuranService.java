@@ -13,6 +13,7 @@ import com.joeldholmes.entity.VerseEntity;
 import com.joeldholmes.enums.QuranVersionEnum;
 import com.joeldholmes.exceptions.ServiceException;
 import com.joeldholmes.repository.IVerseRepository;
+import com.joeldholmes.resources.BibleVerseResource;
 import com.joeldholmes.resources.QuranVerseResource;
 import com.joeldholmes.services.interfaces.IQuranService;
 import com.joeldholmes.services.interfaces.IReligiousTextIndexService;
@@ -325,5 +326,18 @@ public class QuranService implements IQuranService {
 		}
 		verse = newVerse;
 		return verse;
+	}
+
+	@Override
+	public List<QuranVerseResource> getVersesByIds(List<String> ids) {
+		List<VerseEntity> verseEntities = verseRepository.findAll(ids);
+		if(verseEntities == null){
+			return null;
+		}
+		List<QuranVerseResource> results = new ArrayList<QuranVerseResource>();
+		for(VerseEntity verse : verseEntities){
+			results.add(new QuranVerseResource(verse));
+		}
+		return results;
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.joeldholmes.exceptions.ServiceException;
+import com.joeldholmes.resources.QuranVerseResource;
 import com.joeldholmes.resources.TaoVerseResource;
 import com.joeldholmes.services.interfaces.ITaoService;
 
@@ -23,6 +24,10 @@ public class TaoVerseRepository {
 	
 	public TaoVerseResource findOne(String id) throws ServiceException{
 		return taoService.getVerseById(id);
+	}
+	
+	public List<TaoVerseResource> findAll(List<String> ids, QueryParams params) {
+		return taoService.getVersesByIds(ids);
 	}
 	
 	public List<TaoVerseResource> findAll(QueryParams params) throws ServiceException{

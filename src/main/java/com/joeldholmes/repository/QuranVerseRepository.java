@@ -52,4 +52,8 @@ public class QuranVerseRepository {
 		}
 		return resources;
 	}
+
+	public List<QuranVerseResource> findAll(List<String> ids, QueryParams params) {
+		return quranService.getVersesByIds(ids);
+	}
 }

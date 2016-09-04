@@ -1,8 +1,9 @@
 package com.joeldholmes.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.joeldholmes.exceptions.ServiceException;
@@ -27,6 +28,12 @@ public class QuranVerseResourceController {
 	@JsonApiFindOne
 	public QuranVerseResource findOne(String id) throws ServiceException{
 		return quranRepository.findOne(id);
+	}
+	
+	@HystrixCommand(commandKey="QuranVerseFindAll", groupKey="QuranVerse", threadPoolKey="QuranVerse")
+	@JsonApiFindAll
+	public Iterable<QuranVerseResource> findAll(List<String> ids, QueryParams params) throws ServiceException{
+		return quranRepository.findAll(ids, params);
 	}
 	
 	@HystrixCommand(commandKey="QuranVerseFindAll", groupKey="QuranVerse", threadPoolKey="QuranVerse")

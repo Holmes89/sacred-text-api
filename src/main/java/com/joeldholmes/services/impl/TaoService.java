@@ -244,4 +244,17 @@ public class TaoService implements ITaoService {
 		return dtos;
 	}
 
+	@Override
+	public List<TaoVerseResource> getVersesByIds(List<String> ids) {
+		List<VerseEntity> verseEntities = verseRepository.findAll(ids);
+		if(verseEntities == null){
+			return null;
+		}
+		List<TaoVerseResource> results = new ArrayList<TaoVerseResource>();
+		for(VerseEntity verse : verseEntities){
+			results.add(new TaoVerseResource(verse));
+		}
+		return results;
+	}
+
 }
