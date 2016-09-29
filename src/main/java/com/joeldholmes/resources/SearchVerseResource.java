@@ -14,13 +14,13 @@ public class SearchVerseResource {
 	
 	public String searchTerm;
 	
-	@JsonApiToMany(lazy = false)
+	//@JsonApiToMany(lazy = false)
 	public List<BibleVerseResource> bibleVerses;
 	
-	@JsonApiToMany(lazy = false)
+	//@JsonApiToMany(lazy = false)
 	public List<QuranVerseResource> quranVerses;
 	
-	@JsonApiToMany(lazy = false)
+	//@JsonApiToMany(lazy = false)
 	public List<TaoVerseResource> taoVerses;
 	
 	public SearchVerseResource(){
