@@ -193,8 +193,8 @@ public class TaoService implements ITaoService {
 						
 					}
 					if(throughChapterVerse!=null){
-						cvSplit = throughChapterVerse.split(":");
 						if(throughChapterVerse.contains(":")){
+							cvSplit = throughChapterVerse.split(":");
 							endChapter=Integer.parseInt(cvSplit[0].trim());
 							if(cvSplit.length==2){
 								endVerse = Integer.parseInt(cvSplit[1].trim());
@@ -204,7 +204,12 @@ public class TaoService implements ITaoService {
 							}
 						}
 						else{
-							endVerse = Integer.parseInt(cvSplit[0].trim());
+							if(startVerse==null){
+								endChapter = Integer.parseInt(throughChapterVerse.trim());
+							}
+							else{
+								endVerse = Integer.parseInt(throughChapterVerse.trim());
+							}
 						}
 					}
 				}
