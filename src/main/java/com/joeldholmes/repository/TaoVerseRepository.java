@@ -1,6 +1,7 @@
 package com.joeldholmes.repository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -9,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.joeldholmes.exceptions.ServiceException;
-import com.joeldholmes.resources.QuranVerseResource;
 import com.joeldholmes.resources.TaoVerseResource;
 import com.joeldholmes.services.interfaces.ITaoService;
+import com.joeldholmes.utils.QueryParamUtils;
 
 import io.katharsis.queryParams.QueryParams;
-import io.katharsis.queryParams.params.FilterParams;
 
 @Repository
 public class TaoVerseRepository {
@@ -31,18 +31,27 @@ public class TaoVerseRepository {
 	}
 	
 	public List<TaoVerseResource> findAll(QueryParams params) throws ServiceException{
-		Map<String, FilterParams> filterParams = params.getFilters().getParams();
-		if(!filterParams.containsKey("displayVerse")){
-			return null;
-		}
-		Set<String> verses = filterParams.get("displayVerse").getParams().get("");
-		if(verses==null || verses.isEmpty()){
+		Map<String, Set<String>> filterParams = QueryParamUtils.getFilters(TaoVerseResource.class, params);
+		if(filterParams.isEmpty()){
 			return null;
 		}
 		
 		List<TaoVerseResource> resources = new ArrayList<TaoVerseResource>();
-		for(String verse: verses){
-			resources.addAll(taoService.getVersesFromString(verse));
+		Set<String> verses = filterParams.get("displayVerse");
+		Set<String> ids = filterParams.get("id");
+		
+		
+		if(verses!=null && !verses.isEmpty()){
+			for(String verse: verses){
+				resources.addAll(taoService.getVersesFromString(verse));
+			}
+		}
+		else if(ids!=null && !ids.isEmpty()){
+			List<String> idList = new ArrayList<String>();
+			for(String id : ids){
+				idList.addAll(Arrays.asList(id.split(",")));
+			}
+			resources =  taoService.getVersesByIds(idList);
 		}
 		return resources;
 	}
