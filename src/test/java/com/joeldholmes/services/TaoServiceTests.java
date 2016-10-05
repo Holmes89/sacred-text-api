@@ -149,5 +149,11 @@ public class TaoServiceTests {
 		Assert.assertEquals(4, verses.size());
 		verses = taoService.getVersesFromString("1-2");
 		Assert.assertEquals(8, verses.size());
+		verses = taoService.getVersesFromString("1-2, 5");
+		Assert.assertEquals(10, verses.size());
+		verses = taoService.getVersesFromString("1-2, 5:1");
+		Assert.assertEquals(9, verses.size());
+		verses = taoService.getVersesFromString("5:1, 2");
+		Assert.assertEquals(2, verses.size());
 	}
 }

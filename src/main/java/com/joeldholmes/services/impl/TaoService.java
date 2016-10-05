@@ -223,6 +223,9 @@ public class TaoService implements ITaoService {
 				startChapter = endChapter;
 			if(endVerse!=null)
 				startVerse = endVerse;
+			if(startVerse==null){
+				startChapter=null;	
+			}
 			endChapter = null;
 			endVerse = null;
 			
