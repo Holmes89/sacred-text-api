@@ -117,8 +117,8 @@ public class QuranService implements IQuranService {
 						}
 					}
 					if(throughChapterVerse!=null){
-						cvSplit = throughChapterVerse.split(":");
 						if(throughChapterVerse.contains(":")){
+							cvSplit = throughChapterVerse.split(":");
 							endChapter=Integer.parseInt(cvSplit[0].trim());
 							if(cvSplit.length==2){
 								endVerse = Integer.parseInt(cvSplit[1].trim());
@@ -128,7 +128,12 @@ public class QuranService implements IQuranService {
 							}
 						}
 						else{
-							endVerse = Integer.parseInt(cvSplit[0].trim());
+							if(startVerse==null){
+								endChapter = Integer.parseInt(throughChapterVerse.trim());
+							}
+							else{
+								endVerse = Integer.parseInt(throughChapterVerse.trim());
+							}
 						}
 					}
 				}
@@ -142,6 +147,9 @@ public class QuranService implements IQuranService {
 				startChapter = endChapter;
 			if(endVerse!=null)
 				startVerse = endVerse;
+			if(startVerse == null){
+				startChapter=null;
+			}
 			endChapter = null;
 			endVerse = null;
 			

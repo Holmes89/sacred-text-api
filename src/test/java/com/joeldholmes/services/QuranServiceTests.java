@@ -157,10 +157,14 @@ public class QuranServiceTests {
 		Assert.assertEquals(50, verses.size());
 	}
 	
-	@Test(expected=ServiceException.class)
-	public void testGetVersesFromString_invalid() throws Exception{
-		quranService.getVersesFromString("The Opening, 32-33");
-		
+	@Test
+	public void testGetVersesFromString_chapterNumbers() throws Exception{
+		List<QuranVerseResource> verses = quranService.getVersesFromString("1-2");
+		Assert.assertEquals(293, verses.size());
+		verses = quranService.getVersesFromString("1:1-5");
+		Assert.assertEquals(5, verses.size());
+		verses = quranService.getVersesFromString("The Opening, 32-33");
+		Assert.assertEquals(110, verses.size());
 	}
 	
 }
